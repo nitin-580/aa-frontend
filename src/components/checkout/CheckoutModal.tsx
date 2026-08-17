@@ -146,20 +146,20 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
           ></div>
 
           {/* Modal Container */}
-          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 relative border border-red-900/10 text-[#0F1E36]">
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4">
+            <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[95vh] overflow-y-auto p-4 sm:p-6 relative border border-red-900/10 text-[#0F1E36]">
               
               {/* Close Icon Button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 text-gray-405 hover:text-red-900 transition text-2xl"
+                className="absolute top-4 right-4 text-gray-400 hover:text-red-900 transition text-2xl"
               >
                 ✕
               </button>
 
               {step === 1 && (
                 <div>
-                  <h2 className="text-2xl font-bold mb-4 font-sans border-b pb-2 text-[#0F1E36]">
+                  <h2 className="text-xl sm:text-2xl font-bold mb-4 font-sans border-b pb-2 text-[#0F1E36]">
                     Checkout details
                   </h2>
 
@@ -179,7 +179,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
                         <select
                           value={quantity}
                           onChange={(e) => setQuantity(parseInt(e.target.value))}
-                          className="border border-gray-305 rounded px-1.5 py-0.5 text-xs text-black bg-white"
+                          className="border border-gray-300 rounded px-1.5 py-0.5 text-xs text-black bg-white"
                         >
                           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((q) => (
                             <option key={q} value={q}>{q}</option>
@@ -191,7 +191,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
 
                   {/* Fields */}
                   <div className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs font-semibold text-gray-600 mb-1">Full Name *</label>
                         <input
@@ -214,7 +214,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs font-semibold text-gray-600 mb-1">Phone Number *</label>
                         <input
