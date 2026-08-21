@@ -28,11 +28,15 @@ export default function AdminJobsPage() {
   const [link, setLink] = useState("");
 
   useEffect(() => {
-    fetchJobs();
     if (typeof window !== "undefined") {
-      const savedRole = localStorage.getItem("svn_admin_role") || "contractor";
+      const savedRole = localStorage.getItem("svn_admin_role");
+      if (savedRole !== "superadmin" && savedRole !== "contractor") {
+        window.location.href = "/#admin";
+        return;
+      }
       setRole(savedRole);
     }
+    fetchJobs();
   }, []);
 
   const fetchJobs = async () => {

@@ -88,13 +88,17 @@ const OrdersPage = () => {
   const [shippingInputs, setShippingInputs] = useState<{[key: string]: {courier: string, awb: string}}>({});
 
   useEffect(() => {
-    fetchOrders();
     if (typeof window !== "undefined") {
-      const savedRole = localStorage.getItem("svn_admin_role") || "contractor";
+      const savedRole = localStorage.getItem("svn_admin_role");
+      if (savedRole !== "superadmin" && savedRole !== "contractor") {
+        window.location.href = "/#admin";
+        return;
+      }
       setRole(savedRole);
       const savedVendor = localStorage.getItem("svn_vendor_email") || "vendor@svnitalumni.com";
       setVendorEmail(savedVendor);
     }
+    fetchOrders();
   }, []);
 
   const fetchOrders = async () => {

@@ -18,7 +18,7 @@ export async function sendEmail({ to, subject, html }: EmailParams) {
 
   try {
     const data = await resend.emails.send({
-      from: "SVNIT Alumni Association Store <mail@svnitalumniassociation.org>",
+      from: "SVNIT Alumni Association <mail@svnitalumniassociation.org>",
       to: [to],
       subject: subject,
       html: html

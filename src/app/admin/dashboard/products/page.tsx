@@ -35,11 +35,15 @@ export default function ProductsPage() {
   ];
 
   useEffect(() => {
-    fetchProducts();
     if (typeof window !== "undefined") {
-      const savedRole = localStorage.getItem("svn_admin_role") || "contractor";
+      const savedRole = localStorage.getItem("svn_admin_role");
+      if (savedRole !== "superadmin" && savedRole !== "contractor") {
+        window.location.href = "/#admin";
+        return;
+      }
       setRole(savedRole);
     }
+    fetchProducts();
   }, []);
 
   const fetchProducts = async () => {

@@ -63,11 +63,11 @@ const Footer = () => {
             </div>
             <div className="flex">
               <span className="font-bold w-16 shrink-0 text-black">Phone:</span>
-              <span className="text-[#555555] font-semibold">+91 635 331 2523</span>
+              <span className="text-[#555555] font-semibold">+91 95943 96048</span>
             </div>
             <div className="flex items-center">
               <span className="font-bold w-16 shrink-0 text-black">Email:</span>
-              <span className="text-[#7f1d1d] font-semibold break-all">communicationsatanant@gmail.com</span>
+              <span className="text-[#7f1d1d] font-semibold break-all">mail@svnitalumni.com</span>
             </div>
           </div>
         </div>
@@ -76,11 +76,10 @@ const Footer = () => {
         <div>
           <h3 className="font-bold text-sm tracking-wider uppercase text-black mb-4">COMPANY</h3>
           <ul className="space-y-2 text-[#7f1d1d]">
-            <li><Link href="#brand" className="hover:underline flex items-center gap-1.5">• SVNIT Brand Mark</Link></li>
-            <li><Link href="#contact" className="hover:underline flex items-center gap-1.5">• Contact us today!</Link></li>
+            <li><Link href="/contact" className="hover:underline flex items-center gap-1.5">• Contact Us</Link></li>
             <li><Link href="https://svnit.ac.in" target="_blank" rel="noopener noreferrer" className="hover:underline flex items-center gap-1.5">• About SVNIT</Link></li>
-            <li><Link href="#bulk" className="hover:underline flex items-center gap-1.5">• Bulk Order</Link></li>
-            <li><Link href="#business" className="hover:underline flex items-center gap-1.5">• Business Enquiry</Link></li>
+            <li><Link href="/contact" className="hover:underline flex items-center gap-1.5">• Bulk Order</Link></li>
+            <li><Link href="/contact" className="hover:underline flex items-center gap-1.5">• Business Enquiry</Link></li>
           </ul>
         </div>
 

@@ -95,7 +95,7 @@ export default function ContactPage() {
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Call Us</p>
                 <p className="text-sm font-semibold mt-1 hover:text-red-400 transition cursor-pointer">
-                  +91 635 331 2523
+                  +91 95943 96048
                 </p>
               </div>
             </div>
