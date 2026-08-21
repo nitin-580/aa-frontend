@@ -4,7 +4,7 @@ import { products as fallbackProducts } from "@/components/product/products";
 import ProductModal from "@/components/product/ProductModal";
 
 const ProductGrid: React.FC = () => {
-  const [productList, setProductList] = useState<any[]>([]);
+  const [productList, setProductList] = useState<any[]>(fallbackProducts);
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -14,13 +14,10 @@ const ProductGrid: React.FC = () => {
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
           setProductList(data);
-        } else {
-          setProductList(fallbackProducts);
         }
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
-        setProductList(fallbackProducts);
       });
   }, []);
 
@@ -59,6 +56,7 @@ const ProductGrid: React.FC = () => {
                 <img
                   src={product.image}
                   alt={product.name}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/images/product1.png';

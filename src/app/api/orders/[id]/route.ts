@@ -9,7 +9,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await req.json();
-    const { paymentStatus, orderStatus, courier, awb, rejectionReason } = body;
+    const { paymentStatus, orderStatus, courier, awb, rejectionReason, vendorEmail } = body;
 
     // Fetch the current order
     const current = await query(`SELECT * FROM orders WHERE id = $1`, [id]);
@@ -46,10 +46,23 @@ export async function PUT(
       awb: updatedAwb
     };
 
+    // Helper to send order update log to association main address
+    const logUpdateToMainEmail = async (subjectText: string, htmlContent: string) => {
+      try {
+        await sendEmail({
+          to: "svnitalumniassociation01@gmail.com",
+          subject: `[Order Update Log] [Order: ${id}] ${subjectText}`,
+          html: htmlContent
+        });
+      } catch (err) {
+        console.error("Failed to log order update to svnitalumniassociation01@gmail.com:", err);
+      }
+    };
+
     // Trigger emails for specific stage changes
     try {
       if (paymentStatus === "VERIFIED" && order.payment_status !== "VERIFIED") {
-        // Payment verified & Order Confirmed
+        // Payment verified & Order Confirmed (To User)
         const emailHtml = generateEmailHtml(fullOrderInfo, "ORDER_CONFIRMED");
         await sendEmail({
           to: order.email,
@@ -83,11 +96,25 @@ export async function PUT(
             </p>
           </div>
         `;
+        
+        // 1st email to mail@svnitalumni.com (Payment Verified / Order Placed)
         await sendEmail({
           to: "mail@svnitalumni.com",
           subject: `[Payment Confirmed] Order ${id} Sent to Contractor`,
           html: intimationHtml
         });
+
+        // Send notification to vendor email listed in admin panel
+        const targetVendor = vendorEmail || "vendor@svnitalumni.com";
+        await sendEmail({
+          to: targetVendor,
+          subject: `[Vendor Order Placement] Order ${id} Ready for Production`,
+          html: intimationHtml
+        });
+
+        // Log this update to main gmail
+        await logUpdateToMainEmail("Payment Verified & Order Confirmed", intimationHtml);
+
       } else if (orderStatus === "PROCESSING" && order.order_status !== "PROCESSING") {
         // Entered Production
         const emailHtml = generateEmailHtml(fullOrderInfo, "IN_PRODUCTION");
@@ -96,14 +123,42 @@ export async function PUT(
           subject: "SVNIT Alumni Store - Your order is in Production!",
           html: emailHtml
         });
+
+        // Log this update to main gmail
+        await logUpdateToMainEmail("Order Entered Production Stage", emailHtml);
+
       } else if (orderStatus === "COMPLETED" && order.order_status !== "COMPLETED") {
-        // Production Completed
+        // Production Completed (To User)
         const emailHtml = generateEmailHtml(fullOrderInfo, "COMPLETED");
         await sendEmail({
           to: order.email,
           subject: "SVNIT Alumni Store - Item Production Completed",
           html: emailHtml
         });
+
+        const completedNotificationHtml = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #0f1e36;">
+            <h2 style="color: #7f1d1d; border-bottom: 2px solid #7f1d1d; padding-bottom: 10px; margin-bottom: 20px;">[Notification] Order Production Completed</h2>
+            <p style="font-size: 14px; line-height: 1.5;">This is to notify you that the items for the following order have finished production and are ready to be dispatched.</p>
+            <div style="background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; margin: 20px 0;">
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Order ID:</strong> ${id}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Customer Name:</strong> ${order.name}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Items Ordered:</strong> ${order.products}</p>
+              <p style="margin: 0; font-size: 13px;"><strong>Shipping Address:</strong> ${order.address}</p>
+            </div>
+          </div>
+        `;
+
+        // 2nd email to mail@svnitalumni.com (Production Finished / Ready to dispatch)
+        await sendEmail({
+          to: "mail@svnitalumni.com",
+          subject: `[Order Completed] Order ${id} Production Finished`,
+          html: completedNotificationHtml
+        });
+
+        // Log this update to main gmail
+        await logUpdateToMainEmail("Order Production Completed", completedNotificationHtml);
+
       } else if (orderStatus === "SHIPPED" && order.order_status !== "SHIPPED") {
         // Dispatched via Courier
         const emailHtml = generateEmailHtml(fullOrderInfo, "SHIPPED");
@@ -112,6 +167,9 @@ export async function PUT(
           subject: `SVNIT Alumni Store - Order Dispatched (AWB: ${updatedAwb || "N/A"})`,
           html: emailHtml
         });
+
+        // Log this update to main gmail
+        await logUpdateToMainEmail("Order Dispatched & Shipped", emailHtml);
       }
     } catch (emailErr) {
       console.error("Email trigger failed in route:", emailErr);

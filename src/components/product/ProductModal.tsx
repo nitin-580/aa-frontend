@@ -29,7 +29,12 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
   if (!isOpen || !product) return null;
 
   const handleAddToCart = async () => {
-    const success = await addToCart(product.id.toString(), 1, selectedSize, selectedColor);
+    const success = await addToCart(product.id.toString(), 1, selectedSize, selectedColor, {
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      originalPrice: product.originalPrice
+    });
     if (success) {
       setAddedMessage(true);
       setTimeout(() => setAddedMessage(false), 3000);

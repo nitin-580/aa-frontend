@@ -19,7 +19,7 @@ interface CartContextType {
   cartCount: number;
   loading: boolean;
   refreshCart: () => Promise<void>;
-  addToCart: (productId: string, quantity: number, size: string, color: string) => Promise<boolean>;
+  addToCart: (productId: string, quantity: number, size: string, color: string, productDetails?: { name: string; price: string; image: string; originalPrice: string }) => Promise<boolean>;
   updateQty: (productId: string, quantity: number, size: string, color: string, action?: string) => Promise<void>;
   removeFromCart: (cartItemId: number) => Promise<void>;
   clearCart: () => Promise<void>;
@@ -49,7 +49,43 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     refreshCart();
   }, []);
 
-  const addToCart = async (productId: string, quantity: number, size: string, color: string): Promise<boolean> => {
+  const addToCart = async (
+    productId: string, 
+    quantity: number, 
+    size: string, 
+    color: string,
+    productDetails?: { name: string; price: string; image: string; originalPrice: string }
+  ): Promise<boolean> => {
+    // Optimistic Update
+    const tempId = Date.now();
+    if (productDetails) {
+      setCartItems(prevItems => {
+        const existingIdx = prevItems.findIndex(
+          item => item.productId === productId && item.size === size && item.color === color
+        );
+        if (existingIdx > -1) {
+          return prevItems.map((item, idx) => 
+            idx === existingIdx ? { ...item, quantity: item.quantity + quantity } : item
+          );
+        } else {
+          return [
+            ...prevItems,
+            {
+              id: tempId,
+              productId,
+              quantity,
+              size,
+              color,
+              name: productDetails.name,
+              price: productDetails.price,
+              image: productDetails.image,
+              originalPrice: productDetails.originalPrice
+            }
+          ];
+        }
+      });
+    }
+
     try {
       const res = await fetch("/api/cart", {
         method: "POST",
@@ -57,37 +93,57 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         body: JSON.stringify({ productId, quantity, size, color })
       });
       if (res.ok) {
-        await refreshCart();
+        refreshCart();
         return true;
       }
+      if (productDetails) refreshCart(); // sync/revert on server error
       return false;
     } catch (e) {
       console.error("Failed to add item to cart:", e);
+      if (productDetails) refreshCart(); // sync/revert on network failure
       return false;
     }
   };
 
   const updateQty = async (productId: string, quantity: number, size: string, color: string, action?: string) => {
+    // Optimistically update quantity
+    setCartItems(prevItems => 
+      prevItems.map(item => {
+        if (item.productId === productId && item.size === size && item.color === color) {
+          const newQty = action === "increment" 
+            ? item.quantity + 1 
+            : Math.max(1, item.quantity - 1);
+          return { ...item, quantity: newQty };
+        }
+        return item;
+      })
+    );
+
     try {
       await fetch("/api/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId, quantity, size, color, action })
       });
-      await refreshCart();
+      refreshCart();
     } catch (e) {
       console.error("Failed to update cart quantity:", e);
+      refreshCart(); // Revert on failure
     }
   };
 
   const removeFromCart = async (cartItemId: number) => {
+    // Optimistically remove item
+    setCartItems(prevItems => prevItems.filter(item => item.id !== cartItemId));
+
     try {
       await fetch(`/api/cart?cartItemId=${cartItemId}`, {
         method: "DELETE"
       });
-      await refreshCart();
+      refreshCart();
     } catch (e) {
       console.error("Failed to delete cart item:", e);
+      refreshCart(); // Revert on failure
     }
   };
 

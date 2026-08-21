@@ -16,25 +16,14 @@ export async function sendEmail({ to, subject, html }: EmailParams) {
     return { success: false, message: "Resend API key missing." };
   }
 
-  // Resend Free Tier Sandbox limits sending to verified owner email (nitindivya15@gmail.com)
-  // We rewrite recipient to owner during tests to ensure successful delivery.
-  const targetRecipient = to;
-  const verifiedRecipient = "nitindivya15@gmail.com";
-  const subjectWithTarget = `[Sandbox Test for ${targetRecipient}] ${subject}`;
-
   try {
     const data = await resend.emails.send({
-      from: "SVNIT Alumni Association Store <onboarding@resend.dev>",
-      to: [verifiedRecipient],
-      subject: subjectWithTarget,
-      html: `
-        <div style="background-color: #fef2f2; border: 1px solid #fca5a5; padding: 12px; margin-bottom: 20px; border-radius: 6px; font-family: sans-serif; font-size: 13px; color: #991b1b;">
-          <strong>Resend Sandbox Mode:</strong> This email was originally targeted to <strong>${targetRecipient}</strong>, but was routed to you because Resend free tier restricts delivery to verified accounts only.
-        </div>
-        ${html}
-      `
+      from: "SVNIT Alumni Association Store <mail@svnitalumniassociation.org>",
+      to: [to],
+      subject: subject,
+      html: html
     });
-    console.log("Real Email dispatched via Resend Sandbox:", data);
+    console.log("Real Email dispatched via Resend:", data);
     return { success: true, data };
   } catch (error) {
     console.error("Failed to send email via Resend:", error);

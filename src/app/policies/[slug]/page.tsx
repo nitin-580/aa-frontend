@@ -17,7 +17,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       title: "Return & Cancellation Policy",
       icon: <RotateCcw className="h-8 w-8 text-red-900" />,
       content: (
-        <div className="space-y-6 text-sm text-gray-650 leading-relaxed font-sans">
+        <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p className="font-semibold text-black">
             The SVNIT Alumni Association Store performs strict quality checks on all products at various stages of production.
           </p>
@@ -42,7 +42,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       title: "Shipping & Delivery Policy",
       icon: <Truck className="h-8 w-8 text-red-900" />,
       content: (
-        <div className="space-y-6 text-sm text-gray-650 leading-relaxed font-sans">
+        <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <div className="bg-red-900/10 text-red-900 font-semibold p-4 rounded-lg border border-red-900/20 text-center">
             ⚠️ DOMESTIC SHIPMENTS ONLY. WE DO NOT FULFILL INTERNATIONAL DELIVERIES.
           </div>
@@ -86,7 +86,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       title: "Discount Policy",
       icon: <BadgePercent className="h-8 w-8 text-red-900" />,
       content: (
-        <div className="space-y-6 text-sm text-gray-650 leading-relaxed font-sans">
+        <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p>
             The SVNIT Alumni Association Store is a non-profit initiative dedicated to keeping SVNITians connected and supporting alumni projects. We maintain high quality standard manufacturing, and our prices are curated to be as accessible as possible.
           </p>
@@ -103,7 +103,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       title: "Privacy Policy",
       icon: <ShieldCheck className="h-8 w-8 text-red-900" />,
       content: (
-        <div className="space-y-6 text-sm text-gray-650 leading-relaxed font-sans">
+        <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p>
             The SVNIT Alumni Association Store is committed to protecting your privacy. This policy outlines our practices regarding data handling:
           </p>
@@ -120,7 +120,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       title: "Website Policy",
       icon: <FileText className="h-8 w-8 text-red-900" />,
       content: (
-        <div className="space-y-6 text-sm text-gray-650 leading-relaxed font-sans">
+        <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p>
             This portal is owned, designed, and operated by the SVNIT Alumni Association, Surat.
           </p>
@@ -136,7 +136,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       title: "Copyright Policy",
       icon: <FileText className="h-8 w-8 text-red-900" />,
       content: (
-        <div className="space-y-6 text-sm text-gray-650 leading-relaxed font-sans">
+        <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p>
             All material on this portal, including but not limited to text, images, logos, graphics, interface design, and product concepts, is protected under Indian Copyright and Intellectual Property Laws.
           </p>
@@ -162,10 +162,10 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
   };
 
   return (
-    <div className="bg-[#F4F6F9] min-h-screen flex flex-col font-sans">
+    <div className="bg-[#F4F6F9] min-h-screen flex flex-col font-sans text-black">
       <Navbar />
       <div className="flex-grow max-w-4xl w-full mx-auto px-6 py-12 md:py-16">
-        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl border border-gray-100 space-y-8">
+        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl border border-gray-100 space-y-8 text-gray-800">
           <div className="flex items-center gap-4 border-b border-gray-100 pb-6">
             <div className="p-3 bg-red-900/10 rounded-xl">
               {currentPolicy.icon}
@@ -174,7 +174,9 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
               {currentPolicy.title}
             </h1>
           </div>
-          {currentPolicy.content}
+          <div className="text-gray-800">
+            {currentPolicy.content}
+          </div>
         </div>
       </div>
       <Footer />

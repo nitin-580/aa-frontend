@@ -82,6 +82,7 @@ const OrdersPage = () => {
   const [statusFilter, setStatusFilter] = useState("All");
   const [role, setRole] = useState("contractor"); // "superadmin" or "contractor"
   const [loading, setLoading] = useState(true);
+  const [vendorEmail, setVendorEmail] = useState("vendor@svnitalumni.com");
   
   // Shipping input state per order id
   const [shippingInputs, setShippingInputs] = useState<{[key: string]: {courier: string, awb: string}}>({});
@@ -91,6 +92,8 @@ const OrdersPage = () => {
     if (typeof window !== "undefined") {
       const savedRole = localStorage.getItem("svn_admin_role") || "contractor";
       setRole(savedRole);
+      const savedVendor = localStorage.getItem("svn_vendor_email") || "vendor@svnitalumni.com";
+      setVendorEmail(savedVendor);
     }
   }, []);
 
@@ -119,7 +122,8 @@ const OrdersPage = () => {
         orderStatus: payload.orderStatus,
         courier: payload.courier,
         awb: payload.awb,
-        rejectionReason: payload.rejectionReason
+        rejectionReason: payload.rejectionReason,
+        vendorEmail: vendorEmail
       };
 
       const res = await fetch(`/api/orders/${orderId}`, {
@@ -259,6 +263,27 @@ const OrdersPage = () => {
         </h1>
         <div className="bg-red-50 border border-red-200 px-4 py-2 rounded-lg text-sm text-[#7f1d1d] font-semibold uppercase">
           Role: {role}
+        </div>
+      </div>
+
+      {/* Settings Panel */}
+      <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 className="text-sm font-bold text-[#0F1E36]">Vendor & Fulfillment Settings</h2>
+          <p className="text-xs text-gray-500">Configure email address for vendor notification upon payment verification.</p>
+        </div>
+        <div className="flex gap-2 w-full sm:w-auto items-center">
+          <label className="text-xs font-bold text-gray-650 shrink-0">Vendor Email:</label>
+          <input
+            type="email"
+            value={vendorEmail}
+            onChange={(e) => {
+              setVendorEmail(e.target.value);
+              localStorage.setItem("svn_vendor_email", e.target.value);
+            }}
+            placeholder="vendor@svnitalumni.com"
+            className="border px-3 py-1.5 rounded-lg text-xs w-60 text-black bg-white focus:outline-none focus:ring-1 focus:ring-[#7f1d1d]"
+          />
         </div>
       </div>
 

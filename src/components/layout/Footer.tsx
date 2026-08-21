@@ -72,23 +72,13 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* MY ACCOUNT */}
-        <div>
-          <h3 className="font-bold text-sm tracking-wider uppercase text-black mb-4">MY ACCOUNT</h3>
-          <ul className="space-y-2 text-[#7f1d1d]">
-            <li><Link href="#profile" className="hover:underline flex items-center gap-1.5">• My Profile</Link></li>
-            <li><Link href="#orders" className="hover:underline flex items-center gap-1.5">• My Orders</Link></li>
-            <li><Link href="#support" className="hover:underline flex items-center gap-1.5">• Support</Link></li>
-          </ul>
-        </div>
-
         {/* COMPANY */}
         <div>
           <h3 className="font-bold text-sm tracking-wider uppercase text-black mb-4">COMPANY</h3>
           <ul className="space-y-2 text-[#7f1d1d]">
             <li><Link href="#brand" className="hover:underline flex items-center gap-1.5">• SVNIT Brand Mark</Link></li>
             <li><Link href="#contact" className="hover:underline flex items-center gap-1.5">• Contact us today!</Link></li>
-            <li><Link href="#about" className="hover:underline flex items-center gap-1.5">• About SVNIT</Link></li>
+            <li><Link href="https://svnit.ac.in" target="_blank" rel="noopener noreferrer" className="hover:underline flex items-center gap-1.5">• About SVNIT</Link></li>
             <li><Link href="#bulk" className="hover:underline flex items-center gap-1.5">• Bulk Order</Link></li>
             <li><Link href="#business" className="hover:underline flex items-center gap-1.5">• Business Enquiry</Link></li>
           </ul>
@@ -135,17 +125,11 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-[11px] tracking-wider uppercase text-black mb-3">LET&apos;S SOCIALIZE</h3>
             <div className="flex gap-2">
-              <a href="#" className="w-8 h-8 flex items-center justify-center bg-[#FF4500] hover:opacity-90 rounded text-white font-bold transition">
+              <a href="https://www.instagram.com/alumni_association_svnit/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center bg-[#E1306C] hover:opacity-90 rounded text-white font-bold transition" aria-label="Instagram">
                 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" className="w-4 h-4 invert" />
               </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center bg-[#3B5998] hover:opacity-90 rounded text-white font-bold transition">
-                <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" className="w-4 h-4 invert" />
-              </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center bg-[#00ACEE] hover:opacity-90 rounded text-white font-bold transition">
-                <img src="https://cdn-icons-png.flaticon.com/512/3256/3256013.png" alt="Twitter" className="w-4 h-4 invert" />
-              </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center bg-[#0077B5] hover:opacity-90 rounded text-white font-bold transition">
-                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" className="w-4 h-4 invert" />
+              <a href="https://youtube.com/@alumniassociation-01?si=S6Lt57THqNENKMne" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center bg-[#FF0000] hover:opacity-90 rounded text-white font-bold transition" aria-label="YouTube">
+                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" className="w-4 h-4 invert" />
               </a>
             </div>
           </div>
