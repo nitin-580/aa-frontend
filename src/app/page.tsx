@@ -5,7 +5,6 @@ import Navbar from '@/components/layout/Navbar'
 import ProductGrid from '@/components/product/ProductGrid'
 import Quote from '@/components/quote/quote'
 import Exclusive from '@/components/product/Exclusive'
-import AlumniGallery from '@/components/home/AlumniGallery'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -62,7 +61,6 @@ const Page = () => {
         <Quote />
         <Exclusive />
         <ProductGrid/>
-        <AlumniGallery />
         <Footer />
 
         {/* Admin Passcode Modal Overlay */}

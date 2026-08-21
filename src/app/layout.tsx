@@ -26,6 +26,8 @@ export const metadata: Metadata = {
   description: "Official merchandise store of Sardar Vallabhbhai National Institute of Technology Alumni Association",
 };
 
+import { CartProvider } from "@/context/CartContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,7 +39,9 @@ export default function RootLayout({
         className={`${montserrat.variable} ${dancing_script.variable} ${quicksand.variable} font-sans antialiased`}
         style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}
       >
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
         <SimulatedEmailToast />
       </body>
     </html>

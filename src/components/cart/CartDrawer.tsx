@@ -1,138 +1,197 @@
 "use client";
-import React, { useState } from "react";
-import { X } from "lucide-react";
 
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+import React from "react";
+import { useCart } from "@/context/CartContext";
+import { X, Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
+import CheckoutModal from "../checkout/CheckoutModal";
 
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  cart: CartItem[];
 }
 
-const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, cart }) => {
-  const [coupon, setCoupon] = useState("");
-  const [discount, setDiscount] = useState(0);
+export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
+  const { cartItems, refreshCart, removeFromCart, updateQty, cartCount } = useCart();
+  const [checkoutOpen, setCheckoutOpen] = React.useState(false);
 
-  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const total = subtotal - discount;
+  if (!isOpen) return null;
 
-  const applyCoupon = () => {
-    if (coupon.toLowerCase() === "alumni10") {
-      setDiscount(subtotal * 0.1);
-    } else {
-      setDiscount(0);
-      alert("Invalid coupon code");
-    }
+  // Calculate Subtotal
+  const subtotal = cartItems.reduce((acc, item) => {
+    const price = parseFloat(item.price) || 0;
+    return acc + price * item.quantity;
+  }, 0);
+
+  // Calculate Shipping fee based on user rules:
+  // - Up to 3 products: 150 Rs
+  // - 4 to 6 products: 300 Rs
+  // - 7 to 9 products: 450 Rs
+  // - More than 9 products: Contact Council for bulk rates (or fallback to 0 / free)
+  const getShippingFee = (qty: number) => {
+    if (qty <= 0) return 0;
+    if (qty <= 3) return 150;
+    if (qty <= 6) return 300;
+    if (qty <= 9) return 450;
+    return 0; // Contact Council
+  };
+
+  const shipping = getShippingFee(cartCount);
+  const total = subtotal + shipping;
+
+  const handleDecrement = (item: any) => {
+    updateQty(item.productId, 1, item.size, item.color, "decrement");
+  };
+
+  const handleIncrement = (item: any) => {
+    updateQty(item.productId, 1, item.size, item.color, "increment");
   };
 
   return (
     <>
-      {/* Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-transparent bg-opacity-40 z-40"
+      <div className="fixed inset-0 z-50 overflow-hidden font-sans">
+        {/* Backdrop */}
+        <div 
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
           onClick={onClose}
-        ></div>
-      )}
+        />
 
-      {/* Drawer */}
-      <div
-        className={`fixed top-0 right-0 h-full w-96 bg-[#F0E5D8] shadow-lg transform z-50 transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-black">
-          <h2 className="text-lg font-quicksand text-black">Your Cart</h2>
-          <button onClick={onClose}>
-            <X className="w-6 h-6 text-black" />
-          </button>
-        </div>
-
-        {/* Items */}
-        <div className="p-4 overflow-y-auto h-[65%]">
-          {cart.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-center">
-              <p className="font-quicksand text-black text-lg">🛒 Your cart is empty</p>
-              <p className="text-sm text-gray-600 mt-1">Start shopping to add items</p>
-            </div>
-          ) : (
-            cart.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between mb-4"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-16 h-16 rounded-md object-cover"
-                />
-                <div className="flex-1 px-3">
-                  <h3 className="font-quicksand text-black">{item.name}</h3>
-                  <p className="text-sm text-black">
-                    ₹{item.price} × {item.quantity}
-                  </p>
-                </div>
-                <p className="font-bold text-black font-quicksand">
-                  ₹{item.price * item.quantity}
-                </p>
+        <div className="absolute inset-y-0 right-0 max-w-full flex">
+          <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col text-[#0F1E36]">
+            
+            {/* Header */}
+            <div className="px-4 py-6 bg-red-900 text-white flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <ShoppingBag className="h-6 w-6" />
+                <h2 className="text-lg font-bold">Shopping Cart ({cartCount})</h2>
               </div>
-            ))
-          )}
-        </div>
-
-        {/* Footer */}
-        {cart.length > 0 && (
-          <div className="p-4 border-t border-black">
-            {/* Coupon Code */}
-            <div className="flex gap-2 mb-4">
-              <input
-                type="text"
-                placeholder="Enter coupon code"
-                value={coupon}
-                onChange={(e) => setCoupon(e.target.value)}
-                className="flex-1 px-3 py-2 border rounded-lg font-quicksand text-black"
-              />
-              <button
-                onClick={applyCoupon}
-                className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
-              >
-                Apply
+              <button onClick={onClose} className="text-white hover:text-red-200 transition">
+                <X className="h-6 w-6" />
               </button>
             </div>
 
-            {/* Subtotal & Discount */}
-            <div className="flex justify-between mb-1">
-              <span className="font-semibold text-black">Subtotal:</span>
-              <span className="font-quicksand text-black">₹{subtotal}</span>
+            {/* Cart Items List */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              {cartItems.length === 0 ? (
+                <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                  <ShoppingBag className="h-16 w-16 text-gray-300 mb-4 stroke-1" />
+                  <p className="text-gray-500 font-semibold">Your cart is empty</p>
+                  <button 
+                    onClick={onClose}
+                    className="mt-4 px-6 py-2 bg-red-900 text-white rounded-lg text-sm font-bold hover:bg-red-950 transition"
+                  >
+                    Start Shopping
+                  </button>
+                </div>
+              ) : (
+                cartItems.map((item) => (
+                  <div key={item.id} className="flex gap-4 bg-gray-50 p-3 rounded-lg border border-gray-100 relative">
+                    <img 
+                      src={item.image} 
+                      alt={item.name} 
+                      className="w-20 h-20 object-cover rounded-lg border bg-white"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/product1.png';
+                      }}
+                    />
+                    
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-sm text-[#0F1E36] truncate">{item.name}</h4>
+                      
+                      {/* Attributes */}
+                      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-gray-500">
+                        {item.size && <span>Size: <strong className="text-gray-700">{item.size}</strong></span>}
+                        {item.color && (
+                          <span className="flex items-center gap-1">
+                            Color: 
+                            <span 
+                              className="w-3.5 h-3.5 rounded-full border inline-block" 
+                              style={{ backgroundColor: item.color }}
+                            />
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex justify-between items-center mt-3">
+                        {/* Quantity Counter */}
+                        <div className="flex items-center border border-gray-300 rounded-lg bg-white overflow-hidden">
+                          <button 
+                            onClick={() => handleDecrement(item)}
+                            className="px-2 py-1 text-gray-500 hover:bg-gray-100 transition"
+                          >
+                            <Minus className="h-3 w-3" />
+                          </button>
+                          <span className="px-3 text-xs font-bold text-black">{item.quantity}</span>
+                          <button 
+                            onClick={() => handleIncrement(item)}
+                            className="px-2 py-1 text-gray-500 hover:bg-gray-100 transition"
+                          >
+                            <Plus className="h-3 w-3" />
+                          </button>
+                        </div>
+
+                        {/* Price */}
+                        <span className="font-bold text-sm">₹{parseFloat(item.price) * item.quantity}</span>
+                      </div>
+                    </div>
+
+                    {/* Delete button */}
+                    <button 
+                      onClick={() => removeFromCart(item.id)}
+                      className="absolute top-3 right-3 text-gray-400 hover:text-red-600 transition"
+                    >
+                      <Trash2 className="h-4.5 w-4.5" />
+                    </button>
+                  </div>
+                ))
+              )}
             </div>
-            {discount > 0 && (
-              <div className="flex justify-between mb-1 text-green-700">
-                <span className="font-semibold">Discount:</span>
-                <span>-₹{discount}</span>
+
+            {/* Footer Summary */}
+            {cartItems.length > 0 && (
+              <div className="border-t border-gray-200 p-4 bg-gray-50">
+                <div className="space-y-1.5 text-sm text-gray-650 mb-4">
+                  <div className="flex justify-between">
+                    <span>Subtotal:</span>
+                    <span className="text-black font-semibold">₹{subtotal}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Shipping charges:</span>
+                    {cartCount > 9 ? (
+                      <span className="text-red-900 font-semibold text-xs">Contact Council for Bulk rates</span>
+                    ) : (
+                      <span className="text-black font-semibold">₹{shipping}</span>
+                    )}
+                  </div>
+                  {cartCount > 0 && cartCount < 9 && (cartCount % 3 !== 0) && (
+                    <div className="bg-red-50 border border-red-100 text-red-900 rounded-lg p-2.5 text-[11px] font-medium leading-normal mt-1">
+                      💡 You can add <strong>{3 - (cartCount % 3)} more product{3 - (cartCount % 3) > 1 ? "s" : ""}</strong> at the same shipping price of ₹{shipping}!
+                    </div>
+                  )}
+                  <div className="flex justify-between text-lg font-bold text-red-900 pt-2 border-t mt-2">
+                    <span>Total:</span>
+                    <span>₹{total}</span>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => setCheckoutOpen(true)}
+                  className="w-full py-3.5 bg-red-900 text-white hover:bg-red-950 rounded-lg font-bold text-sm transition duration-350 shadow-md text-center"
+                >
+                  Checkout Now
+                </button>
               </div>
             )}
-            <div className="flex justify-between mb-4">
-              <span className="font-bold text-black">Total:</span>
-              <span className="font-bold font-quicksand text-black">₹{total}</span>
-            </div>
-
-            {/* Checkout */}
-            <button className="w-full bg-red-900 text-white py-2 rounded-lg hover:bg-red-700 transition">
-              Checkout
-            </button>
           </div>
-        )}
+        </div>
       </div>
+
+      {checkoutOpen && (
+        <CheckoutModal 
+          isOpen={checkoutOpen}
+          onClose={() => setCheckoutOpen(false)}
+          product={null} // null triggers checkout from cart items instead of a single product
+        />
+      )}
     </>
   );
-};
-
-export default CartDrawer;
+}

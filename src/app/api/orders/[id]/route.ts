@@ -56,6 +56,38 @@ export async function PUT(
           subject: "SVNIT Alumni Store - Order Confirmed & Payment Verified",
           html: emailHtml
         });
+
+        // Direct intimation to Alumni Association / Vendor Contractor
+        const intimationHtml = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #0f1e36;">
+            <h2 style="color: #7f1d1d; border-bottom: 2px solid #7f1d1d; padding-bottom: 10px; margin-bottom: 20px;">[Intimation] Order Payment Confirmed</h2>
+            <p style="font-size: 14px; line-height: 1.5;">This is to notify you that the payment for the following order has been verified and confirmed. The order details have been sent to the vendor contractor for fulfillment.</p>
+            
+            <div style="background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; margin: 20px 0;">
+              <h4 style="margin: 0 0 10px 0; color: #7f1d1d;">Order & Customer Details</h4>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Order ID:</strong> ${id}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Customer Name:</strong> ${order.name}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Email:</strong> ${order.email}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Phone:</strong> ${order.phone}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Batch:</strong> ${order.batch}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Shipping Address:</strong> ${order.address}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>UTR / Reference ID:</strong> ${order.utr}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Items Ordered:</strong> ${order.products}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Subtotal:</strong> ₹${order.subtotal}</p>
+              <p style="margin: 0 0 6px 0; font-size: 13px;"><strong>Shipping Charges:</strong> ₹${order.shipping}</p>
+              <p style="margin: 0;"><strong>Total Paid:</strong> ₹${order.total}</p>
+            </div>
+            
+            <p style="font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 10px; margin-top: 25px;">
+              This is an automated notification from the SVNIT Alumni Association Store.
+            </p>
+          </div>
+        `;
+        await sendEmail({
+          to: "mail@svnitalumni.com",
+          subject: `[Payment Confirmed] Order ${id} Sent to Contractor`,
+          html: intimationHtml
+        });
       } else if (orderStatus === "PROCESSING" && order.order_status !== "PROCESSING") {
         // Entered Production
         const emailHtml = generateEmailHtml(fullOrderInfo, "IN_PRODUCTION");

@@ -257,6 +257,34 @@ export async function initDb() {
       )
     `);
 
+    // 11. Cart Items Table (tracked per IP user)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS cart_items (
+        id SERIAL PRIMARY KEY,
+        ip_address VARCHAR(100) NOT NULL,
+        product_id VARCHAR(100) NOT NULL,
+        quantity INTEGER NOT NULL DEFAULT 1,
+        size VARCHAR(50),
+        color VARCHAR(50),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    // 12. Contact Submissions Table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS contact_submissions (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        phone VARCHAR(50) NOT NULL,
+        batch VARCHAR(100),
+        purpose VARCHAR(100) NOT NULL,
+        subject VARCHAR(255),
+        description TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
     console.log("Database tables initialized and verified successfully.");
   } catch (error) {
     console.error("Error during database tables initialization:", error);

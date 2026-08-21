@@ -66,6 +66,9 @@ const HeroBanner2 = () => {
           />
         </div>
 
+        <h2 className="text-lg md:text-2xl font-extrabold tracking-widest text-red-500 uppercase mb-4 font-sans">
+          CONNECT • COMMUNICATE • COLLABORATE
+        </h2>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white max-w-4xl leading-tight">
           Stay Connected. <span className="text-red-500">Stay Inspired.</span> <br />
           Stay <span className="underline decoration-red-900">SVNIT</span>.
