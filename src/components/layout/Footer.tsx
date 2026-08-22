@@ -137,17 +137,17 @@ const Footer = () => {
       </div>
 
       {/* BESTSELLERS */}
-      <div className="max-w-7xl mx-auto border-t border-[#DFDFDF] mt-10 pt-6 text-[11px] text-[#555555]">
+      {/* <div className="max-w-7xl mx-auto border-t border-[#DFDFDF] mt-10 pt-6 text-[11px] text-[#555555]">
         <span className="font-bold text-black uppercase mr-2">BESTSELLERS:</span>
         <span className="font-medium">
           Classic Polo Navy | Premium Polo White | Mask SVNIT Grey | Coffee Mug Blue With Lid | Cap SVNIT Red | Tie Silk Grey Jacquard
         </span>
-      </div>
+      </div> */}
 
       {/* Footer copyright & Scroll to top */}
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between border-t border-[#DFDFDF] mt-6 pt-6 text-[11px] text-[#555555] gap-4">
         <div>
-          Copyright © The SVNIT Store. All Rights Reserved. Designed by NWDCo
+          Copyright © The SVNIT Store. All Rights Reserved.
         </div>
 
         {/* Scroll To Top Button */}
