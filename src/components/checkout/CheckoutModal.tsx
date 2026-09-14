@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { X, CheckCircle } from "lucide-react";
+import { X, CheckCircle, Copy, Check, ExternalLink, Zap, Smartphone, QrCode } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 interface CheckoutModalProps {
@@ -23,11 +23,13 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [branch, setBranch] = useState("");
   const [batch, setBatch] = useState("");
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [utr, setUtr] = useState("");
+  const [copiedUpi, setCopiedUpi] = useState(false);
 
   if (!isOpen) return null;
 
@@ -67,7 +69,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
   }
 
   const handleNextToPayment = () => {
-    if (!name || !email || !phone || !batch || !address || !pincode) {
+    if (!name || !email || !phone || !branch || !batch || !address || !pincode) {
       alert("Please fill in all the details first! All fields are compulsory.");
       return;
     }
@@ -90,6 +92,12 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
     setStep(2);
   };
 
+  const copyUpiId = () => {
+    navigator.clipboard.writeText("SARDARVALLABHPATELALUMNIASSOCIATION@SBI");
+    setCopiedUpi(true);
+    setTimeout(() => setCopiedUpi(false), 2500);
+  };
+
   const handlePaymentSubmit = async () => {
     if (!utr) {
       alert("Please enter the UTR / Transaction reference number to submit your payment verification request!");
@@ -103,7 +111,8 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
       name,
       email,
       phone,
-      batch,
+      branch,
+      batch: `${branch} - ${batch}`,
       address: `${address}, Pincode: ${pincode}`,
       products: productsSummary,
       subtotal,
@@ -155,11 +164,13 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
     setName("");
     setEmail("");
     setPhone("");
+    setBranch("");
     setBatch("");
     setAddress("");
     setPincode("");
     setQuantity(1);
     setUtr("");
+    setCopiedUpi(false);
     onClose();
   };
 
@@ -266,12 +277,35 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
                     />
                   </div>
                   <div>
+                    <label className="block text-xs font-semibold text-gray-600 mb-1">Branch / Department *</label>
+                    <input
+                      type="text"
+                      value={branch}
+                      onChange={(e) => setBranch(e.target.value)}
+                      placeholder="Eg: Computer Engineering"
+                      className="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm text-black focus:ring-2 focus:ring-red-900 outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
                     <label className="block text-xs font-semibold text-gray-600 mb-1">Batch (Year of Passing) *</label>
                     <input
                       type="text"
                       value={batch}
                       onChange={(e) => setBatch(e.target.value)}
-                      placeholder="Eg: B.Tech CSE '2024"
+                      placeholder="Eg: 2024 or 1999"
+                      className="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm text-black focus:ring-2 focus:ring-red-900 outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-600 mb-1">Pincode *</label>
+                    <input
+                      type="text"
+                      value={pincode}
+                      onChange={(e) => setPincode(e.target.value)}
+                      placeholder="6-digit pincode"
                       className="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm text-black focus:ring-2 focus:ring-red-900 outline-none"
                     />
                   </div>
@@ -285,17 +319,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
                     placeholder="Street, Landmark, Apartment"
                     rows={2}
                     className="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm text-black focus:ring-2 focus:ring-red-900 outline-none resize-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Pincode *</label>
-                  <input
-                    type="text"
-                    value={pincode}
-                    onChange={(e) => setPincode(e.target.value)}
-                    placeholder="6-digit pincode"
-                    className="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm text-black focus:ring-2 focus:ring-red-900 outline-none"
                   />
                 </div>
               </div>
@@ -336,19 +359,83 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
 
           {step === 2 && (
             <div className="text-center">
-              <h2 className="text-2xl font-bold mb-4 font-sans text-center text-[#0F1E36]">
+              <h2 className="text-2xl font-bold mb-2 font-sans text-center text-[#0F1E36]">
                 Complete Your Payment
               </h2>
-              <p className="text-sm text-gray-500 mb-5">
-                Scan the QR code using your preferred UPI app (GPay, PhonePe, Paytm) to transfer the amount.
+              <p className="text-xs text-gray-500 mb-5">
+                Pay directly using any installed UPI app on your device, or scan the official QR code below.
               </p>
 
+              {/* One-Tap Direct UPI App Payment Buttons */}
+              <div className="mb-6 bg-gradient-to-br from-red-900 to-[#0F1E36] text-white p-4 sm:p-5 rounded-2xl shadow-lg border border-red-800/40 text-left">
+                <div className="flex items-center justify-between mb-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="p-1.5 bg-yellow-400 text-black rounded-lg">
+                      <Zap className="h-4 w-4 fill-current" />
+                    </span>
+                    <h3 className="font-bold text-sm tracking-wide">
+                      Instant One-Tap UPI Payment
+                    </h3>
+                  </div>
+                  <span className="text-[10px] bg-white/20 text-white font-semibold px-2 py-0.5 rounded-full">
+                    Mobile Fast-Pay
+                  </span>
+                </div>
+                
+                <p className="text-xs text-gray-200 leading-relaxed mb-3.5">
+                  Tap below to open your preferred UPI payment app directly with amount <strong className="text-yellow-300 font-bold">₹{total}</strong> pre-filled:
+                </p>
+
+                {/* Primary All-App Intent Button */}
+                <a
+                  href={`upi://pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                  className="w-full flex items-center justify-center gap-2.5 py-3 px-4 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black font-extrabold text-sm rounded-xl transition duration-200 shadow-md mb-2.5"
+                >
+                  <Zap className="h-4 w-4 fill-current" />
+                  <span>Pay ₹{total} via Any UPI App</span>
+                  <ExternalLink className="h-3.5 w-3.5 opacity-70 ml-1" />
+                </a>
+
+                {/* Quick Launch App Buttons */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <a
+                    href={`gpay://upi/pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                    className="flex items-center justify-center py-2 px-2 bg-white hover:bg-gray-100 text-gray-900 rounded-lg text-xs font-bold transition shadow-sm text-center"
+                  >
+                    Google Pay
+                  </a>
+                  <a
+                    href={`phonepe://pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                    className="flex items-center justify-center py-2 px-2 bg-[#5f259f] hover:bg-[#4d1d82] text-white rounded-lg text-xs font-bold transition shadow-sm text-center"
+                  >
+                    PhonePe
+                  </a>
+                  <a
+                    href={`paytmmp://pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                    className="flex items-center justify-center py-2 px-2 bg-[#002970] hover:bg-[#001f54] text-white rounded-lg text-xs font-bold transition shadow-sm text-center"
+                  >
+                    Paytm
+                  </a>
+                  <a
+                    href={`upi://pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                    className="flex items-center justify-center py-2 px-2 bg-[#00897b] hover:bg-[#00695c] text-white rounded-lg text-xs font-bold transition shadow-sm text-center"
+                  >
+                    BHIM UPI
+                  </a>
+                </div>
+
+                <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] text-gray-300">
+                  <span>📱 Mobile: Direct app deep-link</span>
+                  <span>💻 PC / Laptop: Scan QR below</span>
+                </div>
+              </div>
+
               {/* UPI QR Display */}
-              <div className="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl border border-gray-100 mb-6">
+              <div className="flex flex-col items-center justify-center p-5 bg-gray-50 rounded-xl border border-gray-100 mb-6">
                 <img 
                   src="/images/qrcode.png" 
                   alt="SBI Payments QR Code" 
-                  className="h-64 w-auto object-contain mb-4 bg-white p-2 rounded shadow"
+                  className="h-60 w-auto object-contain mb-4 bg-white p-2 rounded shadow"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
@@ -357,9 +444,22 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
                   <p className="text-xs font-semibold text-gray-500">MERCHANT NAME:</p>
                   <p className="font-bold text-sm text-black">SVNIT ALUMNI ASSOCIATION</p>
                   <p className="text-xs font-semibold text-gray-500 mt-1">UPI ID:</p>
-                  <p className="font-bold text-xs bg-white border px-3 py-1 rounded text-black font-mono select-all">
-                    SARDARVALLABHPATELALUMNIASSOCIATION@SBI
-                  </p>
+                  <div className="flex items-center justify-center gap-2">
+                    <code className="font-bold text-xs bg-white border px-3 py-1.5 rounded text-black font-mono select-all">
+                      SARDARVALLABHPATELALUMNIASSOCIATION@SBI
+                    </code>
+                    <button
+                      type="button"
+                      onClick={copyUpiId}
+                      className="p-1.5 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded transition"
+                      title="Copy UPI ID"
+                    >
+                      {copiedUpi ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+                    </button>
+                  </div>
+                  {copiedUpi && (
+                    <span className="text-[11px] text-green-600 font-semibold mt-1 block">✓ UPI ID copied to clipboard!</span>
+                  )}
                   <p className="text-xs font-semibold text-gray-500 mt-2">Amount to transfer:</p>
                   <p className="text-3xl font-extrabold text-red-900">₹{total}</p>
                 </div>
@@ -397,7 +497,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
                   </div>
                 </div>
                 <div className="text-[10px] text-gray-300 pt-2 border-t border-white/10">
-                  ⚠️ Send transaction intimation / screenshot to: <strong className="text-red-300">mail@svnitalumni.com</strong>
+                  ⚠️ Send transaction intimation / screenshot to: <strong className="text-red-300">svnitalumniassociation01@gmail.com</strong>
                 </div>
               </div>
 

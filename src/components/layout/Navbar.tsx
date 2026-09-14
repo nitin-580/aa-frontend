@@ -12,13 +12,22 @@ const Navbar = () => {
 
   const navItems = [
     { name: "About Us", href: "/about" },
-    { name: "Contact Us", href: "/contact" },
     { name: "Merchandise", href: "/merchandise" },
-    { name: "Newsletter", href: "#newsletter" }
+    { name: "Announcements", href: "/announcements" },
+    { name: "Media", href: "/media" },
+    { name: "Contact Us", href: "/contact" },
   ];
 
   return (
     <>
+      {/* Top Announcement Bar */}
+      <div className="bg-[#7f1d1d] text-white text-xs font-semibold py-2 px-4 text-center border-b border-red-950 flex items-center justify-center gap-2 overflow-hidden shadow-inner">
+        <span className="bg-white/20 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full shrink-0">Announcement</span>
+        <span className="truncate">
+          OFFICIAL SVNIT ALUMNI ASSOCIATION STORE | ONLY DOMESTIC ORDERS ARE ACCEPTED | SUPPORT: +91 95943 96048
+        </span>
+      </div>
+
       <div className="bg-[#0F1E36] text-white shadow-lg sticky z-40 top-0">
         <div className="flex items-center justify-between px-6 py-4">
           {/* Left side - Mobile Menu Toggle & Logo */}

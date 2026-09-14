@@ -97,9 +97,9 @@ export async function PUT(
           </div>
         `;
         
-        // 1st email to mail@svnitalumni.com (Payment Verified / Order Placed)
+        // 1st email to svnitalumniassociation01@gmail.com (Payment Verified / Order Placed)
         await sendEmail({
-          to: "mail@svnitalumni.com",
+          to: "svnitalumniassociation01@gmail.com",
           subject: `[Payment Confirmed] Order ${id} Sent to Contractor`,
           html: intimationHtml
         });
@@ -149,9 +149,9 @@ export async function PUT(
           </div>
         `;
 
-        // 2nd email to mail@svnitalumni.com (Production Finished / Ready to dispatch)
+        // 2nd email to svnitalumniassociation01@gmail.com (Production Finished / Ready to dispatch)
         await sendEmail({
-          to: "mail@svnitalumni.com",
+          to: "svnitalumniassociation01@gmail.com",
           subject: `[Order Completed] Order ${id} Production Finished`,
           html: completedNotificationHtml
         });

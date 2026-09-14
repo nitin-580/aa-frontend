@@ -53,6 +53,9 @@ export async function initDb() {
     // Ensure columns exist on existing databases
     await pool.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS sizes TEXT[]`);
     await pool.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS colors TEXT[]`);
+    await pool.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS images TEXT[]`);
+    await pool.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS color_images JSONB`);
+    await pool.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS images_by_color JSONB`);
 
     // Seed initial products if table is empty
     const productCountRes = await pool.query(`SELECT COUNT(*) FROM products`);
@@ -76,15 +79,15 @@ export async function initDb() {
           id: "2",
           name: "Official SVNIT Legacy T-Shirt",
           brand: "SVNIT Alumni Association",
-          price: "699",
-          original_price: "999",
-          image: "/images/Tshirt.png",
-          description: "Comfortable navy-blue cotton polo t-shirt with official SVNIT Alumni insignia. Perfect for alumni meets and reunions.",
+          price: "599",
+          original_price: "899",
+          image: "/Products/t-shirts/navyblue/14d86e91-ea30-441d-a42f-66818231c58c.JPG",
+          description: "Comfortable cotton t-shirt with official SVNIT Alumni insignia. Perfect for alumni meets and reunions.",
           category: "Apparel",
-          features: ["100% Premium Cotton", "Embroidered Left-Chest Crest", "Polo Collar Style"],
-          discount: "30% Off",
+          features: ["100% Combed Cotton", "Gold legacy printing", "Preshrunk fabric", "Multi-angle tailored fit"],
+          discount: "33% Off",
           sizes: ["S", "M", "L", "XL", "XXL"],
-          colors: ["#0F1E36", "#7f1d1d"]
+          colors: ["#0F1E36", "#000000", "#FFFFFF"]
         },
         {
           id: "3",
@@ -111,11 +114,20 @@ export async function initDb() {
       console.log("Seeded initial products successfully.");
     }
 
-    // Force update sizes and colors for product ID '2' (Legacy Polo T-shirt) if they are currently null or empty
+    // Force update sizes, colors, images, color_images, and images_by_color for T-shirt products
     await pool.query(`
       UPDATE products 
-      SET sizes = ARRAY['S', 'M', 'L', 'XL', 'XXL'], colors = ARRAY['#0F1E36', '#7f1d1d']
-      WHERE id = '2' AND (sizes IS NULL OR cardinality(sizes) = 0)
+      SET 
+        colors = ARRAY['#0F1E36', '#000000', '#FFFFFF'],
+        image = '/Products/t-shirts/navyblue/14d86e91-ea30-441d-a42f-66818231c58c.JPG',
+        images = ARRAY[
+          '/Products/t-shirts/navyblue/14d86e91-ea30-441d-a42f-66818231c58c.JPG',
+          '/Products/t-shirts/navyblue/2c73ca62-0f5f-434d-ba19-fe19f6dc304f.JPG',
+          '/Products/t-shirts/navyblue/5af0bfc9-192c-4977-870f-409b6d4eef68.JPG'
+        ],
+        color_images = '{"#0F1E36": "/Products/t-shirts/navyblue/14d86e91-ea30-441d-a42f-66818231c58c.JPG", "#000000": "/Products/t-shirts/black/4446d5bf-adb5-41c3-ba43-a4efad49a9e6.JPG", "#FFFFFF": "/Products/t-shirts/white/44571b86-dbc3-4137-85dd-77b0b7b10f62.JPG"}'::jsonb,
+        images_by_color = '{"#0F1E36": ["/Products/t-shirts/navyblue/14d86e91-ea30-441d-a42f-66818231c58c.JPG", "/Products/t-shirts/navyblue/2c73ca62-0f5f-434d-ba19-fe19f6dc304f.JPG", "/Products/t-shirts/navyblue/5af0bfc9-192c-4977-870f-409b6d4eef68.JPG"], "#000000": ["/Products/t-shirts/black/4446d5bf-adb5-41c3-ba43-a4efad49a9e6.JPG", "/Products/t-shirts/black/5de1e579-ef48-4fc0-890e-93f99e4ef37a.JPG", "/Products/t-shirts/black/9e659c61-c6d4-4648-8652-e2f9bda019b7.JPG"], "#FFFFFF": ["/Products/t-shirts/white/44571b86-dbc3-4137-85dd-77b0b7b10f62.JPG", "/Products/t-shirts/white/a23fbe5b-e1d0-46ab-bd98-1285fbabb75f.JPG", "/Products/t-shirts/white/f56e8c50-8ddd-49ae-b1a9-9bbc30fcd128.JPG"]}'::jsonb
+      WHERE id = '2' OR name ILIKE '%T-Shirt%' OR name ILIKE '%Polo%'
     `);
 
     // 2. Orders Table

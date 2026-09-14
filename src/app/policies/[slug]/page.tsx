@@ -28,8 +28,8 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
             <h4 className="font-bold text-red-900">How to request a return/rectification:</h4>
             <ul className="list-disc pl-5 space-y-2">
               <li>Take clear photos of the defective item.</li>
-              <li>Email the photos and description along with your Order ID to <strong className="text-red-900 font-semibold">mail@svnitalumni.com</strong> as soon as possible.</li>
-              <li>Or contact our support team at <strong className="text-black font-semibold">+91 635 331 2523</strong> (available 10:00 AM to 6:00 PM IST, Monday to Saturday).</li>
+              <li>Email the photos and description along with your Order ID to <strong className="text-red-900 font-semibold">svnitalumniassociation01@gmail.com</strong> as soon as possible.</li>
+              <li>Or contact our support team at <strong className="text-black font-semibold">+91 95943 96048</strong> (available 10:00 AM to 6:00 PM IST, Monday to Saturday).</li>
             </ul>
           </div>
           <p>
@@ -83,19 +83,52 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       ),
     },
     discount: {
-      title: "Discount Policy",
+      title: "Discount & Bulk Order Policy",
       icon: <BadgePercent className="h-8 w-8 text-red-900" />,
       content: (
         <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p>
-            The SVNIT Alumni Association Store is a non-profit initiative dedicated to keeping SVNITians connected and supporting alumni projects. We maintain high quality standard manufacturing, and our prices are curated to be as accessible as possible.
+            The SVNIT Alumni Association Store is a non-profit initiative dedicated to keeping SVNITians connected, honoring our alma mater, and supporting alumni welfare initiatives. We maintain the highest manufacturing quality, and our base prices are subsidized to be accessible to all alumni and students.
           </p>
-          <p>
-            As a general rule, we do not operate as a discount store. However, specialized coupon codes may be issued during specific SVNIT reunion programs, batch jubilees, or official alumni conventions.
-          </p>
-          <p>
-            For bulk orders (e.g. customized batch t-shirts or souvenirs), special pricing is available. Please reach out to us via our <a href="/contact" className="text-red-900 font-bold hover:underline">Contact Us Form</a> with your specifications.
-          </p>
+
+          <div className="bg-amber-50/70 border border-amber-200 p-5 rounded-xl space-y-3">
+            <h4 className="font-bold text-amber-900 text-base flex items-center gap-2">
+              <span>🎉</span> Jubilee Celebrations & Milestone Reunions
+            </h4>
+            <p className="text-amber-950 text-xs sm:text-sm leading-relaxed">
+              We take tremendous pride in supporting milestone batch reunions hosted on campus or across regional alumni chapters:
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-amber-900">
+              <li><strong>Silver Jubilee (25-Year Reunion):</strong> Special batch discount tiers are unlocked for the 25th anniversary celebrations. We provide coordinated batch-year branding on all t-shirts and souvenirs.</li>
+              <li><strong>Golden Jubilee (50-Year Reunion):</strong> Complimentary mementos and curated priority packaging for our senior esteemed alumni celebrating five decades of graduation.</li>
+              <li><strong>Ruby & Pearl Jubilees (40 & 30 Years):</strong> Dedicated bulk concierge support to assist organizing batch committees with group deliveries and tailored memorabilia.</li>
+            </ul>
+          </div>
+
+          <div className="bg-blue-50/70 border border-blue-200 p-5 rounded-xl space-y-3">
+            <h4 className="font-bold text-blue-900 text-base flex items-center gap-2">
+              <span>🎁</span> Official Alumni Merch Kits
+            </h4>
+            <p className="text-blue-950 text-xs sm:text-sm leading-relaxed">
+              Planning a batch gathering, department meet, or conference? The Alumni Association offers customized <strong>Official Merch Kits</strong> bundled at attractive concession rates:
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-blue-900">
+              <li><strong>Kit Inclusions:</strong> Premium Polo T-shirt, Laser-engraved Executive Diary, Brass Lapel Crest Pin, Insulated Sipper Bottle, and official SVNIT Alumni Heritage Keepsake Box.</li>
+              <li><strong>Bundle Concession:</strong> Ordering items as an assembled kit grants up to <strong>15% to 25% discount</strong> compared to individual item listings.</li>
+              <li><strong>Direct Campus Delivery:</strong> For reunions taking place in Surat, batch merch kits can be delivered directly to the SVNIT Guest House or designated banquet venue ahead of your arrival.</li>
+            </ul>
+          </div>
+
+          <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-2">
+            <h4 className="font-bold text-gray-900">How to request Jubilee & Merch Kit quotations:</h4>
+            <p className="text-xs text-gray-700 leading-relaxed">
+              Reunion batch coordinators are requested to contact our merchandising team at least <strong>3 to 4 weeks prior</strong> to the event to allow for custom sizing, batch embroidery, and timely dispatch.
+            </p>
+            <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold">
+              <span className="text-red-900">📧 svnitalumniassociation01@gmail.com</span>
+              <span className="text-gray-700">📞 +91 95943 96048</span>
+            </div>
+          </div>
         </div>
       ),
     },
@@ -144,7 +177,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
             The official SVNIT Crest and the SVNIT Alumni Association Seal are trademarks of the institute and the association.
           </p>
           <p>
-            Reproduction, modification, or distribution of any digital material from this website without prior written permission from the SVNIT Alumni Association Executive Committee is strictly prohibited. For permission requests, write to <strong className="text-black font-semibold">mail@svnitalumni.com</strong>.
+            Reproduction, modification, or distribution of any digital material from this website without prior written permission from the SVNIT Alumni Association Executive Committee is strictly prohibited. For permission requests, write to <strong className="text-black font-semibold">svnitalumniassociation01@gmail.com</strong>.
           </p>
         </div>
       ),

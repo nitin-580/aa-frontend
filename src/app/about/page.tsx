@@ -115,6 +115,8 @@ export default function AboutPage() {
           </div>
         </div>
 
+
+
         {/* Advisory / Contact CTA */}
         <div className="bg-[#0F1E36] text-white p-8 md:p-12 rounded-3xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10">
           <div className="space-y-3 max-w-xl text-center md:text-left">

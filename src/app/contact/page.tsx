@@ -81,9 +81,9 @@ export default function ContactPage() {
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Office Address</p>
                 <p className="text-sm font-semibold mt-1">
-                  The SVNIT Store, Near Admin Block,<br />
-                  SVNIT Campus, Ichchhanath,<br />
-                  Surat, Gujarat - 395007
+                  The Alumni Association office,<br />
+                  SVNIT Campus, near SBI Bank,<br />
+                  Ichchhanath, Surat, Gujarat - 395007
                 </p>
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function ContactPage() {
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Email Support</p>
                 <p className="text-sm font-semibold mt-1 hover:text-red-400 transition cursor-pointer break-all">
-                  mail@svnitalumni.com
+                  svnitalumniassociation01@gmail.com
                 </p>
               </div>
             </div>

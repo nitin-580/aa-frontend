@@ -55,9 +55,9 @@ const Footer = () => {
             <div className="flex">
               <span className="font-bold w-16 shrink-0 text-black">Address:</span>
               <span className="text-[#555555]">
-                The SVNIT Store,<br />
-                Near Admin Block, SVNIT Campus,<br />
-                Ichchhanath, Surat, Gujarat<br />
+                The Alumni Association office,<br />
+                SVNIT Campus, near SBI Bank,<br />
+                Ichchhanath, Surat, Gujarat,<br />
                 Pin - 395007
               </span>
             </div>
@@ -67,7 +67,9 @@ const Footer = () => {
             </div>
             <div className="flex items-center">
               <span className="font-bold w-16 shrink-0 text-black">Email:</span>
-              <span className="text-[#7f1d1d] font-semibold break-all">mail@svnitalumni.com</span>
+              <a href="mailto:svnitalumniassociation01@gmail.com" className="text-[#7f1d1d] font-semibold break-all hover:underline">
+                svnitalumniassociation01@gmail.com
+              </a>
             </div>
           </div>
         </div>
@@ -76,6 +78,9 @@ const Footer = () => {
         <div>
           <h3 className="font-bold text-sm tracking-wider uppercase text-black mb-4">COMPANY</h3>
           <ul className="space-y-2 text-[#7f1d1d]">
+            <li><Link href="/about" className="hover:underline flex items-center gap-1.5">• About Us</Link></li>
+            <li><Link href="/announcements" className="hover:underline flex items-center gap-1.5">• Announcements</Link></li>
+            <li><Link href="/media" className="hover:underline flex items-center gap-1.5">• Media & Events</Link></li>
             <li><Link href="/contact" className="hover:underline flex items-center gap-1.5">• Contact Us</Link></li>
             <li><Link href="https://svnit.ac.in" target="_blank" rel="noopener noreferrer" className="hover:underline flex items-center gap-1.5">• About SVNIT</Link></li>
             <li><Link href="/contact" className="hover:underline flex items-center gap-1.5">• Bulk Order</Link></li>

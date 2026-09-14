@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ProductModal from "@/components/product/ProductModal";
 import { products as fallbackProducts, Product } from "@/components/product/products";
+import { Sparkles } from "lucide-react";
 
 export default function MerchandiseCatalog() {
   const [productsList, setProductsList] = useState<Product[]>([]);
@@ -174,6 +175,70 @@ export default function MerchandiseCatalog() {
             <p className="text-gray-500 text-lg">No products found matching your criteria.</p>
           </div>
         )}
+
+        {/* Success Stories & Silver Jubilee Batch Merch Delivery Section */}
+        <div className="mt-20 border-t border-gray-200 pt-16">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 bg-red-900/10 text-red-900 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+              <Sparkles className="w-4 h-4" />
+              Alumni Success Stories & Delivery Highlights
+            </span>
+            <h2 className="text-3xl font-extrabold text-[#0F1E36] tracking-tight mb-3">
+              Silver Jubilee Batch Merch Fulfillments
+            </h2>
+            <p className="text-gray-650 text-base max-w-2xl mx-auto leading-relaxed">
+              Official SVNIT Alumni merchandise kits successfully delivered to our Silver Jubilee batch alumni during the Global Alumni Convention.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Story Photo Card 1 */}
+            <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col justify-between hover:shadow-xl transition duration-300">
+              <div className="space-y-4">
+                <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner relative group">
+                  <img
+                    src="/aaphotos/successStories/323e978b-7d34-45e4-8141-2b7e07b5bbfe.JPG"
+                    alt="Silver Jubilee Batch Merch Delivery at Global Alumni Convention"
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  />
+                  <span className="absolute bottom-3 left-3 text-xs font-bold bg-black/70 text-white px-3 py-1 rounded-full backdrop-blur-md">
+                    Global Alumni Convention
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-[#0F1E36]">Silver Jubilee Celebration Kit Delivery</h3>
+                  <p className="text-xs font-semibold text-red-900 mt-1">Global Alumni Reunion • SVNIT Campus</p>
+                  <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                    Distributing official SVNIT custom merch kits, heritage memorabilia, and customized alumni badges to our Silver Jubilee reunion attendees.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Story Photo Card 2 */}
+            <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col justify-between hover:shadow-xl transition duration-300">
+              <div className="space-y-4">
+                <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner relative group">
+                  <img
+                    src="/aaphotos/successStories/35a42487-eb0e-469a-8a9e-448f35ef4b6c.JPG"
+                    alt="Alumni Merch Distribution at Global Alumni Convention"
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  />
+                  <span className="absolute bottom-3 left-3 text-xs font-bold bg-black/70 text-white px-3 py-1 rounded-full backdrop-blur-md">
+                    Merchandise Fulfillments
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-[#0F1E36]">Batch Reunion Distribution</h3>
+                  <p className="text-xs font-semibold text-red-900 mt-1">Alumni Association Store • On-Site Fulfillments</p>
+                  <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                    Memorable moments as alumni receive their exclusive SVNIT legacy t-shirts and custom keepsakes during the convention meetups.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <ProductModal isOpen={isModalOpen} onClose={closeModal} product={selectedProduct} />
