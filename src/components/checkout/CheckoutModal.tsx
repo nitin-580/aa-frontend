@@ -93,7 +93,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
   };
 
   const copyUpiId = () => {
-    navigator.clipboard.writeText("SARDARVALLABHPATELALUMNIASSOCIATION@SBI");
+    navigator.clipboard.writeText("sardarvallabhpatelalumnassociation@sbi");
     setCopiedUpi(true);
     setTimeout(() => setCopiedUpi(false), 2500);
   };
@@ -388,7 +388,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
 
                 {/* Primary All-App Intent Button */}
                 <a
-                  href={`upi://pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                  href={`upi://pay?pa=sardarvallabhpatelalumnassociation@sbi&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
                   className="w-full flex items-center justify-center gap-2.5 py-3 px-4 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black font-extrabold text-sm rounded-xl transition duration-200 shadow-md mb-2.5"
                 >
                   <Zap className="h-4 w-4 fill-current" />
@@ -399,25 +399,25 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
                 {/* Quick Launch App Buttons */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   <a
-                    href={`gpay://upi/pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                    href={`gpay://upi/pay?pa=sardarvallabhpatelalumnassociation@sbi&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
                     className="flex items-center justify-center py-2 px-2 bg-white hover:bg-gray-100 text-gray-900 rounded-lg text-xs font-bold transition shadow-sm text-center"
                   >
                     Google Pay
                   </a>
                   <a
-                    href={`phonepe://pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                    href={`phonepe://pay?pa=sardarvallabhpatelalumnassociation@sbi&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
                     className="flex items-center justify-center py-2 px-2 bg-[#5f259f] hover:bg-[#4d1d82] text-white rounded-lg text-xs font-bold transition shadow-sm text-center"
                   >
                     PhonePe
                   </a>
                   <a
-                    href={`paytmmp://pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                    href={`paytmmp://pay?pa=sardarvallabhpatelalumnassociation@sbi&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
                     className="flex items-center justify-center py-2 px-2 bg-[#002970] hover:bg-[#001f54] text-white rounded-lg text-xs font-bold transition shadow-sm text-center"
                   >
                     Paytm
                   </a>
                   <a
-                    href={`upi://pay?pa=SARDARVALLABHPATELALUMNIASSOCIATION@SBI&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
+                    href={`upi://pay?pa=sardarvallabhpatelalumnassociation@sbi&pn=SVNIT%20ALUMNI%20ASSOCIATION&am=${total}&cu=INR&tn=SVNIT%20Store%20Order`}
                     className="flex items-center justify-center py-2 px-2 bg-[#00897b] hover:bg-[#00695c] text-white rounded-lg text-xs font-bold transition shadow-sm text-center"
                   >
                     BHIM UPI
@@ -446,7 +446,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, product,
                   <p className="text-xs font-semibold text-gray-500 mt-1">UPI ID:</p>
                   <div className="flex items-center justify-center gap-2">
                     <code className="font-bold text-xs bg-white border px-3 py-1.5 rounded text-black font-mono select-all">
-                      SARDARVALLABHPATELALUMNIASSOCIATION@SBI
+                      sardarvallabhpatelalumnassociation@sbi
                     </code>
                     <button
                       type="button"
