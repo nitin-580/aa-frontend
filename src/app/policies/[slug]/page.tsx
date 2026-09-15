@@ -44,7 +44,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       content: (
         <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <div className="bg-red-900/10 text-red-900 font-semibold p-4 rounded-lg border border-red-900/20 text-center">
-            ⚠️ DOMESTIC SHIPMENTS ONLY. WE DO NOT FULFILL INTERNATIONAL DELIVERIES.
+            ⚠️ DOMESTIC SHIPMENTS ONLY. INTERNATIONAL DELIVERY WILL START FROM 1 APRIL 2027.
           </div>
           <p>
             We process shipments via standard domestic courier partners. Delivery times range from 7 to 10 working days from the completion of the production stage.

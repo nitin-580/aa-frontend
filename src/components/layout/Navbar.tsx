@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className="bg-[#7f1d1d] text-white text-[11px] sm:text-xs font-semibold py-2 px-3 text-center border-b border-red-950 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 shadow-inner">
         <span className="bg-white/20 text-white text-[9px] sm:text-[10px] uppercase font-bold px-2 py-0.5 rounded-full shrink-0">Announcement</span>
         <span className="leading-snug text-center">
-          OFFICIAL SVNIT ALUMNI ASSOCIATION STORE | ONLY DOMESTIC ORDERS ARE ACCEPTED | SUPPORT: +91 95943 96048
+          OFFICIAL SVNIT ALUMNI ASSOCIATION STORE | ONLY DOMESTIC ORDERS ARE ACCEPTED (INTERNATIONAL DELIVERY STARTS 1 APRIL 2027) | SUPPORT: +91 95943 96048
         </span>
       </div>
 

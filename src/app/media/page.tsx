@@ -21,7 +21,7 @@ const YoutubeIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
 interface MediaItem {
   id: string;
   title: string;
-  category: "garba" | "health" | "reunion" | "video";
+  category: "reunion" | "video";
   categoryLabel: string;
   imageUrl: string;
   date: string;
@@ -34,69 +34,19 @@ interface MediaItem {
 const mediaItems: MediaItem[] = [
   {
     id: "m-1",
-    title: "Ramzat Garba Mahotsav - Grand Campus Inauguration",
-    category: "garba",
-    categoryLabel: "Ramzat Garba",
-    imageUrl: "/aaphotos/ramzat-garba/image.png",
-    date: "Annual Cultural Fest",
-    location: "SVNIT Campus Main Ground",
-    description: "Alumni and families coming together to celebrate the vibrant traditional Gujarati Garba evening on SVNIT lawns."
-  },
-  {
-    id: "m-2",
-    title: "Ramzat Garba - Alumni Group Raas & Celebration",
-    category: "garba",
-    categoryLabel: "Ramzat Garba",
-    imageUrl: "/aaphotos/ramzat-garba/image copy.png",
-    date: "Annual Cultural Fest",
-    location: "SVNIT Campus",
-    description: "Generations of SVNITians sharing the dance circle, accompanied by traditional folk vocalists and dhol players."
-  },
-  {
-    id: "m-3",
-    title: "Ramzat Garba - Felicitation & Evening Highlights",
-    category: "garba",
-    categoryLabel: "Ramzat Garba",
-    imageUrl: "/aaphotos/ramzat-garba/image copy 2.png",
-    date: "Annual Cultural Fest",
-    location: "SVNIT Amphitheatre",
-    description: "Awarding traditional attire honors and memorable alumni reunions during the gala evening."
-  },
-  {
-    id: "m-4",
-    title: "Community Health Checkup & Wellness Camp - Registration & Vitals",
-    category: "health",
-    categoryLabel: "Health Checkup Camp",
-    imageUrl: "/aaphotos/healthcheckup/Healthcheckupcamp.png",
-    date: "Alumni Welfare Drive",
-    location: "SVNIT Health Center",
-    description: "Complimentary medical consultations, cardiac screenings, dental exams, and diagnostic checks organized by the SVNIT Alumni Association."
-  },
-  {
-    id: "m-5",
-    title: "Doctor Consultations & Free Health Screening",
-    category: "health",
-    categoryLabel: "Health Checkup Camp",
-    imageUrl: "/aaphotos/healthcheckup/image.png",
-    date: "Alumni Welfare Drive",
-    location: "SVNIT Campus Health Center",
-    description: "Distinguished alumni medical specialists providing consultation and preventive care awareness to staff, students, and local community members."
-  },
-  {
-    id: "m-6",
-    title: "Silver Jubilee Celebration Kit Delivery",
+    title: "Jubilee Celebration Kit Delivery",
     category: "reunion",
-    categoryLabel: "Silver Jubilee Merch",
+    categoryLabel: "Jubilee Merch Delivery",
     imageUrl: "/aaphotos/successStories/323e978b-7d34-45e4-8141-2b7e07b5bbfe.JPG",
     date: "Global Alumni Convention",
     location: "SVNIT Campus Reunion",
-    description: "Distributing official SVNIT custom merch kits, heritage memorabilia, and customized alumni badges to our Silver Jubilee reunion attendees."
+    description: "Distributing official SVNIT custom merch kits, heritage memorabilia, and customized alumni badges to our jubilee reunion attendees."
   },
   {
-    id: "m-7",
+    id: "m-2",
     title: "Batch Reunion Merchandise Fulfillments",
     category: "reunion",
-    categoryLabel: "Silver Jubilee Merch",
+    categoryLabel: "Jubilee Merch Delivery",
     imageUrl: "/aaphotos/successStories/35a42487-eb0e-469a-8a9e-448f35ef4b6c.JPG",
     date: "Global Alumni Convention",
     location: "Alumni Association Store",
@@ -122,13 +72,13 @@ export default function MediaPage() {
         <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <div className="inline-flex items-center gap-2 bg-red-900/40 text-red-300 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-red-800/40">
             <Camera className="h-4 w-4" />
-            Alumni Moments & Events
+            Alumni Moments & Deliveries
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">
             Media & Photo Gallery
           </h1>
           <p className="text-gray-300 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
-            Relive cherished memories from alumni gatherings, cultural fests, health camps, and milestone reunions at SVNIT Surat.
+            Relive cherished memories from milestone jubilee reunions, convention fulfillments, and merchandise deliveries at SVNIT Surat.
           </p>
 
           {/* Social Quick Links */}
@@ -179,27 +129,7 @@ export default function MediaPage() {
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
-            Silver Jubilee Merch Delivery
-          </button>
-          <button
-            onClick={() => setSelectedCategory("garba")}
-            className={`px-5 py-2 rounded-xl text-xs font-bold transition duration-200 ${
-              selectedCategory === "garba"
-                ? "bg-red-900 text-white shadow-sm"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Ramzat Garba Mahotsav
-          </button>
-          <button
-            onClick={() => setSelectedCategory("health")}
-            className={`px-5 py-2 rounded-xl text-xs font-bold transition duration-200 ${
-              selectedCategory === "health"
-                ? "bg-red-900 text-white shadow-sm"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Health Checkup Camp
+            Jubilee Merch Delivery
           </button>
         </div>
       </section>

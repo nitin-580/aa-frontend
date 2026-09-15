@@ -82,7 +82,7 @@ export async function initDb() {
           price: "599",
           original_price: "899",
           image: "/Products/t-shirts/navyblue/14d86e91-ea30-441d-a42f-66818231c58c.JPG",
-          description: "Comfortable cotton t-shirt with official SVNIT Alumni insignia. Perfect for alumni meets and reunions.",
+          description: "Comfortable premium cotton polo SVNIT Alumni t-shirt with official insignia. Perfect for alumni meets and reunions.",
           category: "Apparel",
           features: ["100% Combed Cotton", "Gold legacy printing", "Preshrunk fabric", "Multi-angle tailored fit"],
           discount: "33% Off",

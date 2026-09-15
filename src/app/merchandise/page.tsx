@@ -176,18 +176,18 @@ export default function MerchandiseCatalog() {
           </div>
         )}
 
-        {/* Success Stories & Silver Jubilee Batch Merch Delivery Section */}
+        {/* Success Stories & Jubilee Celebrations Kits Delivery Section */}
         <div className="mt-20 border-t border-gray-200 pt-16">
           <div className="text-center mb-12">
             <span className="inline-flex items-center gap-2 bg-red-900/10 text-red-900 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
               <Sparkles className="w-4 h-4" />
-              Alumni Success Stories & Delivery Highlights
+              Alumni Delivery Highlights & Memories
             </span>
             <h2 className="text-3xl font-extrabold text-[#0F1E36] tracking-tight mb-3">
-              Silver Jubilee Batch Merch Fulfillments
+              Jubilee Celebrations Kits Fulfillments
             </h2>
             <p className="text-gray-650 text-base max-w-2xl mx-auto leading-relaxed">
-              Official SVNIT Alumni merchandise kits successfully delivered to our Silver Jubilee batch alumni during the Global Alumni Convention.
+              Official merchandise curated by the SVNIT Alumni Association delivered to our Silver, Golden, and milestone reunion batch alumni during the Global Alumni Convention.
             </p>
           </div>
 
@@ -198,7 +198,7 @@ export default function MerchandiseCatalog() {
                 <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner relative group">
                   <img
                     src="/aaphotos/successStories/323e978b-7d34-45e4-8141-2b7e07b5bbfe.JPG"
-                    alt="Silver Jubilee Batch Merch Delivery at Global Alumni Convention"
+                    alt="Jubilee Celebrations Kits Delivery at Global Alumni Convention"
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                   />
                   <span className="absolute bottom-3 left-3 text-xs font-bold bg-black/70 text-white px-3 py-1 rounded-full backdrop-blur-md">
@@ -206,10 +206,10 @@ export default function MerchandiseCatalog() {
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#0F1E36]">Silver Jubilee Celebration Kit Delivery</h3>
+                  <h3 className="text-xl font-bold text-[#0F1E36]">Jubilee Celebration Kit Delivery</h3>
                   <p className="text-xs font-semibold text-red-900 mt-1">Global Alumni Reunion • SVNIT Campus</p>
                   <p className="text-sm text-gray-600 mt-2 leading-relaxed">
-                    Distributing official SVNIT custom merch kits, heritage memorabilia, and customized alumni badges to our Silver Jubilee reunion attendees.
+                    Distributing official SVNIT custom merch kits, heritage memorabilia, and customized alumni badges to our milestone jubilee reunion attendees.
                   </p>
                 </div>
               </div>

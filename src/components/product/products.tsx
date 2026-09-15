@@ -39,7 +39,7 @@ export const products: Product[] = [
     originalPrice: "899",
     discount: "33% Off",
     image: "/Products/t-shirts/navyblue/14d86e91-ea30-441d-a42f-66818231c58c.JPG",
-    description: "Premium combed cotton SVNIT Alumni t-shirt. Breathable, durable, and stylishly tailored. Features the elegant Alumni emblem printed in gold on deep navy blue, classic black, or crisp white fabric.",
+    description: "Comfortable premium cotton polo SVNIT Alumni t-shirt. Breathable, durable, and stylishly tailored. Features the elegant Alumni emblem printed in gold.",
     category: "Apparel",
     sizes: ["S", "M", "L", "XL", "XXL"],
     colors: ["#0F1E36", "#000000", "#FFFFFF"],
@@ -98,7 +98,7 @@ export const products: Product[] = [
       "#0F1E36": "/images/bottleAA.png",
       "#FFFFFF": "/images/stanley.png"
     },
-    description: "Double-walled vacuum insulated water bottle keeping beverages cold for 24 hours and hot for 12 hours. Laser-etched SVNIT emblem on high-grade steel matte navy body.",
+    description: "Double-walled vacuum insulated water bottle keeping beverages cold for 24 hours and hot for 12 hours. Laser-etched SVNIT emblem on high-grade steel matte body.",
     category: "Accessories",
     sizes: ["750ml", "1000ml"],
     colors: ["#0F1E36", "#FFFFFF"],
