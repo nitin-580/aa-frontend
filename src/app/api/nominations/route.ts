@@ -40,16 +40,25 @@ export async function POST(req: NextRequest) {
       !yearOfPassing ||
       !branch ||
       !category ||
+      !dateOfBirth ||
       !mobile ||
       !email ||
+      !addressResidence ||
+      !addressWork ||
       !proposerName ||
+      !proposerDegreeYear ||
       !proposerEmail ||
+      !proposerMobile ||
+      !proposerAddress ||
       !seconderName ||
+      !seconderDegreeYear ||
       !seconderEmail ||
+      !seconderMobile ||
+      !seconderAddress ||
       !declarationAccepted
     ) {
       return NextResponse.json(
-        { error: "Mandatory fields are missing. Please complete all required sections." },
+        { error: "Mandatory fields are missing. Please complete all required sections in Nominee, Proposer, and Seconder details." },
         { status: 400 }
       );
     }
