@@ -15,7 +15,8 @@ import {
   UserCheck,
   Send,
   Camera,
-  UploadCloud
+  UploadCloud,
+  ExternalLink
 } from "lucide-react";
 import { 
   ACCOLADE_GROUPS, 
@@ -29,6 +30,7 @@ export default function NominatePage() {
   const [submitted, setSubmitted] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [submissionId, setSubmissionId] = useState("");
+  const [uploadedPhotoUrl, setUploadedPhotoUrl] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [missingField, setMissingField] = useState<string>("");
 
@@ -217,6 +219,7 @@ export default function NominatePage() {
 
       const generatedId = data.id || `AAA-${yop}-${Date.now().toString().slice(-6)}`;
       setSubmissionId(generatedId);
+      if (data.photoUrl) setUploadedPhotoUrl(data.photoUrl);
       setSubmitted(true);
       setShowSuccessModal(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -876,6 +879,20 @@ export default function NominatePage() {
                 <span className="text-gray-500 font-medium">Category:</span>
                 <span className="font-semibold text-gray-900 text-right max-w-[220px] truncate">{formData.category}</span>
               </div>
+              {uploadedPhotoUrl && (
+                <div className="flex justify-between items-center py-1.5 border-b border-gray-200">
+                  <span className="text-gray-500 font-medium">Photograph:</span>
+                  <a
+                    href={uploadedPhotoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 font-semibold underline flex items-center gap-1"
+                  >
+                    <span>View Photo Link</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
+              )}
               <div className="flex justify-between items-center py-1.5">
                 <span className="text-gray-500 font-medium">Database Status:</span>
                 <span className="font-bold text-emerald-700 flex items-center gap-1">

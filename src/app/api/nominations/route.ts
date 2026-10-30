@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { uploadNomineePhoto } from "@/lib/cloudinary";
 
 export async function POST(req: NextRequest) {
   try {
@@ -66,6 +67,16 @@ export async function POST(req: NextRequest) {
 
     const id = `AAA-${yearOfPassing}-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
 
+    // Upload photo to Cloudinary CDN
+    let photoUrl = "";
+    if (photoBase64 && typeof photoBase64 === "string" && photoBase64.startsWith("data:")) {
+      try {
+        photoUrl = await uploadNomineePhoto(photoBase64, id);
+      } catch (cloudErr) {
+        console.error("Failed to upload photo to Cloudinary:", cloudErr);
+      }
+    }
+
     const sheetPayload = {
       submissionId: id,
       formType: "ACE Accolade Nomination",
@@ -82,7 +93,7 @@ export async function POST(req: NextRequest) {
       addressResidence: addressResidence || "",
       addressWork: addressWork || "",
       photoName: photoName || "",
-      photoBase64: photoBase64 || "",
+      photoUrl: photoUrl || "",
       proposerName,
       proposerDegreeYear: proposerDegreeYear || "",
       proposerEmail,
@@ -123,6 +134,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
       id,
+      photoUrl,
       message: `Nomination for ${nomineeName} has been successfully recorded.`,
     });
   } catch (error: any) {
