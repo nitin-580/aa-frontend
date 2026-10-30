@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
@@ -8,9 +8,12 @@
   --primary: #0F1E36;       /* Deep Navy */
   --accent: #7f1d1d;        /* Deep Crimson Red */
   --accent-light: #E6F0FA;  /* Light Blue */
+  --gold: #C9A050;          /* Accolade Ceremonial Gold */
+  --gold-hover: #b88e3e;
   --font-dancing-script: "Dancing Script", cursive;
   --font-quicksand-script: "Quicksand", sans-serif;
   --font-sans: "Montserrat", sans-serif;
+  --font-display: "Libre Baskerville", Georgia, serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +36,25 @@ body {
 }
 .font-quicksand {
   font-family: var(--font-quicksand-script);
+}
+.font-display {
+  font-family: var(--font-display);
+}
+
+.rule-gold {
+  position: relative;
+}
+.rule-gold::after {
+  content: "";
+  background-color: var(--gold);
+  width: 3.5rem;
+  height: 2px;
+  margin-top: 0.875rem;
+  display: block;
+}
+
+.card-elevated {
+  box-shadow: 0 4px 20px -2px rgba(15, 30, 54, 0.08), 0 2px 6px -1px rgba(15, 30, 54, 0.04);
 }
 
 /* Force all boxes, buttons, inputs, modals, and containers to have sharp, perfectly cornered square borders */
