@@ -9,7 +9,7 @@ interface Announcement {
   id: string;
   refNo: string;
   title: string;
-  category: "Reunions" | "Welfare" | "Elections" | "Store" | "General";
+  category: "Convention" | "Elections";
   date: string;
   isNew?: boolean;
   summary: string;
@@ -19,16 +19,52 @@ interface Announcement {
   actionHref?: string;
 }
 
-const announcementsData: Announcement[] = [];
+const announcementsData: Announcement[] = [
+  {
+    id: "ann-conv-2026",
+    refNo: "SVNIT/AA/CONV/2026/01",
+    title: "Annual Alumni Convention & ACE Alumnus Accolade (AAA) 2026 Nominations",
+    category: "Convention",
+    date: "October 2026",
+    isNew: true,
+    summary: "Nominations are officially invited for the prestigious ACE Alumnus Accolade 2026 to be conferred during the Annual Alumni Convention at the SVNIT Surat Campus.",
+    details: [
+      "Honouring alumni across 16 Accolade Categories in Groups A through E (Professional Excellence, Entrepreneurship, Public Service, Lifetime Contribution & Young Alumnus Achiever).",
+      "Nomination Dossier submission deadline: 25th November 2026.",
+      "Each nomination must be proposed and seconded by two distinct SVNIT/SVRCET alumni.",
+      "Selection will be evaluated by an eminent Selection Committee appointed by the SVNIT Alumni Association."
+    ],
+    contactEmail: "svnitalumniassociation01@gmail.com",
+    actionText: "File an Accolade Nomination",
+    actionHref: "/ace-awards",
+  },
+  {
+    id: "ann-elec-2026",
+    refNo: "SVNIT/AA/ELEC/2026/01",
+    title: "SVNIT Alumni Association Management Committee Election 2026 — Registration Drive",
+    category: "Elections",
+    date: "October 2026",
+    isNew: true,
+    summary: "Official election circular for all alumni of SVNIT / SVRCET Surat regarding voting rights and candidate nominations for the upcoming Management Committee elections.",
+    details: [
+      "Candidate Nominations: Alumni registering as candidates must complete portal registration on or before 15th November 2026.",
+      "Alumnus Voting Rights: Register on or before 30th November 2026 to be included in the official electoral voter roll.",
+      "Online portal registration is mandatory. Profiles will be verified by the SVNIT Alumni Cell.",
+      "Approved alumni will receive digital Alumni Membership Cards and access to the 'My Alumni Network' mobile voting app."
+    ],
+    contactEmail: "dean_arg@svnit.ac.in",
+    actionText: "Register for Election / Voting Rights",
+    actionHref: "/register",
+  },
+];
 
 export default function AnnouncementsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const categories = ["Convention", "Elections"];
+  const [selectedCategory, setSelectedCategory] = useState<string>("Convention");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = ["All", "Reunions", "Welfare", "Store", "Elections", "General"];
-
   const filteredAnnouncements = announcementsData.filter((item) => {
-    const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+    const matchesCategory = item.category === selectedCategory;
     const matchesSearch =
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
