@@ -297,6 +297,40 @@ export async function initDb() {
       )
     `);
 
+    // 13. ACE Accolade Nominations Table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS ace_nominations (
+        id VARCHAR(100) PRIMARY KEY,
+        nominee_name VARCHAR(255) NOT NULL,
+        degree VARCHAR(255) NOT NULL,
+        year_of_passing VARCHAR(10) NOT NULL,
+        branch VARCHAR(255) NOT NULL,
+        category VARCHAR(255) NOT NULL,
+        date_of_birth VARCHAR(50),
+        address_residence TEXT,
+        address_work TEXT,
+        mobile VARCHAR(50) NOT NULL,
+        other_phone VARCHAR(50),
+        email VARCHAR(255) NOT NULL,
+        proposer_name VARCHAR(255) NOT NULL,
+        proposer_degree_year VARCHAR(255),
+        proposer_email VARCHAR(255) NOT NULL,
+        proposer_mobile VARCHAR(50),
+        proposer_address TEXT,
+        seconder_name VARCHAR(255) NOT NULL,
+        seconder_degree_year VARCHAR(255),
+        seconder_email VARCHAR(255) NOT NULL,
+        seconder_mobile VARCHAR(50),
+        seconder_address TEXT,
+        declaration_accepted BOOLEAN DEFAULT TRUE,
+        photo_name TEXT,
+        annexures JSONB,
+        additional_evidence JSONB,
+        status VARCHAR(50) DEFAULT 'Submitted',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
     console.log("Database tables initialized and verified successfully.");
   } catch (error) {
     console.error("Error during database tables initialization:", error);
