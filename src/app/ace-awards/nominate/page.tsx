@@ -110,30 +110,36 @@ export default function NominatePage() {
     e.preventDefault();
     setErrorMsg("");
 
-    // Validate Required Fields
+    // Validate Required Fields - Section 1: Nominee Details
     if (!formData.nomineeName.trim()) return setErrorMsg("Nominee Name is required.");
     if (!formData.degree.trim()) return setErrorMsg("Degree obtained is required.");
     if (!formData.yearOfPassing.trim() || !/^(19|20)\d{2}$/.test(formData.yearOfPassing.trim())) {
       return setErrorMsg("Please enter a valid 4-digit Year of Passing (e.g. 1998).");
     }
-    if (!formData.branch.trim()) return setErrorMsg("Branch is required.");
-    if (!formData.category) return setErrorMsg("Please select one of the 16 Accolade categories.");
+    if (!formData.branch.trim()) return setErrorMsg("Branch / Discipline is required.");
+    if (!formData.dateOfBirth.trim()) return setErrorMsg("Nominee Date of Birth is required.");
     if (!formData.mobile.trim()) return setErrorMsg("Nominee Mobile Number is required.");
     if (!formData.email.trim()) return setErrorMsg("Nominee Email is required.");
+    if (!formData.addressResidence.trim()) return setErrorMsg("Nominee Residential Address is required.");
+    if (!formData.addressWork.trim()) return setErrorMsg("Nominee Work / Office Address is required.");
+    if (!formData.category) return setErrorMsg("Please select one of the 16 Accolade categories.");
     if (!photoFile) return setErrorMsg("Please upload a recent passport-size photograph.");
 
+    // Validate Required Fields - Section 2: Proposer Details
     if (!formData.proposerName.trim()) return setErrorMsg("Proposer Name is required.");
+    if (!formData.proposerDegreeYear.trim()) return setErrorMsg("Proposer Degree & Year of Passing is required.");
     if (!formData.proposerEmail.trim()) return setErrorMsg("Proposer Email is required.");
+    if (!formData.proposerMobile.trim()) return setErrorMsg("Proposer Mobile Number is required.");
+    if (!formData.proposerAddress.trim()) return setErrorMsg("Proposer Address is required.");
 
+    // Validate Required Fields - Section 3: Seconder Details
     if (!formData.seconderName.trim()) return setErrorMsg("Seconder Name is required.");
+    if (!formData.seconderDegreeYear.trim()) return setErrorMsg("Seconder Degree & Year of Passing is required.");
     if (!formData.seconderEmail.trim()) return setErrorMsg("Seconder Email is required.");
+    if (!formData.seconderMobile.trim()) return setErrorMsg("Seconder Mobile Number is required.");
+    if (!formData.seconderAddress.trim()) return setErrorMsg("Seconder Address is required.");
 
-    // Check mandatory annexures
-    for (const ann of ANNEXURES) {
-      if (!annexureFiles[ann.key]) {
-        return setErrorMsg(`Please upload ${ann.title.split(" — ")[0]}.`);
-      }
-    }
+    // Section 4: Annexures are optional / as applicable to nomination category
 
     if (!formData.declarationAccepted) {
       return setErrorMsg("You must accept the declaration to submit the nomination.");
@@ -318,11 +324,12 @@ export default function NominatePage() {
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Date of Birth
+                    Date of Birth <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="date"
                     name="dateOfBirth"
+                    required
                     value={formData.dateOfBirth}
                     onChange={handleInputChange}
                     className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
@@ -331,22 +338,7 @@ export default function NominatePage() {
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Mobile Number <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="mobile"
-                    required
-                    value={formData.mobile}
-                    onChange={handleInputChange}
-                    placeholder="+91 98765 43210"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Other Phone Number
+                    Other Phone Number <span className="text-gray-400 font-normal">(Optional)</span>
                   </label>
                   <input
                     type="tel"
@@ -375,10 +367,11 @@ export default function NominatePage() {
 
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Residential Address
+                    Residential Address <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     name="addressResidence"
+                    required
                     rows={2}
                     value={formData.addressResidence}
                     onChange={handleInputChange}
@@ -389,10 +382,11 @@ export default function NominatePage() {
 
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Work / Office Address
+                    Work / Office Address <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     name="addressWork"
+                    required
                     rows={2}
                     value={formData.addressWork}
                     onChange={handleInputChange}
@@ -481,11 +475,12 @@ export default function NominatePage() {
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Degree & Year of Passing
+                    Degree & Year of Passing <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     name="proposerDegreeYear"
+                    required
                     value={formData.proposerDegreeYear}
                     onChange={handleInputChange}
                     placeholder="e.g. B.E. Mechanical 1996"
@@ -510,11 +505,12 @@ export default function NominatePage() {
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Proposer Mobile
+                    Proposer Mobile <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
                     name="proposerMobile"
+                    required
                     value={formData.proposerMobile}
                     onChange={handleInputChange}
                     placeholder="+91 98200 XXXXX"
@@ -524,10 +520,11 @@ export default function NominatePage() {
 
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Proposer Address
+                    Proposer Address <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     name="proposerAddress"
+                    required
                     rows={2}
                     value={formData.proposerAddress}
                     onChange={handleInputChange}
@@ -567,11 +564,12 @@ export default function NominatePage() {
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Degree & Year of Passing
+                    Degree & Year of Passing <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     name="seconderDegreeYear"
+                    required
                     value={formData.seconderDegreeYear}
                     onChange={handleInputChange}
                     placeholder="e.g. B.E. Civil 1999"
@@ -596,11 +594,12 @@ export default function NominatePage() {
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Seconder Mobile
+                    Seconder Mobile <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
                     name="seconderMobile"
+                    required
                     value={formData.seconderMobile}
                     onChange={handleInputChange}
                     placeholder="+91 99000 XXXXX"
@@ -610,10 +609,11 @@ export default function NominatePage() {
 
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Seconder Address
+                    Seconder Address <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     name="seconderAddress"
+                    required
                     rows={2}
                     value={formData.seconderAddress}
                     onChange={handleInputChange}
@@ -624,14 +624,14 @@ export default function NominatePage() {
               </div>
             </section>
 
-            {/* Section 4: Mandatory Annexures (1-7) & Additional (8) */}
+            {/* Section 4: Supporting Annexures */}
             <section className="bg-white border border-gray-200 p-6 sm:p-8 space-y-6 shadow-sm">
               <div>
                 <h2 className="rule-gold text-2xl font-bold font-display text-[#0F1E36]">
-                  4. Annexures
+                  4. Supporting Annexures
                 </h2>
                 <p className="text-xs text-gray-600 mt-2 leading-relaxed">
-                  All seven annexures are mandatory and should be signed by the nominee. Accepted formats: PDF, DOC, DOCX, or images (max 10 MB per file).
+                  Upload documents and annexures relevant to the nominated category. Annexures are optional at initial submission and can be provided as PDF, DOC, DOCX, or images (max 10 MB per file).
                 </p>
               </div>
 
@@ -640,7 +640,7 @@ export default function NominatePage() {
                   <div key={ann.key} className="border border-gray-200 p-4 bg-[#F8F9FA] space-y-2">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                       <label className="text-xs font-bold uppercase tracking-wider text-[#0F1E36]">
-                        {ann.title} <span className="text-red-500">*</span>
+                        {ann.title} <span className="text-gray-400 font-normal text-[11px]">(Optional / As applicable)</span>
                       </label>
                       {annexureFiles[ann.key] && (
                         <span className="text-[11px] font-semibold text-emerald-700 flex items-center gap-1">
