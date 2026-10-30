@@ -61,7 +61,8 @@ export async function POST(req: NextRequest) {
     };
 
     // Forward directly to Google Apps Script Web App URL
-    const googleSheetUrl = process.env.GOOGLE_SHEET_WEBAPP_URL || process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+    const DEFAULT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzhvAsn9KcmtlLWn3h-_oUyRxurwasmA9gZIvCkESS8-5MWARb8GdaEgDc3CsFbF99s/exec";
+    const googleSheetUrl = process.env.GOOGLE_SHEET_WEBAPP_URL || process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL || DEFAULT_WEBAPP_URL;
 
     if (googleSheetUrl) {
       try {
@@ -69,6 +70,7 @@ export async function POST(req: NextRequest) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(sheetPayload),
+          redirect: "follow",
         });
         const respText = await sheetRes.text();
         console.log(`[Google Sheet Webhook (Register)] Status: ${sheetRes.status}, Response:`, respText.slice(0, 300));
