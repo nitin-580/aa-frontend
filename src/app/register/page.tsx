@@ -22,8 +22,10 @@ import {
 export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [registrationId, setRegistrationId] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [missingField, setMissingField] = useState<string>("");
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -43,6 +45,8 @@ export default function RegisterPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
+    if (errorMsg) setErrorMsg("");
+    if (missingField === name) setMissingField("");
     if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
       setFormData((prev) => ({ ...prev, [name]: checked }));
@@ -51,20 +55,40 @@ export default function RegisterPage() {
     }
   };
 
+  const showError = (msg: string, fieldName?: string) => {
+    setErrorMsg(msg);
+    if (fieldName) {
+      setMissingField(fieldName);
+      const el = document.getElementById(fieldName) || document.querySelector(`[name="${fieldName}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        (el as HTMLElement).focus?.();
+      }
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
+    setMissingField("");
 
-    if (!formData.fullName.trim()) return setErrorMsg("Full Name is required.");
-    if (!formData.email.trim()) return setErrorMsg("Email Address is required.");
-    if (!formData.mobile.trim()) return setErrorMsg("Mobile Number is required.");
-    if (!formData.degree.trim()) return setErrorMsg("Degree is required.");
-    if (!formData.passingYear.trim() || !/^(19|20)\d{2}$/.test(formData.passingYear.trim())) {
-      return setErrorMsg("Please enter a valid 4-digit Year of Passing (e.g. 2012).");
+    let yop = formData.passingYear.trim();
+    if (yop.length === 2 && /^\d{2}$/.test(yop)) {
+      const num = parseInt(yop, 10);
+      yop = num > 50 ? `19${yop}` : `20${yop}`;
+      setFormData((prev) => ({ ...prev, passingYear: yop }));
     }
-    if (!formData.branch.trim()) return setErrorMsg("Branch / Department is required.");
+
+    if (!formData.fullName.trim()) return showError("Please enter your Full Name.", "fullName");
+    if (!formData.email.trim()) return showError("Please enter your Email Address.", "email");
+    if (!formData.mobile.trim()) return showError("Please enter your Mobile Number.", "mobile");
+    if (!formData.degree.trim()) return showError("Please select your Degree.", "degree");
+    if (!yop || !/^\d{4}$/.test(yop)) {
+      return showError("Please enter a valid 4-digit Year of Passing (e.g. 2012).", "passingYear");
+    }
+    if (!formData.branch.trim()) return showError("Please select your Branch / Department.", "branch");
     if (!formData.declarationAccepted) {
-      return setErrorMsg("Please confirm the declaration to complete registration.");
+      return showError("Please confirm the declaration checkbox to complete registration.", "declarationAccepted");
     }
 
     setLoading(true);
@@ -73,7 +97,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, passingYear: yop }),
       });
 
       const data = await res.json();
@@ -82,11 +106,13 @@ export default function RegisterPage() {
         throw new Error(data.error || "Registration failed. Please try again.");
       }
 
-      setRegistrationId(data.registrationId || `SVNIT-REG-${formData.passingYear}-${Date.now().toString().slice(-6)}`);
+      const genId = data.registrationId || `SVNIT-REG-${yop}-${Date.now().toString().slice(-6)}`;
+      setRegistrationId(genId);
       setSubmitted(true);
+      setShowSuccessModal(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err: any) {
-      setErrorMsg(err.message || "Something went wrong. Please try again.");
+      showError(err.message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -503,34 +529,107 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full sm:w-auto px-10 py-4 bg-[#C9A050] text-[#0F1E36] font-bold text-sm uppercase tracking-wider hover:bg-[#b88e3e] shadow-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    <span>Submitting to Portal...</span>
-                  </>
-                ) : (
-                  <>
-                    <UserCheck className="h-4 w-4" />
-                    <span>Submit Alumni Registration</span>
-                  </>
-                )}
-              </button>
+            {/* Submit Button & Error Area */}
+            <div className="space-y-4 pt-2">
+              {errorMsg && (
+                <div className="p-4 bg-red-50 border-2 border-red-500 text-red-900 text-sm flex items-start gap-3 shadow-md">
+                  <AlertCircle className="h-5 w-5 shrink-0 text-red-600 mt-0.5" />
+                  <div>
+                    <p className="font-bold">Required Field Missing:</p>
+                    <p className="text-red-800 text-xs sm:text-sm mt-0.5">{errorMsg}</p>
+                  </div>
+                </div>
+              )}
 
-              <div className="text-xs text-gray-500">
-                Official SVNIT Portal: <a href="https://alumniportal.svnit.ac.in/" target="_blank" rel="noopener noreferrer" className="underline font-mono">https://alumniportal.svnit.ac.in/</a>
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full sm:w-auto px-10 py-4 bg-[#C9A050] text-[#0F1E36] font-bold text-sm uppercase tracking-wider hover:bg-[#b88e3e] shadow-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Submitting to Portal...</span>
+                    </>
+                  ) : (
+                    <>
+                      <UserCheck className="h-4 w-4" />
+                      <span>Submit Alumni Registration</span>
+                    </>
+                  )}
+                </button>
+
+                <div className="text-xs text-gray-500">
+                  Official SVNIT Portal: <a href="https://alumniportal.svnit.ac.in/" target="_blank" rel="noopener noreferrer" className="underline font-mono">https://alumniportal.svnit.ac.in/</a>
+                </div>
               </div>
             </div>
 
           </form>
         )}
       </main>
+
+      {/* Success Popup Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white max-w-lg w-full p-6 sm:p-8 border-2 border-[#C9A050] shadow-2xl space-y-6 text-center relative">
+            <div className="mx-auto w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-500 flex items-center justify-center shadow-inner">
+              <CheckCircle2 className="w-10 h-10 text-emerald-600" />
+            </div>
+
+            <div className="space-y-2">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A050] bg-[#C9A050]/15 px-3 py-1 border border-[#C9A050]/30 inline-block">
+                Registration Confirmed
+              </span>
+              <h3 className="text-2xl font-bold font-display text-[#0F1E36]">
+                Successfully Submitted!
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                Thank you, <strong className="text-[#0F1E36]">{formData.fullName}</strong>. Your alumni record has been registered for the upcoming SVNIT Alumni Association Election and saved to the official Google Sheet.
+              </p>
+            </div>
+
+            <div className="bg-[#F8F9FA] border border-gray-200 p-4 space-y-2 text-left text-xs">
+              <div className="flex justify-between items-center py-1.5 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Registration ID:</span>
+                <span className="font-mono font-bold text-[#0F1E36] bg-[#C9A050]/20 px-2 py-0.5 border border-[#C9A050]/40">{registrationId}</span>
+              </div>
+              <div className="flex justify-between items-center py-1.5 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Name:</span>
+                <span className="font-semibold text-gray-900">{formData.fullName}</span>
+              </div>
+              <div className="flex justify-between items-center py-1.5 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Degree & Branch:</span>
+                <span className="font-semibold text-gray-900">{formData.degree} - {formData.branch} ({formData.passingYear})</span>
+              </div>
+              <div className="flex justify-between items-center py-1.5">
+                <span className="text-gray-500 font-medium">Database Status:</span>
+                <span className="font-bold text-emerald-700 flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5" />
+                  Recorded in Google Sheet
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setShowSuccessModal(false)}
+                className="flex-1 py-3 px-4 bg-[#C9A050] hover:bg-[#b88e3e] text-[#0F1E36] font-bold text-xs uppercase tracking-wider transition cursor-pointer shadow-md"
+              >
+                Close & View Details
+              </button>
+              <Link
+                href="/ace-awards"
+                className="flex-1 py-3 px-4 bg-[#0F1E36] hover:bg-[#1a2e4d] text-white font-bold text-xs uppercase tracking-wider transition text-center shadow-md flex items-center justify-center"
+              >
+                Alumni Accolade
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
