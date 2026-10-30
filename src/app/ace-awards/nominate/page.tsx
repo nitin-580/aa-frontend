@@ -13,7 +13,9 @@ import {
   Loader2, 
   Mail,
   UserCheck,
-  Send
+  Send,
+  Camera,
+  UploadCloud
 } from "lucide-react";
 import { 
   ACCOLADE_GROUPS, 
@@ -56,8 +58,10 @@ export default function NominatePage() {
     declarationAccepted: false,
   });
 
-  // File names tracking
+  // File names and preview tracking
   const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [photoBase64, setPhotoBase64] = useState<string>("");
   const [annexureFiles, setAnnexureFiles] = useState<{ [key: string]: File | null }>({});
   const [additionalFiles, setAdditionalFiles] = useState<File[]>([]);
 
@@ -95,7 +99,21 @@ export default function NominatePage() {
       setPhotoFile(file);
       setErrorMsg("");
       setMissingField("");
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setPhotoPreview(result);
+        setPhotoBase64(result);
+      };
+      reader.readAsDataURL(file);
     }
+  };
+
+  const handleRemovePhoto = () => {
+    setPhotoFile(null);
+    setPhotoPreview(null);
+    setPhotoBase64("");
   };
 
   const handleAnnexureSelect = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -178,6 +196,7 @@ export default function NominatePage() {
         ...formData,
         yearOfPassing: yop,
         photoName: photoFile?.name || "",
+        photoBase64: photoBase64,
         annexures: Object.fromEntries(
           Object.entries(annexureFiles).map(([k, v]) => [k, v?.name || ""])
         ),
@@ -451,26 +470,76 @@ export default function NominatePage() {
                   </p>
                 </div>
 
-                {/* Nominee Photograph Upload */}
-                <div id="photoUpload" className={`sm:col-span-2 bg-[#F8F9FA] border ${missingField === 'photoUpload' ? 'border-red-500 ring-2 ring-red-200' : 'border-dashed border-gray-300'} p-4`}>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-800 mb-1">
-                    Recent Passport-Size Colour Photograph <span className="text-red-500">*</span>
-                  </label>
-                  <p className="text-xs text-gray-500 mb-3">
-                    JPG or PNG format (max 10 MB).
-                  </p>
-                  <input
-                    type="file"
-                    accept="image/png, image/jpeg, image/jpg"
-                    onChange={handlePhotoSelect}
-                    className="text-xs text-gray-600 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:text-xs file:font-semibold file:bg-white hover:file:bg-gray-50 cursor-pointer"
-                  />
-                  {photoFile && (
-                    <div className="mt-2 text-xs font-medium text-emerald-700 flex items-center gap-1.5">
-                      <CheckCircle2 className="h-4 w-4" />
-                      <span>Selected: {photoFile.name} ({(photoFile.size / 1024).toFixed(1)} KB)</span>
+                {/* Nominee Photograph Upload with Live Preview */}
+                <div
+                  id="photoUpload"
+                  className={`sm:col-span-2 bg-[#F8F9FA] border-2 ${
+                    missingField === "photoUpload"
+                      ? "border-red-500 bg-red-50/40 ring-2 ring-red-200"
+                      : "border-dashed border-gray-300"
+                  } p-5 transition-all`}
+                >
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                    {/* Photo Thumbnail / Avatar Frame */}
+                    <div className="relative w-28 h-36 bg-gray-100 border-2 border-gray-300 flex flex-col items-center justify-center overflow-hidden shrink-0 shadow-sm">
+                      {photoPreview ? (
+                        <img
+                          src={photoPreview}
+                          alt="Nominee Passport Photo Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="text-center p-2 text-gray-400 flex flex-col items-center">
+                          <Camera className="w-8 h-8 text-gray-400 mb-1" />
+                          <span className="text-[10px] font-semibold uppercase tracking-wider text-center leading-tight">
+                            Passport Photo Preview
+                          </span>
+                        </div>
+                      )}
                     </div>
-                  )}
+
+                    {/* Upload Controls & Instructions */}
+                    <div className="flex-1 space-y-2 text-center sm:text-left">
+                      <div>
+                        <label className="text-xs font-bold uppercase tracking-wider text-[#0F1E36] flex items-center justify-center sm:justify-start gap-1">
+                          Recent Passport-Size Colour Photograph <span className="text-red-500">*</span>
+                        </label>
+                        <p className="text-xs text-gray-500 mt-0.5">
+                          Upload a clear, front-facing colour photograph of the nominee (JPG or PNG format, max 10 MB).
+                        </p>
+                      </div>
+
+                      <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                        <label className="cursor-pointer px-4 py-2.5 bg-white border border-gray-300 hover:border-[#C9A050] text-[#0F1E36] text-xs font-bold uppercase tracking-wider shadow-sm hover:shadow transition flex items-center gap-2">
+                          <UploadCloud className="w-4 h-4 text-[#C9A050]" />
+                          <span>{photoFile ? "Change Photograph" : "Choose Photograph"}</span>
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg, image/jpg"
+                            onChange={handlePhotoSelect}
+                            className="hidden"
+                          />
+                        </label>
+
+                        {photoFile && (
+                          <button
+                            type="button"
+                            onClick={handleRemovePhoto}
+                            className="text-xs text-red-600 hover:text-red-800 font-semibold underline cursor-pointer"
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+
+                      {photoFile && (
+                        <div className="text-xs font-medium text-emerald-700 flex items-center justify-center sm:justify-start gap-1.5 pt-1">
+                          <CheckCircle2 className="h-4 w-4 shrink-0" />
+                          <span>Attached: {photoFile.name} ({(photoFile.size / 1024).toFixed(1)} KB)</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>

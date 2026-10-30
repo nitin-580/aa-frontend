@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
       seconderAddress,
       declarationAccepted,
       photoName,
+      photoBase64,
       annexures,
       additionalEvidence,
     } = body;
@@ -81,6 +82,7 @@ export async function POST(req: NextRequest) {
       addressResidence: addressResidence || "",
       addressWork: addressWork || "",
       photoName: photoName || "",
+      photoBase64: photoBase64 || "",
       proposerName,
       proposerDegreeYear: proposerDegreeYear || "",
       proposerEmail,
