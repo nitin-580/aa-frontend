@@ -121,11 +121,13 @@ export async function POST(req: NextRequest) {
 
     if (googleSheetUrl) {
       try {
-        await fetch(googleSheetUrl, {
+        const sheetRes = await fetch(googleSheetUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(sheetPayload),
         });
+        const respText = await sheetRes.text();
+        console.log(`[Google Sheet Webhook] Status: ${sheetRes.status}, Response:`, respText.slice(0, 300));
       } catch (sheetError) {
         console.error("Failed to forward submission to Google Sheet webhook:", sheetError);
       }

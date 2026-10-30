@@ -65,11 +65,13 @@ export async function POST(req: NextRequest) {
 
     if (googleSheetUrl) {
       try {
-        await fetch(googleSheetUrl, {
+        const sheetRes = await fetch(googleSheetUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(sheetPayload),
         });
+        const respText = await sheetRes.text();
+        console.log(`[Google Sheet Webhook (Register)] Status: ${sheetRes.status}, Response:`, respText.slice(0, 300));
       } catch (sheetErr) {
         console.error("Failed to forward registration to Google Sheet:", sheetErr);
       }
