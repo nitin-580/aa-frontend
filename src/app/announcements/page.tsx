@@ -17,6 +17,7 @@ import {
   Users,
   MapPin,
   Heart,
+  Vote,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -34,6 +35,14 @@ interface Announcement {
   actionHref?: string;
   externalAction?: boolean;
   posterImage?: string;
+}
+
+interface ActivePosterModal {
+  image: string;
+  title: string;
+  downloadName: string;
+  actionText?: string;
+  actionHref?: string;
 }
 
 const announcementsData: Announcement[] = [
@@ -82,23 +91,28 @@ const announcementsData: Announcement[] = [
   },
   {
     id: "ann-elec-2026",
-    refNo: "SVNIT/AA/ELEC/2026/01",
-    title: "SVNIT Alumni Association Management Committee Election 2026 — Registration Drive",
+    refNo: "SVNIT/AA/ELEC/2026/01 · Management Committee Notice",
+    title: "🗳️ Alumni Portal Registration Drive — Management Committee Election 2026",
     category: "Elections",
-    date: "30th November 2026",
+    date: "30th November 2026 (Voting Rights Deadline)",
     isNew: true,
     summary:
-      "Official election circular for all alumni of SVNIT / SVRCET Surat regarding voting rights and candidate nominations for the upcoming Management Committee elections.",
+      "Sardar Vallabhbhai National Institute of Technology, Surat — Alumni Portal Registration Drive (Mandatory for Voting in the upcoming SVNIT Alumni Association Management Committee Election).\n\nCALL TO ACTION: SVNIT ALUMNI Register on our SVNIT ALUMNI PORTAL at the earliest to enable you to vote in the upcoming SVNIT Alumni Association Management Committee Election.",
     details: [
-      "Candidate Nominations: Alumni registering as candidates must complete portal registration on or before 15th November 2026.",
-      "Alumnus Voting Rights: Register on or before 30th November 2026 to be included in the official electoral voter roll.",
-      "The election will be conducted in ONLINE MODE. You can vote ONLY after verified portal registration.",
-      "Download your digital Alumni Membership Card and access the 'My Alumni Network' mobile app.",
+      "📢 CALL TO ACTION: SVNIT ALUMNI Register on our SVNIT ALUMNI PORTAL at the earliest to enable you to vote in the upcoming SVNIT Alumni Association Management Committee Election.",
+      "💻 KEY MANDATE: The election will be ONLINE MODE. You can vote ONLY after registration. Registration is also mandatory for filing nomination. Decided in Management Committee Meeting: 23rd October 2026.",
+      "⭐ BENEFITS: Create your profile, gain approval, and download your Alumni Membership Card! Also access the 'My Alumni Network' mobile app.",
+      "⏳ CANDIDATES (Nomination Rights Deadline): Register on or before 15th November, 2026.",
+      "🗳️ ALUMNUS (Voting Rights Deadline): Register on or before 30th November, 2026.",
+      "🌐 Portal Link: https://alumniportal.svnit.ac.in/",
+      "📨 Kindly forward above message to your authentic SVNIT connections and groups...",
+      "🏛️ Issued By: Prof. Upena Dalal (Dean – A&RG, dean_arg@svnit.ac.in) & Er. Ranjit Sinha (President – SVNIT AA, ranjetsinha@gmail.com)",
     ],
     contactEmail: "dean_arg@svnit.ac.in",
-    actionText: "Register on Alumni Portal",
-    actionHref: "/register",
-    externalAction: false,
+    actionText: "Register on Alumni Portal Now",
+    actionHref: "https://alumniportal.svnit.ac.in/",
+    externalAction: true,
+    posterImage: "/images/announcements/alumni_portal_registration_drive_election.jpg",
   },
 ];
 
@@ -106,7 +120,7 @@ export default function AnnouncementsPage() {
   const categories = ["All", "Convention", "Elections"];
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPoster, setSelectedPoster] = useState<string | null>(null);
+  const [activeModal, setActiveModal] = useState<ActivePosterModal | null>(null);
 
   const filteredAnnouncements = announcementsData.filter((item) => {
     const matchesCategory =
@@ -155,7 +169,7 @@ export default function AnnouncementsPage() {
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
-                {cat === "Convention" ? "Convention" : cat}
+                {cat}
               </button>
             ))}
           </div>
@@ -227,24 +241,39 @@ export default function AnnouncementsPage() {
                     <img
                       src={item.posterImage}
                       alt={item.title}
-                      className="w-full h-auto object-contain rounded-lg max-h-[420px] mx-auto bg-white"
+                      className="w-full h-auto object-contain rounded-lg max-h-[460px] mx-auto bg-white"
                     />
                     <div className="absolute inset-0 bg-[#0F1E36]/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2.5 p-4 text-center">
                       <button
                         type="button"
-                        onClick={() => setSelectedPoster(item.posterImage || null)}
+                        onClick={() =>
+                          setActiveModal({
+                            image: item.posterImage || "",
+                            title: item.title,
+                            downloadName:
+                              item.id === "ann-elec-2026"
+                                ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.jpg"
+                                : "22nd_Global_Alumni_Convention_Invitation.png",
+                            actionText: item.actionText,
+                            actionHref: item.actionHref,
+                          })
+                        }
                         className="px-4 py-2 bg-[#C9A050] text-[#0F1E36] font-bold text-xs uppercase tracking-wider rounded shadow flex items-center gap-1.5 cursor-pointer hover:bg-[#b88e3e]"
                       >
                         <Maximize2 className="h-3.5 w-3.5" />
-                        <span>View Invitation Poster</span>
+                        <span>View Full Circular</span>
                       </button>
                       <a
                         href={item.posterImage}
-                        download="22nd_Global_Alumni_Convention_Invitation.png"
+                        download={
+                          item.id === "ann-elec-2026"
+                            ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.jpg"
+                            : "22nd_Global_Alumni_Convention_Invitation.png"
+                        }
                         className="px-4 py-2 bg-white/20 text-white font-semibold text-xs uppercase tracking-wider rounded border border-white/30 flex items-center gap-1.5 hover:bg-white/30"
                       >
                         <Download className="h-3.5 w-3.5 text-[#C9A050]" />
-                        <span>Download Poster</span>
+                        <span>Download Flyer</span>
                       </a>
                     </div>
                   </div>
@@ -260,14 +289,14 @@ export default function AnnouncementsPage() {
                     <h2 className="text-xl md:text-2xl font-bold text-[#0F1E36] mb-3 leading-snug font-display">
                       {item.title}
                     </h2>
-                    <p className="text-sm text-gray-700 leading-relaxed font-light whitespace-pre-line bg-amber-50/60 p-4 rounded-xl border border-amber-100 italic">
-                      &ldquo;{item.summary}&rdquo;
+                    <p className="text-sm text-gray-700 leading-relaxed font-light whitespace-pre-line bg-amber-50/60 p-4 rounded-xl border border-amber-100">
+                      {item.summary}
                     </p>
                   </div>
 
                   {/* Bullet points */}
                   {item.details && item.details.length > 0 && (
-                    <div className="bg-[#F8FAFC] p-4 rounded-xl border border-slate-200/60 space-y-2">
+                    <div className="bg-[#F8FAFC] p-4.5 rounded-xl border border-slate-200/60 space-y-2">
                       <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
                         Notice Details & Highlights:
                       </h4>
@@ -302,11 +331,22 @@ export default function AnnouncementsPage() {
                       {item.posterImage && (
                         <button
                           type="button"
-                          onClick={() => setSelectedPoster(item.posterImage || null)}
+                          onClick={() =>
+                            setActiveModal({
+                              image: item.posterImage || "",
+                              title: item.title,
+                              downloadName:
+                                item.id === "ann-elec-2026"
+                                  ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.jpg"
+                                  : "22nd_Global_Alumni_Convention_Invitation.png",
+                              actionText: item.actionText,
+                              actionHref: item.actionHref,
+                            })
+                          }
                           className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-xs font-bold hover:bg-gray-100 transition duration-200 flex items-center gap-1.5 cursor-pointer"
                         >
                           <Maximize2 className="h-3.5 w-3.5" />
-                          <span>View Poster</span>
+                          <span>View Notice Flyer</span>
                         </button>
                       )}
 
@@ -358,17 +398,17 @@ export default function AnnouncementsPage() {
         </section>
       </main>
 
-      {/* Poster Enlarge Modal */}
-      {selectedPoster && (
+      {/* Dynamic Enlarge Poster / Circular Modal */}
+      {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col">
             <div className="bg-[#0F1E36] text-white px-5 py-3.5 flex items-center justify-between">
-              <span className="font-bold text-sm text-[#C9A050]">
-                22nd Global Alumni Convention & Reunion 2026 — Official Invitation
+              <span className="font-bold text-sm text-[#C9A050] line-clamp-1">
+                {activeModal.title}
               </span>
               <button
                 type="button"
-                onClick={() => setSelectedPoster(null)}
+                onClick={() => setActiveModal(null)}
                 className="text-gray-300 hover:text-white p-1 cursor-pointer"
               >
                 <X className="h-5 w-5" />
@@ -376,28 +416,31 @@ export default function AnnouncementsPage() {
             </div>
             <div className="p-4 bg-gray-100 flex items-center justify-center max-h-[80vh] overflow-auto">
               <img
-                src={selectedPoster}
-                alt="22nd Global Alumni Convention & Reunion 2026 Poster"
+                src={activeModal.image}
+                alt={activeModal.title}
                 className="max-h-[75vh] w-auto object-contain rounded-lg shadow-lg"
               />
             </div>
             <div className="bg-white p-4 border-t border-gray-200 flex flex-wrap items-center justify-between gap-3">
               <a
-                href={selectedPoster}
-                download="22nd_Global_Alumni_Convention_Invitation.png"
+                href={activeModal.image}
+                download={activeModal.downloadName}
                 className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-lg flex items-center gap-1.5"
               >
                 <Download className="h-3.5 w-3.5 text-[#C9A050]" />
-                <span>Download Poster Image</span>
+                <span>Download Flyer</span>
               </a>
-              <a
-                href="https://forms.gle/CJ4suKBxiNgvbtpTA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-2 bg-[#C9A050] hover:bg-[#b88e3e] text-[#0F1E36] text-xs font-bold rounded-lg uppercase tracking-wider shadow"
-              >
-                Register on Google Form →
-              </a>
+              {activeModal.actionHref && activeModal.actionText && (
+                <a
+                  href={activeModal.actionHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-2 bg-[#C9A050] hover:bg-[#b88e3e] text-[#0F1E36] text-xs font-bold rounded-lg uppercase tracking-wider shadow flex items-center gap-1.5"
+                >
+                  <span>{activeModal.actionText}</span>
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              )}
             </div>
           </div>
         </div>
