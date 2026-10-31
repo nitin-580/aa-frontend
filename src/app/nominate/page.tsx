@@ -1,5 +1,5 @@
-import NominatePage from "@/app/ace-awards/nominate/page";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return <NominatePage />;
+export default function NominateRedirect() {
+  redirect("/ace-alumni-accolade/nominate");
 }

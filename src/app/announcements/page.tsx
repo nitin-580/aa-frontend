@@ -36,7 +36,7 @@ const announcementsData: Announcement[] = [
     ],
     contactEmail: "svnitalumniassociation01@gmail.com",
     actionText: "File an Accolade Nomination",
-    actionHref: "/ace-awards",
+    actionHref: "/ace-alumni-accolade",
   },
   {
     id: "ann-elec-2026",

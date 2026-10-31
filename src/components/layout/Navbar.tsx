@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "About Us", href: "/about" },
-    { name: "Alumni Accolade", href: "/ace-awards" },
+    { name: "Alumni Accolade", href: "/ace-alumni-accolade" },
     { name: "Merchandise", href: "/merchandise" },
     { name: "Announcements", href: "/announcements" },
     { name: "Media", href: "/media" },

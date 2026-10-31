@@ -621,7 +621,7 @@ export default function RegisterPage() {
                 Close & View Details
               </button>
               <Link
-                href="/ace-awards"
+                href="/ace-alumni-accolade"
                 className="flex-1 py-3 px-4 bg-[#0F1E36] hover:bg-[#1a2e4d] text-white font-bold text-xs uppercase tracking-wider transition text-center shadow-md flex items-center justify-center"
               >
                 Alumni Accolade

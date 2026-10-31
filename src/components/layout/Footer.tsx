@@ -79,7 +79,7 @@ const Footer = () => {
           <h3 className="font-bold text-sm tracking-wider uppercase text-black mb-4">COMPANY</h3>
           <ul className="space-y-2 text-[#7f1d1d]">
             <li><Link href="/about" className="hover:underline flex items-center gap-1.5">• About Us</Link></li>
-            <li><Link href="/ace-awards" className="hover:underline flex items-center gap-1.5">• Alumni Accolade</Link></li>
+            <li><Link href="/ace-alumni-accolade" className="hover:underline flex items-center gap-1.5">• Alumni Accolade</Link></li>
             <li><Link href="/announcements" className="hover:underline flex items-center gap-1.5">• Announcements</Link></li>
             <li><Link href="/media" className="hover:underline flex items-center gap-1.5">• Media & Events</Link></li>
             <li><Link href="/contact" className="hover:underline flex items-center gap-1.5">• Contact Us</Link></li>
