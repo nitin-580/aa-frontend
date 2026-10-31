@@ -244,7 +244,7 @@ export default function NominatePage() {
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Accolade details & guidelines</span>
           </Link>
-          <h1 className="mt-4 text-3xl sm:text-4xl font-bold font-display text-white">
+          <h1 className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
             Nomination Form — ACE Alumnus Accolade 2026
           </h1>
           <p className="mt-2 text-sm text-gray-300">
@@ -260,7 +260,7 @@ export default function NominatePage() {
           <div className="bg-white border border-gray-200 p-8 sm:p-12 text-center space-y-6 shadow-md animate-fade-in">
             <CheckCircle2 className="mx-auto h-16 w-16 text-[#C9A050]" />
             
-            <h2 className="text-3xl font-bold font-display text-[#0F1E36]">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#0F1E36]">
               Nomination Received
             </h2>
             
@@ -308,7 +308,7 @@ export default function NominatePage() {
 
             {/* Section 1: Nominee Details */}
             <section className="bg-white border border-gray-200 p-6 sm:p-8 space-y-6 shadow-sm">
-              <h2 className="rule-gold text-2xl font-bold font-display text-[#0F1E36]">
+              <h2 className="rule-gold text-2xl font-extrabold tracking-tight text-[#0F1E36]">
                 1. Nominee Details
               </h2>
               <div className="grid gap-6 sm:grid-cols-2 pt-2">
@@ -550,7 +550,7 @@ export default function NominatePage() {
             {/* Section 2: Nomination Proposed By */}
             <section className="bg-white border border-gray-200 p-6 sm:p-8 space-y-6 shadow-sm">
               <div>
-                <h2 className="rule-gold text-2xl font-bold font-display text-[#0F1E36]">
+                <h2 className="rule-gold text-2xl font-extrabold tracking-tight text-[#0F1E36]">
                   2. Nomination Proposed By
                 </h2>
                 <p className="text-xs text-gray-500 mt-2">
@@ -639,7 +639,7 @@ export default function NominatePage() {
             {/* Section 3: Nomination Seconded By */}
             <section className="bg-white border border-gray-200 p-6 sm:p-8 space-y-6 shadow-sm">
               <div>
-                <h2 className="rule-gold text-2xl font-bold font-display text-[#0F1E36]">
+                <h2 className="rule-gold text-2xl font-extrabold tracking-tight text-[#0F1E36]">
                   3. Nomination Seconded By
                 </h2>
                 <p className="text-xs text-gray-500 mt-2">
@@ -728,7 +728,7 @@ export default function NominatePage() {
             {/* Section 4: Supporting Annexures */}
             <section className="bg-white border border-gray-200 p-6 sm:p-8 space-y-6 shadow-sm">
               <div>
-                <h2 className="rule-gold text-2xl font-bold font-display text-[#0F1E36]">
+                <h2 className="rule-gold text-2xl font-extrabold tracking-tight text-[#0F1E36]">
                   4. Supporting Annexures
                 </h2>
                 <p className="text-xs text-gray-600 mt-2 leading-relaxed">
@@ -787,7 +787,7 @@ export default function NominatePage() {
 
             {/* Section 5: Declaration & Agreement */}
             <section className="bg-white border border-gray-200 p-6 sm:p-8 space-y-6 shadow-sm">
-              <h2 className="rule-gold text-2xl font-bold font-display text-[#0F1E36]">
+              <h2 className="rule-gold text-2xl font-extrabold tracking-tight text-[#0F1E36]">
                 5. Declaration
               </h2>
 
@@ -858,7 +858,7 @@ export default function NominatePage() {
               <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A050] bg-[#C9A050]/15 px-3 py-1 border border-[#C9A050]/30 inline-block">
                 Submission Confirmed
               </span>
-              <h3 className="text-2xl font-bold font-display text-[#0F1E36]">
+              <h3 className="text-2xl font-extrabold tracking-tight text-[#0F1E36]">
                 Successfully Submitted!
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">

@@ -61,7 +61,7 @@ export default function AceAwardsPage() {
             <span>SVNIT ALUMNI ASSOCIATION · SURAT</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white font-display">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
             ACE Alumnus Accolade 2026
           </h1>
 
@@ -80,7 +80,7 @@ export default function AceAwardsPage() {
               <div className="text-[10px] sm:text-xs font-bold tracking-widest text-[#C9A050] uppercase">
                 Last Date for Nomination
               </div>
-              <div className="text-xl sm:text-2xl font-bold text-white font-display mt-1">
+              <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-1">
                 25 Nov 2026
               </div>
               <div className="text-xs text-gray-300 mt-1 flex items-center gap-1.5">
@@ -94,7 +94,7 @@ export default function AceAwardsPage() {
               <div className="text-[10px] sm:text-xs font-bold tracking-widest text-[#C9A050] uppercase">
                 Global Alumni Convention
               </div>
-              <div className="text-xl sm:text-2xl font-bold text-white font-display mt-1">
+              <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-1">
                 26 Dec 2026
               </div>
               <div className="text-xs text-gray-300 mt-1 flex items-center gap-1.5">
@@ -108,7 +108,7 @@ export default function AceAwardsPage() {
               <div className="text-[10px] sm:text-xs font-bold tracking-widest text-[#C9A050] uppercase">
                 Receiving Accolade
               </div>
-              <div className="text-xl sm:text-2xl font-bold text-white font-display mt-1">
+              <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-1">
                 In Person
               </div>
               <div className="text-xs text-gray-300 mt-1 flex items-center gap-1.5">
@@ -155,7 +155,7 @@ export default function AceAwardsPage() {
           <div className="grid gap-8 lg:grid-cols-12 items-start">
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <h2 className="rule-gold text-2xl sm:text-3xl font-bold font-display text-[#0F1E36]">
+                <h2 className="rule-gold text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0F1E36]">
                   Preamble & Purpose
                 </h2>
                 <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">
@@ -183,7 +183,7 @@ export default function AceAwardsPage() {
               <div className="absolute top-0 left-0 w-full h-1 bg-[#C9A050]"></div>
               <div className="flex items-center gap-3 text-[#0F1E36] mb-5">
                 <Award className="h-6 w-6 text-[#C9A050]" />
-                <h3 className="font-display text-xl font-bold">Key Notice Details</h3>
+                <h3 className="text-xl font-bold tracking-tight text-[#0F1E36]">Key Notice Details</h3>
               </div>
 
               <div className="space-y-4 text-xs text-gray-700 leading-relaxed">
@@ -234,7 +234,7 @@ export default function AceAwardsPage() {
                   <FileCheck className="h-4 w-4" />
                   <span>Official Notice & Circular</span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-bold font-display text-white">
+                <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
                   {REGISTRATION_DRIVE_CIRCULAR.title}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">
@@ -417,7 +417,7 @@ export default function AceAwardsPage() {
         <section className="bg-white border-y border-gray-200 py-16">
           <div className="mx-auto max-w-5xl px-6 space-y-10">
             <div>
-              <h2 className="rule-gold text-2xl sm:text-3xl font-bold font-display text-[#0F1E36]">
+              <h2 className="rule-gold text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0F1E36]">
                 How to Submit Nominations
               </h2>
               <p className="mt-2 text-sm text-gray-600 max-w-2xl leading-relaxed">
@@ -540,7 +540,7 @@ export default function AceAwardsPage() {
             {/* Selection Process */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <h2 className="rule-gold text-2xl sm:text-3xl font-bold font-display text-[#0F1E36]">
+                <h2 className="rule-gold text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0F1E36]">
                   Selection Process
                 </h2>
                 <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">
@@ -627,7 +627,7 @@ export default function AceAwardsPage() {
             {/* Who may nominate */}
             <div className="space-y-5">
               <div>
-                <h2 className="rule-gold text-2xl font-bold font-display text-[#0F1E36]">
+                <h2 className="rule-gold text-2xl font-extrabold tracking-tight text-[#0F1E36]">
                   Who May Nominate
                 </h2>
                 <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">
@@ -651,7 +651,7 @@ export default function AceAwardsPage() {
             {/* Selection Criteria */}
             <div className="space-y-5">
               <div>
-                <h2 className="rule-gold text-2xl font-bold font-display text-[#0F1E36]">
+                <h2 className="rule-gold text-2xl font-extrabold tracking-tight text-[#0F1E36]">
                   Selection Criteria
                 </h2>
                 <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">
@@ -683,7 +683,7 @@ export default function AceAwardsPage() {
         {/* Section 5: All 16 Accolade Categories (Groups A to E) */}
         <section className="mx-auto max-w-5xl px-6 space-y-8">
           <div>
-            <h2 className="rule-gold text-2xl sm:text-3xl font-bold font-display text-[#0F1E36]">
+            <h2 className="rule-gold text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0F1E36]">
               Accolade Categories (16 Categories)
             </h2>
             <p className="mt-2 text-sm text-gray-600 max-w-3xl leading-relaxed">
@@ -742,7 +742,7 @@ export default function AceAwardsPage() {
         <section className="bg-white border-y border-gray-200 py-16">
           <div className="mx-auto max-w-5xl px-6 space-y-8">
             <div>
-              <h2 className="rule-gold text-2xl sm:text-3xl font-bold font-display text-[#0F1E36]">
+              <h2 className="rule-gold text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0F1E36]">
                 Annexures to be Attached (as Applicable)
               </h2>
               <p className="mt-2 text-sm text-gray-600 max-w-3xl leading-relaxed">
@@ -797,7 +797,7 @@ export default function AceAwardsPage() {
                 <span>Call to All Alumni</span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
+              <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
                 Circulate this Notification
               </h3>
 
@@ -851,7 +851,7 @@ export default function AceAwardsPage() {
         <section className="mx-auto max-w-5xl px-6 pb-6">
           <div className="bg-gradient-to-r from-amber-50 via-white to-amber-50 border-2 border-[#C9A050]/40 p-8 sm:p-12 text-center space-y-6">
             <Award className="mx-auto h-12 w-12 text-[#C9A050]" />
-            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#0F1E36]">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0F1E36]">
               Ready to Submit a Nomination?
             </h2>
             <p className="text-sm text-gray-600 max-w-2xl mx-auto leading-relaxed">
