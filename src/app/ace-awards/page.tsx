@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -19,6 +19,10 @@ import {
   Share2,
   Clock,
   Sparkles,
+  ExternalLink,
+  Maximize2,
+  X,
+  FileCheck,
 } from "lucide-react";
 import {
   ACCOLADE_DETAILED_GROUPS,
@@ -28,9 +32,13 @@ import {
   COMMITTEE_OFFICERS,
   OFFICIAL_EMAILS,
   POSTAL_ADDRESS,
+  REGISTRATION_DRIVE_CIRCULAR,
 } from "@/data/aceAwardsData";
 
 export default function AceAwardsPage() {
+  const [previewMode, setPreviewMode] = useState<"drive" | "image">("drive");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="bg-[#F8F9FA] min-h-screen text-[#0F1E36] font-sans antialiased">
       <Navbar />
@@ -121,19 +129,20 @@ export default function AceAwardsPage() {
             </Link>
 
             <a
+              href="#official-circular"
+              className="px-6 py-3.5 bg-white/10 border border-[#C9A050]/50 text-[#C9A050] font-semibold text-sm uppercase tracking-wider hover:bg-white/20 transition-all duration-200 flex items-center gap-2"
+            >
+              <FileCheck className="h-4 w-4 text-[#C9A050]" />
+              <span>View Official Circular Preview</span>
+            </a>
+
+            <a
               href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.docx"
               download
               className="px-6 py-3.5 bg-white/10 border border-white/30 text-white font-semibold text-sm uppercase tracking-wider hover:bg-white/20 transition-all duration-200 flex items-center gap-2"
             >
               <Download className="h-4 w-4 text-[#C9A050]" />
-              <span>Download Nomination Form (DOCX)</span>
-            </a>
-
-            <a
-              href="#guidelines"
-              className="px-6 py-3.5 text-gray-300 font-medium text-sm hover:text-white transition-all duration-200 underline underline-offset-4"
-            >
-              Read guidelines & categories ↓
+              <span>Download Form (DOCX)</span>
             </a>
           </div>
         </div>
@@ -211,6 +220,194 @@ export default function AceAwardsPage() {
                   <Download className="h-3.5 w-3.5" />
                   <span>Download Prescribed Form (DOCX)</span>
                 </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section: Official Circular & Registration Drive (with Live Google Drive Preview & Link) */}
+        <section id="official-circular" className="mx-auto max-w-5xl px-6 scroll-mt-24">
+          <div className="bg-white border border-gray-200 shadow-sm overflow-hidden">
+            <div className="bg-[#0F1E36] text-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 text-xs font-bold text-[#C9A050] uppercase tracking-wider">
+                  <FileCheck className="h-4 w-4" />
+                  <span>Official Notice & Circular</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-bold font-display text-white">
+                  {REGISTRATION_DRIVE_CIRCULAR.title}
+                </h2>
+                <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">
+                  {REGISTRATION_DRIVE_CIRCULAR.subtitle}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <a
+                  href={REGISTRATION_DRIVE_CIRCULAR.driveViewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-[#C9A050] text-[#0F1E36] font-bold text-xs uppercase tracking-wider hover:bg-[#b88e3e] transition-colors flex items-center gap-1.5 shadow"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  <span>Open in Google Drive</span>
+                </a>
+
+                <a
+                  href={REGISTRATION_DRIVE_CIRCULAR.pdfDownloadUrl}
+                  download
+                  className="px-4 py-2 bg-white/10 border border-white/25 text-white font-semibold text-xs uppercase tracking-wider hover:bg-white/20 transition-colors flex items-center gap-1.5"
+                >
+                  <Download className="h-3.5 w-3.5 text-[#C9A050]" />
+                  <span>Download PDF</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 grid gap-8 lg:grid-cols-12 items-start">
+              {/* Document Preview Box (7 cols) */}
+              <div className="lg:col-span-7 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-gray-100 text-xs">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-gray-700">Preview:</span>
+                    <div className="inline-flex rounded border border-gray-200 bg-gray-50 p-0.5">
+                      <button
+                        type="button"
+                        onClick={() => setPreviewMode("drive")}
+                        className={`px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer ${
+                          previewMode === "drive"
+                            ? "bg-[#0F1E36] text-white shadow-sm"
+                            : "text-gray-600 hover:text-black"
+                        }`}
+                      >
+                        Google Drive Viewer
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPreviewMode("image")}
+                        className={`px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer ${
+                          previewMode === "image"
+                            ? "bg-[#0F1E36] text-white shadow-sm"
+                            : "text-gray-600 hover:text-black"
+                        }`}
+                      >
+                        HD Document View
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsModalOpen(true)}
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0F1E36] hover:text-[#C9A050] cursor-pointer"
+                  >
+                    <Maximize2 className="h-3.5 w-3.5" />
+                    <span>Fullscreen</span>
+                  </button>
+                </div>
+
+                <div className="relative w-full h-[560px] bg-gray-100 border border-gray-300 rounded overflow-hidden shadow-inner">
+                  {previewMode === "drive" ? (
+                    <iframe
+                      src={REGISTRATION_DRIVE_CIRCULAR.drivePreviewUrl}
+                      className="w-full h-full border-0"
+                      title="SVNIT Alumni Registration Drive Circular Preview"
+                      allow="autoplay"
+                    />
+                  ) : (
+                    <div className="w-full h-full overflow-auto flex justify-center bg-gray-900/95 p-3">
+                      <img
+                        src={REGISTRATION_DRIVE_CIRCULAR.imageUrl}
+                        alt="SVNIT Alumni Registration Drive Notice"
+                        className="max-w-full h-auto object-contain shadow-2xl"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between text-[11px] text-gray-500 pt-1">
+                  <span>Scroll within preview to view entire circular</span>
+                  <a
+                    href={REGISTRATION_DRIVE_CIRCULAR.driveViewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-[#0F1E36] hover:text-[#C9A050] inline-flex items-center gap-1"
+                  >
+                    <span>View original on Google Drive</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Circular Key Details & Direct Action (5 cols) */}
+              <div className="lg:col-span-5 space-y-5">
+                <div>
+                  <h3 className="font-display text-lg font-bold text-[#0F1E36]">
+                    Key Mandates & Deadlines
+                  </h3>
+                  <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                    Decided in Management Committee Meeting on <strong>{REGISTRATION_DRIVE_CIRCULAR.decisionDate}</strong>:
+                  </p>
+                </div>
+
+                <div className="space-y-3 text-xs">
+                  <div className="border-l-4 border-red-600 bg-red-50 p-3.5 text-gray-800">
+                    <span className="font-bold text-red-900 block text-[11px] uppercase tracking-wider mb-1">
+                      Candidates (Nomination Rights)
+                    </span>
+                    Register on or before <strong className="text-red-950 font-bold">{REGISTRATION_DRIVE_CIRCULAR.candidateDeadline}</strong>
+                  </div>
+
+                  <div className="border-l-4 border-[#C9A050] bg-amber-50 p-3.5 text-gray-800">
+                    <span className="font-bold text-[#0F1E36] block text-[11px] uppercase tracking-wider mb-1">
+                      Alumnus (Voting Rights)
+                    </span>
+                    Register on or before <strong className="text-[#0F1E36] font-bold">{REGISTRATION_DRIVE_CIRCULAR.voterDeadline}</strong>
+                  </div>
+
+                  <div className="border border-gray-200 bg-[#F8F9FA] p-3.5 space-y-2">
+                    <span className="font-bold text-[#0F1E36] block">
+                      Mandatory Requirements:
+                    </span>
+                    <ul className="space-y-1.5 text-gray-600 list-disc list-inside">
+                      <li>The election will be conducted in <strong>ONLINE MODE</strong>.</li>
+                      <li>You can vote <strong>ONLY after registration</strong>.</li>
+                      <li>Registration is mandatory for filing nominations.</li>
+                      <li>Download your official <strong>Alumni Membership Card</strong> and access the mobile app.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Signatories */}
+                <div className="border-t border-gray-100 pt-4 space-y-2">
+                  <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block">
+                    Issued & Signed By:
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    {REGISTRATION_DRIVE_CIRCULAR.signatories.map((sig, idx) => (
+                      <div key={idx} className="bg-gray-50 p-2.5 border border-gray-200">
+                        <strong className="text-[#0F1E36] block">{sig.name}</strong>
+                        <span className="text-[11px] text-gray-600 block">{sig.designation}</span>
+                        <a href={`mailto:${sig.email}`} className="text-[10px] text-blue-700 hover:underline block break-all">
+                          {sig.email}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Direct Registration Call to Action */}
+                <div className="pt-2">
+                  <a
+                    href={REGISTRATION_DRIVE_CIRCULAR.portalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-center py-3 bg-[#0F1E36] text-[#C9A050] font-bold text-xs uppercase tracking-wider hover:bg-[#1a2e50] shadow-md transition-colors flex items-center justify-center gap-2"
+                  >
+                    <span>Register on Alumni Portal Now</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -671,6 +868,16 @@ export default function AceAwardsPage() {
               </Link>
 
               <a
+                href={REGISTRATION_DRIVE_CIRCULAR.driveViewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3.5 bg-white border border-gray-300 text-gray-800 font-semibold text-sm uppercase tracking-wider hover:bg-gray-50 transition-all duration-200 inline-flex items-center gap-2"
+              >
+                <ExternalLink className="h-4 w-4 text-[#C9A050]" />
+                <span>View Drive Circular</span>
+              </a>
+
+              <a
                 href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.docx"
                 download
                 className="px-6 py-3.5 bg-white border border-gray-300 text-gray-800 font-semibold text-sm uppercase tracking-wider hover:bg-gray-50 transition-all duration-200 inline-flex items-center gap-2"
@@ -682,6 +889,48 @@ export default function AceAwardsPage() {
           </div>
         </section>
       </main>
+
+      {/* Fullscreen Document Preview Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="relative w-full max-w-5xl h-[90vh] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
+            <div className="flex items-center justify-between bg-[#0F1E36] text-white px-5 py-3.5">
+              <div className="flex items-center gap-2">
+                <FileCheck className="h-5 w-5 text-[#C9A050]" />
+                <span className="font-bold text-sm">
+                  {REGISTRATION_DRIVE_CIRCULAR.title} — Official Preview
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <a
+                  href={REGISTRATION_DRIVE_CIRCULAR.driveViewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-[#C9A050] hover:underline flex items-center gap-1"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  <span>Open in Google Drive</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="text-gray-300 hover:text-white p-1 cursor-pointer"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+            <div className="flex-1 w-full h-full bg-gray-100">
+              <iframe
+                src={REGISTRATION_DRIVE_CIRCULAR.drivePreviewUrl}
+                className="w-full h-full border-0"
+                title="Google Drive Fullscreen Preview"
+                allow="autoplay"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

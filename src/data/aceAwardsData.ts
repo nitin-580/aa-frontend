@@ -271,3 +271,51 @@ export const POSTAL_ADDRESS = {
 
 export const DIGNITARIES =
   "(Akshay Pachchigar) Coordinator, AAA 2026 · (Tushar Mehta) Hon. Secretary, SVNITAA · (Ranjit Sinha) President, SVNITAA";
+
+export interface CircularSignatory {
+  name: string;
+  designation: string;
+  email: string;
+}
+
+export interface RegistrationDriveCircular {
+  title: string;
+  subtitle: string;
+  driveViewUrl: string;
+  drivePreviewUrl: string;
+  pdfDownloadUrl: string;
+  imageUrl: string;
+  portalUrl: string;
+  decisionDate: string;
+  candidateDeadline: string;
+  voterDeadline: string;
+  signatories: CircularSignatory[];
+}
+
+export const REGISTRATION_DRIVE_CIRCULAR: RegistrationDriveCircular = {
+  title: "SVNIT Alumni Registration Drive on Portal",
+  subtitle:
+    "Mandatory for Voting in Upcoming SVNIT Alumni Association Management Committee Election & Nomination Rights",
+  driveViewUrl:
+    "https://drive.google.com/file/d/1leBxndbwCLEs8V6nC30KnEn6ML_8GPhy/view?usp=sharing",
+  drivePreviewUrl:
+    "https://drive.google.com/file/d/1leBxndbwCLEs8V6nC30KnEn6ML_8GPhy/preview",
+  pdfDownloadUrl: "/downloads/SVNIT_Alumni_Registration_Drive.pdf",
+  imageUrl: "/images/circulars/alumni_registration_drive_notice.png",
+  portalUrl: "https://alumniportal.svnit.ac.in/",
+  decisionDate: "23rd October 2026",
+  candidateDeadline: "15th November 2026",
+  voterDeadline: "30th November 2026",
+  signatories: [
+    {
+      name: "Prof. Upena Dalal",
+      designation: "Dean - Alumni and RG",
+      email: "dean_arg@svnit.ac.in",
+    },
+    {
+      name: "Er. Ranjit Sinha",
+      designation: "President - SVNIT Alumni Association",
+      email: "ranjetsinha@gmail.com",
+    },
+  ],
+};
