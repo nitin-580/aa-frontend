@@ -141,7 +141,10 @@ export default function AnnouncementsPage() {
   });
 
   return (
-    <div className="bg-[#F4F6F9] min-h-screen flex flex-col font-sans text-black">
+    <div
+      className="bg-[#F4F6F9] min-h-screen flex flex-col font-sans text-black"
+      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+    >
       <Navbar />
 
       {/* Hero Header */}
@@ -201,7 +204,7 @@ export default function AnnouncementsPage() {
         {filteredAnnouncements.length === 0 ? (
           <div className="bg-white rounded-2xl p-12 text-center border border-gray-100 shadow-sm space-y-3">
             <Bell className="h-10 w-10 text-red-900 mx-auto" />
-            <h3 className="text-lg font-bold text-[#0F1E36]">
+            <h3 className="text-lg font-extrabold tracking-tight text-[#0F1E36]">
               No Announcements Found
             </h3>
             <p className="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
@@ -310,7 +313,7 @@ export default function AnnouncementsPage() {
                   }`}
                 >
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-[#0F1E36] mb-3 leading-snug font-display">
+                    <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-[#0F1E36] mb-3 leading-snug">
                       {item.title}
                     </h2>
                     <p className="text-sm text-gray-700 leading-relaxed font-light whitespace-pre-line bg-amber-50/60 p-4 rounded-xl border border-amber-100">
@@ -421,7 +424,7 @@ export default function AnnouncementsPage() {
         {/* Newsletter / Notifications Subscription CTA */}
         <section className="bg-gradient-to-r from-[#0F1E36] via-[#1a2e4d] to-[#0F1E36] text-white p-8 md:p-10 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl md:text-2xl font-bold font-display text-[#C9A050]">
+            <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[#C9A050]">
               Have an official circular or reunion announcement?
             </h3>
             <p className="text-xs md:text-sm text-gray-200 max-w-xl font-light">
