@@ -105,28 +105,6 @@ const announcementsData: Announcement[] = [
     externalAction: true,
     posterImage: "/images/announcements/22nd_global_alumni_convention_invitation.png",
   },
-  {
-    id: "ann-conv-2026",
-    refNo: "SVNIT/AA/CONV/2026/01",
-    title: "Annual Alumni Convention & ACE Alumnus Accolade (AAA) 2026 Nominations",
-    category: "Convention",
-    date: "25th November 2026",
-    isNew: true,
-    summary:
-      "Nominations are officially invited for the prestigious ACE Alumnus Accolade 2026 to be announced and presented in person during the Global Annual Alumni Convention at the SVNIT Surat Campus.",
-    details: [
-      "Honouring alumni across 16 Accolade Categories in Groups A through E (Society, Alumni Association, SVNIT/SVRCET, Student Welfare, Entrepreneurship & Leadership).",
-      "Nomination Dossier submission deadline: 25th November 2026.",
-      "Each nomination must be proposed and seconded by two distinct SVNIT/SVRCET alumni.",
-      "Conferred in person during the Global Annual Alumni Convention Day on 26th December 2026.",
-    ],
-    contactEmail: "mail@svnitalumni.com",
-    actionText: "View Accolade Notice & Nominate",
-    actionHref: "/ace-alumni-accolade",
-    externalAction: false,
-    pdfUrl: "/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf",
-    pdfDownloadName: "ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf",
-  },
 ];
 
 export default function AnnouncementsPage() {
