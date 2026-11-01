@@ -35,6 +35,8 @@ interface Announcement {
   actionHref?: string;
   externalAction?: boolean;
   posterImage?: string;
+  pdfUrl?: string;
+  pdfDownloadName?: string;
 }
 
 interface ActivePosterModal {
@@ -43,6 +45,8 @@ interface ActivePosterModal {
   downloadName: string;
   actionText?: string;
   actionHref?: string;
+  pdfUrl?: string;
+  pdfDownloadName?: string;
 }
 
 const announcementsData: Announcement[] = [
@@ -88,6 +92,8 @@ const announcementsData: Announcement[] = [
     actionText: "View Accolade Notice & Nominate",
     actionHref: "/ace-alumni-accolade",
     externalAction: false,
+    pdfUrl: "/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf",
+    pdfDownloadName: "ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf",
   },
   {
     id: "ann-elec-2026",
@@ -112,7 +118,9 @@ const announcementsData: Announcement[] = [
     actionText: "Register on Alumni Portal Now",
     actionHref: "https://alumniportal.svnit.ac.in/",
     externalAction: true,
-    posterImage: "/images/announcements/alumni_portal_registration_drive_election.jpg",
+    posterImage: "/images/announcements/alumni_portal_registration_drive_election.png",
+    pdfUrl: "/downloads/SVNIT_Alumni_Portal_Registration_Drive_Notice.pdf",
+    pdfDownloadName: "SVNIT_Alumni_Portal_Registration_Drive_Notice.pdf",
   },
 ];
 
@@ -252,10 +260,12 @@ export default function AnnouncementsPage() {
                             title: item.title,
                             downloadName:
                               item.id === "ann-elec-2026"
-                                ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.jpg"
+                                ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.png"
                                 : "22nd_Global_Alumni_Convention_Invitation.png",
                             actionText: item.actionText,
                             actionHref: item.actionHref,
+                            pdfUrl: item.pdfUrl,
+                            pdfDownloadName: item.pdfDownloadName,
                           })
                         }
                         className="px-4 py-2 bg-[#C9A050] text-[#0F1E36] font-bold text-xs uppercase tracking-wider rounded shadow flex items-center gap-1.5 cursor-pointer hover:bg-[#b88e3e]"
@@ -263,11 +273,25 @@ export default function AnnouncementsPage() {
                         <Maximize2 className="h-3.5 w-3.5" />
                         <span>View Full Circular</span>
                       </button>
+
+                      {item.pdfUrl && (
+                        <a
+                          href={item.pdfUrl}
+                          download={item.pdfDownloadName || "Notice.pdf"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider rounded shadow flex items-center gap-1.5 transition-colors"
+                        >
+                          <FileText className="h-3.5 w-3.5" />
+                          <span>Download PDF</span>
+                        </a>
+                      )}
+
                       <a
                         href={item.posterImage}
                         download={
                           item.id === "ann-elec-2026"
-                            ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.jpg"
+                            ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.png"
                             : "22nd_Global_Alumni_Convention_Invitation.png"
                         }
                         className="px-4 py-2 bg-white/20 text-white font-semibold text-xs uppercase tracking-wider rounded border border-white/30 flex items-center gap-1.5 hover:bg-white/30"
@@ -337,10 +361,12 @@ export default function AnnouncementsPage() {
                               title: item.title,
                               downloadName:
                                 item.id === "ann-elec-2026"
-                                  ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.jpg"
+                                  ? "SVNIT_Alumni_Portal_Registration_Drive_Notice.png"
                                   : "22nd_Global_Alumni_Convention_Invitation.png",
                               actionText: item.actionText,
                               actionHref: item.actionHref,
+                              pdfUrl: item.pdfUrl,
+                              pdfDownloadName: item.pdfDownloadName,
                             })
                           }
                           className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-xs font-bold hover:bg-gray-100 transition duration-200 flex items-center gap-1.5 cursor-pointer"
@@ -348,6 +374,19 @@ export default function AnnouncementsPage() {
                           <Maximize2 className="h-3.5 w-3.5" />
                           <span>View Notice Flyer</span>
                         </button>
+                      )}
+
+                      {item.pdfUrl && (
+                        <a
+                          href={item.pdfUrl}
+                          download={item.pdfDownloadName || "Notice.pdf"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-900 border border-red-200 rounded-lg text-xs font-bold transition duration-200 shadow-sm"
+                        >
+                          <FileText className="h-3.5 w-3.5 text-red-700" />
+                          <span>Download Notice (PDF)</span>
+                        </a>
                       )}
 
                       {item.actionText && item.actionHref && (
@@ -422,14 +461,28 @@ export default function AnnouncementsPage() {
               />
             </div>
             <div className="bg-white p-4 border-t border-gray-200 flex flex-wrap items-center justify-between gap-3">
-              <a
-                href={activeModal.image}
-                download={activeModal.downloadName}
-                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-lg flex items-center gap-1.5"
-              >
-                <Download className="h-3.5 w-3.5 text-[#C9A050]" />
-                <span>Download Flyer</span>
-              </a>
+              <div className="flex flex-wrap items-center gap-2">
+                {activeModal.pdfUrl && (
+                  <a
+                    href={activeModal.pdfUrl}
+                    download={activeModal.pdfDownloadName || "Notice.pdf"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow transition-colors"
+                  >
+                    <FileText className="h-3.5 w-3.5" />
+                    <span>Download Official PDF</span>
+                  </a>
+                )}
+                <a
+                  href={activeModal.image}
+                  download={activeModal.downloadName}
+                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-lg flex items-center gap-1.5"
+                >
+                  <Download className="h-3.5 w-3.5 text-[#C9A050]" />
+                  <span>Download Flyer</span>
+                </a>
+              </div>
               {activeModal.actionHref && activeModal.actionText && (
                 <a
                   href={activeModal.actionHref}
