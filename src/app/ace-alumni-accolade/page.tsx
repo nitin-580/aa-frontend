@@ -31,114 +31,117 @@ import {
 
 export default function AceAwardsPage() {
   return (
-    <div className="bg-[#F8F9FA] min-h-screen text-[#0F1E36] font-sans antialiased">
+    <div
+      className="bg-[#F8F9FA] min-h-screen text-[#0F1E36] font-sans antialiased"
+      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+    >
       <Navbar />
 
       {/* Hero Header Section */}
       <header className="relative isolate overflow-hidden bg-[#0F1E36]">
-        {/* Background Image & Ambient Overlays */}
+        {/* Background Image & Ambient Overlays with SVNIT Campus Building */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <img
-            src="/images/hero-award.jpg"
-            alt="SVNIT Convocation Hall and Award Dais"
-            className="h-full w-full object-cover opacity-30 filter brightness-75 scale-105 transition-transform duration-1000"
+            src="/images/svnit-campus-dusk.jpg"
+            alt="SVNIT Campus Building"
+            className="h-full w-full object-cover object-center opacity-25 filter brightness-90 contrast-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F1E36]/90 via-[#0F1E36]/85 to-[#0F1E36]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F1E36]/85 via-[#0F1E36]/80 to-[#0F1E36]"></div>
         </div>
 
-        <div className="relative mx-auto max-w-5xl px-6 py-16 sm:py-24 text-center">
-          <div className="inline-flex items-center gap-2 mb-4 bg-[#C9A050]/15 border border-[#C9A050]/30 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] text-[#C9A050]">
+        <div className="relative mx-auto max-w-5xl px-6 py-10 sm:py-14 text-center">
+          <div className="inline-flex items-center gap-2 mb-3 bg-[#C9A050]/15 border border-[#C9A050]/30 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-[#C9A050]">
             <Sparkles className="h-3.5 w-3.5 text-[#C9A050]" />
             <span>SVNIT ALUMNI ASSOCIATION · SURAT</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white">
             ACE Alumnus Accolade 2026
           </h1>
 
-          <p className="mt-3 text-sm sm:text-base font-semibold tracking-wide text-[#C9A050] uppercase">
+          <p className="mt-2 text-xs sm:text-sm font-semibold tracking-wide text-[#C9A050] uppercase">
             Notice Inviting Nominations for ACE Alumnus Accolade – 2026
           </p>
 
-          <p className="mx-auto mt-5 max-w-3xl text-sm sm:text-base leading-relaxed text-gray-200 font-light">
+          <p className="mx-auto mt-3 max-w-2xl text-xs sm:text-sm leading-relaxed text-gray-200 font-light">
             Recognizing and honouring the distinguished achievements and enduring contributions of alumni of SVNIT and SVRCET towards society, the Alumni Association, and the Institute.
           </p>
 
           {/* 3 Prominent Notice Badges (Matching Official Notice Flyer) */}
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-3xl mx-auto text-left">
             {/* Badge 1 */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-5 relative overflow-hidden group hover:bg-white/15 transition-all">
-              <div className="text-[10px] sm:text-xs font-bold tracking-widest text-[#C9A050] uppercase">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-3.5 sm:p-4 relative overflow-hidden group hover:bg-white/15 transition-all">
+              <div className="text-[10px] font-bold tracking-widest text-[#C9A050] uppercase">
                 Last Date for Nomination
               </div>
-              <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-1">
+              <div className="text-lg sm:text-2xl font-extrabold tracking-tight text-white mt-0.5">
                 25 Nov 2026
               </div>
-              <div className="text-xs text-gray-300 mt-1 flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5 text-[#C9A050]" />
+              <div className="text-[11px] text-gray-300 mt-1 flex items-center gap-1.5">
+                <Clock className="h-3 w-3 text-[#C9A050]" />
                 <span>Last date of receipt</span>
               </div>
             </div>
 
             {/* Badge 2 */}
-            <div className="bg-white/10 backdrop-blur-md border border-[#C9A050]/50 p-4 sm:p-5 relative overflow-hidden group hover:bg-white/15 transition-all shadow-lg">
-              <div className="text-[10px] sm:text-xs font-bold tracking-widest text-[#C9A050] uppercase">
+            <div className="bg-white/10 backdrop-blur-md border border-[#C9A050]/50 p-3.5 sm:p-4 relative overflow-hidden group hover:bg-white/15 transition-all shadow-lg">
+              <div className="text-[10px] font-bold tracking-widest text-[#C9A050] uppercase">
                 Global Alumni Convention
               </div>
-              <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-1">
+              <div className="text-lg sm:text-2xl font-extrabold tracking-tight text-white mt-0.5">
                 26 Dec 2026
               </div>
-              <div className="text-xs text-gray-300 mt-1 flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5 text-[#C9A050]" />
+              <div className="text-[11px] text-gray-300 mt-1 flex items-center gap-1.5">
+                <Calendar className="h-3 w-3 text-[#C9A050]" />
                 <span>Announced & presented</span>
               </div>
             </div>
 
             {/* Badge 3 */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-5 relative overflow-hidden group hover:bg-white/15 transition-all">
-              <div className="text-[10px] sm:text-xs font-bold tracking-widest text-[#C9A050] uppercase">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-3.5 sm:p-4 relative overflow-hidden group hover:bg-white/15 transition-all">
+              <div className="text-[10px] font-bold tracking-widest text-[#C9A050] uppercase">
                 Receiving Accolade
               </div>
-              <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-1">
+              <div className="text-lg sm:text-2xl font-extrabold tracking-tight text-white mt-0.5">
                 In Person
               </div>
-              <div className="text-xs text-gray-300 mt-1 flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-[#C9A050]" />
+              <div className="text-[11px] text-gray-300 mt-1 flex items-center gap-1.5">
+                <CheckCircle2 className="h-3 w-3 text-[#C9A050]" />
                 <span>Recipient must be present</span>
               </div>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/ace-alumni-accolade/nominate"
-              className="px-8 py-3.5 bg-[#C9A050] text-[#0F1E36] font-bold text-sm uppercase tracking-wider hover:bg-[#b88e3e] shadow-xl transition-all duration-200 flex items-center gap-2 cursor-pointer"
+              className="px-6 py-2.5 bg-[#C9A050] text-[#0F1E36] font-bold text-xs uppercase tracking-wider hover:bg-[#b88e3e] shadow-xl transition-all duration-200 flex items-center gap-2 cursor-pointer"
             >
               <span>File a nomination online</span>
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-3.5 w-3.5" />
             </Link>
 
             <a
               href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.docx"
               download
-              className="px-6 py-3.5 bg-white/10 border border-white/30 text-white font-semibold text-sm uppercase tracking-wider hover:bg-white/20 transition-all duration-200 flex items-center gap-2"
+              className="px-5 py-2.5 bg-white/10 border border-white/30 text-white font-semibold text-xs uppercase tracking-wider hover:bg-white/20 transition-all duration-200 flex items-center gap-2"
             >
-              <Download className="h-4 w-4 text-[#C9A050]" />
+              <Download className="h-3.5 w-3.5 text-[#C9A050]" />
               <span>Download Form (DOCX)</span>
             </a>
 
             <a
               href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf"
               download
-              className="px-6 py-3.5 bg-white/10 border border-white/30 text-white font-semibold text-sm uppercase tracking-wider hover:bg-white/20 transition-all duration-200 flex items-center gap-2"
+              className="px-5 py-2.5 bg-white/10 border border-white/30 text-white font-semibold text-xs uppercase tracking-wider hover:bg-white/20 transition-all duration-200 flex items-center gap-2"
             >
-              <Download className="h-4 w-4 text-[#C9A050]" />
+              <Download className="h-3.5 w-3.5 text-[#C9A050]" />
               <span>Download Form (PDF)</span>
             </a>
           </div>
 
-          <p className="mt-3.5 text-xs text-gray-300 font-medium tracking-wide">
+          <p className="mt-2.5 text-[11px] text-gray-300 font-medium tracking-wide">
             You can file nomination by using physical copy
           </p>
         </div>
