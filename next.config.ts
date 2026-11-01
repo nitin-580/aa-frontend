@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
         destination: "/ace-alumni-accolade/nominate",
         permanent: true,
       },
+      {
+        source: "/svnit-alumni-portal",
+        destination: "/alumni-portal",
+        permanent: true,
+      },
     ];
   },
 };

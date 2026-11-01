@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingCart, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "../cart/CartDrawer";
@@ -17,6 +17,12 @@ const Navbar = () => {
     { name: "Announcements", href: "/announcements" },
     { name: "Media", href: "/media" },
     { name: "Contact Us", href: "/contact" },
+    {
+      name: "SVNIT Alumni Portal",
+      href: "/alumni-portal",
+      isPortal: true,
+      externalUrl: "https://www.svnit.ac.in/web/alumni/",
+    },
   ];
 
   return (
@@ -57,15 +63,62 @@ const Navbar = () => {
 
           {/* Desktop - Middle Horizontal Navigation */}
           <nav className="hidden md:block">
-            <ul className="flex items-center space-x-6 text-sm font-medium tracking-wide">
+            <ul className="flex items-center space-x-4 lg:space-x-6 text-xs lg:text-sm font-medium tracking-wide">
               {navItems.map((item) => (
-                <li key={item.name}>
+                <li key={item.name} className="relative group">
                   <Link
                     href={item.href}
-                    className="hover:text-red-500 border-b-2 border-transparent hover:border-red-500 pb-1 transition-all duration-300"
+                    className="hover:text-red-500 border-b-2 border-transparent hover:border-red-500 pb-1 transition-all duration-300 inline-flex items-center gap-1.5"
                   >
-                    {item.name}
+                    <span>{item.name}</span>
+                    {item.isPortal && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#C9A050] animate-pulse"></span>
+                    )}
                   </Link>
+
+                  {/* Hover Quick Preview Card for SVNIT Alumni Portal */}
+                  {item.isPortal && (
+                    <div className="absolute right-0 top-full pt-3 hidden group-hover:block z-50 w-72 pointer-events-auto">
+                      <div className="bg-white rounded-xl shadow-2xl border border-gray-200 p-3 text-slate-800 space-y-2.5">
+                        <div className="relative rounded-lg overflow-hidden border border-gray-200 aspect-[16/10] bg-gray-900">
+                          <img
+                            src="/images/svnit_alumni_portal_preview.webp"
+                            alt="SVNIT Alumni Portal Preview"
+                            className="w-full h-full object-cover object-top"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                          <span className="absolute bottom-1.5 left-2 text-[10px] text-white font-mono font-semibold truncate max-w-[90%]">
+                            svnit.ac.in/web/alumni/
+                          </span>
+                        </div>
+                        <div className="space-y-1">
+                          <p className="font-bold text-xs text-[#0F1E36]">
+                            Official SVNIT Alumni Portal
+                          </p>
+                          <p className="text-[11px] text-gray-500 leading-snug">
+                            Redirect to the official portal or view interactive preview.
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-1.5 pt-1">
+                          <a
+                            href={item.externalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-2.5 py-1.5 bg-[#C9A050] hover:bg-[#b88e3e] text-[#0F1E36] font-bold text-[11px] rounded text-center uppercase tracking-wider flex items-center justify-center gap-1 shadow"
+                          >
+                            <span>Redirect</span>
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                          <Link
+                            href={item.href}
+                            className="px-2.5 py-1.5 bg-[#0F1E36] hover:bg-[#1a2e4d] text-white font-semibold text-[11px] rounded text-center uppercase tracking-wider flex items-center justify-center"
+                          >
+                            <span>Preview</span>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
@@ -90,16 +143,31 @@ const Navbar = () => {
 
         {/* Mobile menu panel */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-[#0F1E36] border-t border-red-900/20 px-6 py-4 space-y-3">
+          <div className="md:hidden bg-[#0F1E36] border-t border-red-900/20 px-6 py-4 space-y-2">
             {navItems.map((item) => (
-              <Link
+              <div
                 key={item.name}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-white hover:text-red-500 font-medium py-2 transition"
+                className="flex items-center justify-between py-2 border-b border-white/5"
               >
-                {item.name}
-              </Link>
+                <Link
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-white hover:text-red-500 font-medium transition text-sm"
+                >
+                  {item.name}
+                </Link>
+                {item.isPortal && item.externalUrl && (
+                  <a
+                    href={item.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] text-[#C9A050] font-bold uppercase tracking-wider flex items-center gap-1 px-2.5 py-1 bg-white/10 rounded"
+                  >
+                    <span>Visit</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
+              </div>
             ))}
           </div>
         )}
