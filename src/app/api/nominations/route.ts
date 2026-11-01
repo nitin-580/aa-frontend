@@ -35,13 +35,19 @@ export async function POST(req: NextRequest) {
       additionalEvidence,
     } = body;
 
+    const categoryValue = Array.isArray(category)
+      ? category.join("; ")
+      : typeof category === "string"
+      ? category.trim()
+      : "";
+
     // Validate required fields
     if (
       !nomineeName ||
       !degree ||
       !yearOfPassing ||
       !branch ||
-      !category ||
+      !categoryValue ||
       !dateOfBirth ||
       !mobile ||
       !email ||
@@ -82,7 +88,7 @@ export async function POST(req: NextRequest) {
       formType: "ACE Accolade Nomination",
       timestamp: new Date().toISOString(),
       nomineeName,
-      category,
+      category: categoryValue,
       degree,
       yearOfPassing,
       branch,

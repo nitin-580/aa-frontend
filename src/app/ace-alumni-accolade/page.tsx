@@ -525,7 +525,7 @@ export default function AceAwardsPage() {
               Accolade Categories (16 Categories)
             </h2>
             <p className="mt-2 text-sm text-gray-600 max-w-3xl leading-relaxed">
-              Nominations may be made in <strong>any one of the following 16 categories</strong> across Groups A through E. Please select the appropriate category number and title when submitting the nomination.
+              Nominations may be made in <strong>one or more of the following 16 categories</strong> across Groups A through E. Please select the appropriate category number(s) and title(s) when submitting the nomination.
             </p>
           </div>
 

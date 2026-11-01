@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -16,7 +16,12 @@ import {
   Send,
   Camera,
   UploadCloud,
-  ExternalLink
+  ExternalLink,
+  ChevronDown,
+  ChevronUp,
+  X,
+  Check,
+  Search
 } from "lucide-react";
 import { 
   ACCOLADE_GROUPS, 
@@ -33,6 +38,59 @@ export default function NominatePage() {
   const [uploadedPhotoUrl, setUploadedPhotoUrl] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [missingField, setMissingField] = useState<string>("");
+
+  // Multi-Select Category State
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const [categorySearchQuery, setCategorySearchQuery] = useState("");
+  const categoryDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close category dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        categoryDropdownRef.current &&
+        !categoryDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsCategoryDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleCategory = (cat: string) => {
+    if (errorMsg) setErrorMsg("");
+    if (missingField === "category") setMissingField("");
+    setSelectedCategories((prev) => {
+      const next = prev.includes(cat)
+        ? prev.filter((c) => c !== cat)
+        : [...prev, cat];
+      setFormData((f) => ({ ...f, category: next.join("; ") }));
+      return next;
+    });
+  };
+
+  const handleSelectAllGroup = (groupCategories: string[]) => {
+    if (errorMsg) setErrorMsg("");
+    if (missingField === "category") setMissingField("");
+    setSelectedCategories((prev) => {
+      const allSelected = groupCategories.every((c) => prev.includes(c));
+      let next: string[];
+      if (allSelected) {
+        next = prev.filter((c) => !groupCategories.includes(c));
+      } else {
+        next = Array.from(new Set([...prev, ...groupCategories]));
+      }
+      setFormData((f) => ({ ...f, category: next.join("; ") }));
+      return next;
+    });
+  };
+
+  const handleClearAllCategories = () => {
+    setSelectedCategories([]);
+    setFormData((f) => ({ ...f, category: "" }));
+  };
 
   // Form State
   const [formData, setFormData] = useState({
@@ -168,7 +226,10 @@ export default function NominatePage() {
     if (!formData.email.trim()) return showError("Please enter Nominee Email Address.", "email");
     if (!formData.addressResidence.trim()) return showError("Please enter Nominee Residential Address.", "addressResidence");
     if (!formData.addressWork.trim()) return showError("Please enter Nominee Work / Office Address.", "addressWork");
-    if (!formData.category) return showError("Please select one of the 16 Accolade Categories.", "category");
+    if (selectedCategories.length === 0) {
+      setIsCategoryDropdownOpen(true);
+      return showError("Please select at least one of the 16 Accolade Categories.", "category");
+    }
     if (!photoFile) return showError("Please upload a recent passport-size photograph.", "photoUpload");
 
     // Validate Required Fields - Section 2: Proposer Details
@@ -196,6 +257,8 @@ export default function NominatePage() {
     try {
       const payload = {
         ...formData,
+        category: selectedCategories.join("; "),
+        selectedCategories: selectedCategories,
         yearOfPassing: yop,
         photoName: photoFile?.name || "",
         photoBase64: photoBase64,
@@ -478,33 +541,165 @@ export default function NominatePage() {
                   />
                 </div>
 
-                <div className="sm:col-span-2">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Category Nominated For <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    id="category"
-                    name="category"
-                    required
-                    value={formData.category}
-                    onChange={handleInputChange}
-                    className={`w-full px-3.5 py-2.5 border text-sm bg-white focus:outline-none focus:border-[#C9A050] transition ${
-                      missingField === "category" ? "border-red-500 bg-red-50 ring-2 ring-red-200" : "border-gray-300"
+                <div className="sm:col-span-2 relative" ref={categoryDropdownRef} id="category">
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-700">
+                      Category Nominated For <span className="text-red-500">*</span>
+                      <span className="ml-1.5 font-normal text-gray-500 normal-case">
+                        (Select one or multiple options)
+                      </span>
+                    </label>
+                    {selectedCategories.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={handleClearAllCategories}
+                        className="text-[11px] text-red-600 hover:text-red-800 font-semibold cursor-pointer underline"
+                      >
+                        Clear All ({selectedCategories.length})
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Multi-Select Trigger Box */}
+                  <div
+                    onClick={() => setIsCategoryDropdownOpen((prev) => !prev)}
+                    className={`w-full min-h-[46px] p-2.5 border text-sm bg-white cursor-pointer transition flex items-center justify-between gap-2 ${
+                      missingField === "category"
+                        ? "border-red-500 bg-red-50 ring-2 ring-red-200"
+                        : isCategoryDropdownOpen
+                        ? "border-[#C9A050] ring-2 ring-[#C9A050]/20"
+                        : "border-gray-300 hover:border-gray-400"
                     }`}
                   >
-                    <option value="">-- Select One of 16 Accolade Categories --</option>
-                    {ACCOLADE_GROUPS.map((g) => (
-                      <optgroup key={g.group} label={g.group}>
-                        {g.categories.map((c) => (
-                          <option key={c} value={c}>
-                            {c}
-                          </option>
-                        ))}
-                      </optgroup>
-                    ))}
-                  </select>
+                    <div className="flex flex-wrap items-center gap-1.5 flex-1">
+                      {selectedCategories.length === 0 ? (
+                        <span className="text-gray-400 text-sm select-none">
+                          -- Select One or More of 16 Accolade Categories (Click to open) --
+                        </span>
+                      ) : (
+                        selectedCategories.map((cat) => (
+                          <span
+                            key={cat}
+                            className="inline-flex items-center gap-1.5 bg-[#0F1E36] text-[#C9A050] text-xs font-semibold px-2.5 py-1 rounded shadow-sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleCategory(cat);
+                            }}
+                          >
+                            <span>{cat}</span>
+                            <span className="hover:bg-white/20 rounded-full p-0.5 transition cursor-pointer">
+                              <X className="h-3 w-3 text-gray-300 hover:text-white" />
+                            </span>
+                          </span>
+                        ))
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-1.5 shrink-0 text-gray-500">
+                      {selectedCategories.length > 0 && (
+                        <span className="bg-[#C9A050]/20 text-[#0F1E36] text-[11px] font-bold px-2 py-0.5 rounded-full">
+                          {selectedCategories.length} selected
+                        </span>
+                      )}
+                      {isCategoryDropdownOpen ? (
+                        <ChevronUp className="h-4 w-4 text-gray-600" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-gray-600" />
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Multi-Select Dropdown Panel */}
+                  {isCategoryDropdownOpen && (
+                    <div className="absolute left-0 right-0 mt-1 bg-white border border-[#C9A050]/60 shadow-2xl rounded-lg p-3.5 z-40 space-y-3">
+                      {/* Search & Actions Bar */}
+                      <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-gray-100">
+                        <div className="relative flex-1">
+                          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400" />
+                          <input
+                            type="text"
+                            placeholder="Filter 16 categories by keyword..."
+                            value={categorySearchQuery}
+                            onChange={(e) => setCategorySearchQuery(e.target.value)}
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full pl-8 pr-3 py-1.5 text-xs border border-gray-200 rounded focus:outline-none focus:border-[#C9A050] text-black"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setIsCategoryDropdownOpen(false)}
+                          className="px-3.5 py-1.5 bg-[#0F1E36] text-[#C9A050] text-xs font-bold rounded hover:bg-[#1a2e4d] cursor-pointer shadow-sm transition"
+                        >
+                          Done
+                        </button>
+                      </div>
+
+                      {/* Grouped Category Options */}
+                      <div className="max-h-80 overflow-y-auto space-y-3 pr-1 divide-y divide-gray-100">
+                        {ACCOLADE_GROUPS.map((g) => {
+                          const filteredCats = g.categories.filter((c) =>
+                            c.toLowerCase().includes(categorySearchQuery.toLowerCase())
+                          );
+                          if (filteredCats.length === 0) return null;
+
+                          const allGroupSelected = g.categories.every((c) =>
+                            selectedCategories.includes(c)
+                          );
+
+                          return (
+                            <div key={g.group} className="pt-2.5 first:pt-0 space-y-1.5">
+                              <div className="flex items-center justify-between px-1">
+                                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#0F1E36] bg-amber-50 px-2 py-0.5 rounded border border-amber-200/70">
+                                  {g.group}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSelectAllGroup(g.categories);
+                                  }}
+                                  className="text-[10px] text-gray-500 hover:text-[#0F1E36] font-semibold cursor-pointer underline"
+                                >
+                                  {allGroupSelected ? "Deselect Group" : "Select All in Group"}
+                                </button>
+                              </div>
+
+                              <div className="grid grid-cols-1 gap-1">
+                                {filteredCats.map((cat) => {
+                                  const isChecked = selectedCategories.includes(cat);
+                                  return (
+                                    <div
+                                      key={cat}
+                                      onClick={() => toggleCategory(cat)}
+                                      className={`flex items-start gap-2.5 p-2 rounded cursor-pointer transition text-xs select-none ${
+                                        isChecked
+                                          ? "bg-amber-50/90 text-[#0F1E36] font-bold border border-amber-200 shadow-sm"
+                                          : "hover:bg-gray-50 text-gray-700 border border-transparent"
+                                      }`}
+                                    >
+                                      <input
+                                        type="checkbox"
+                                        checked={isChecked}
+                                        onChange={() => {}} // handled by parent div onClick
+                                        className="mt-0.5 h-4 w-4 rounded border-gray-300 text-[#0F1E36] focus:ring-[#C9A050] cursor-pointer accent-[#0F1E36]"
+                                      />
+                                      <span className="leading-snug flex-1">{cat}</span>
+                                      {isChecked && (
+                                        <Check className="h-3.5 w-3.5 text-[#C9A050] shrink-0 font-bold" />
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
                   <p className="text-[11px] text-gray-500 mt-1">
-                    The nomination dossier will be officially reviewed and evaluated under this category.
+                    The nomination dossier will be officially reviewed and evaluated under the selected categories. Multiple categories can be selected if the nominee's contributions span multiple domains.
                   </p>
                 </div>
 
@@ -926,9 +1121,22 @@ export default function NominatePage() {
                 <span className="text-gray-500 font-medium">Nominee:</span>
                 <span className="font-semibold text-gray-900">{formData.nomineeName}</span>
               </div>
-              <div className="flex justify-between items-center py-1.5 border-b border-gray-200">
-                <span className="text-gray-500 font-medium">Category:</span>
-                <span className="font-semibold text-gray-900 text-right max-w-[220px] truncate">{formData.category}</span>
+              <div className="flex justify-between items-start py-1.5 border-b border-gray-200">
+                <span className="text-gray-500 font-medium shrink-0 pt-0.5">Category:</span>
+                <div className="text-right max-w-[280px] flex flex-wrap justify-end gap-1">
+                  {selectedCategories.length > 0 ? (
+                    selectedCategories.map((c, i) => (
+                      <span
+                        key={i}
+                        className="text-[10px] font-semibold text-[#0F1E36] bg-amber-50 border border-[#C9A050]/40 px-1.5 py-0.5 rounded text-right"
+                      >
+                        {c}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="font-semibold text-gray-900">{formData.category}</span>
+                  )}
+                </div>
               </div>
               {uploadedPhotoUrl && (
                 <div className="flex justify-between items-center py-1.5 border-b border-gray-200">
