@@ -230,6 +230,13 @@ export default function NominatePage() {
     }
   };
 
+  const fieldClass = (fieldName: string) =>
+    `w-full px-3.5 py-2.5 border text-sm focus:outline-none focus:border-[#C9A050] transition ${
+      missingField === fieldName
+        ? "border-red-500 bg-red-50 ring-2 ring-red-200"
+        : "border-gray-300"
+    }`;
+
   return (
     <div className="bg-[#F8F9FA] min-h-screen text-[#0F1E36] font-sans antialiased flex flex-col">
       <Navbar />
@@ -318,12 +325,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="text"
+                    id="nomineeName"
                     name="nomineeName"
                     required
                     value={formData.nomineeName}
                     onChange={handleInputChange}
                     placeholder="e.g. Dr. Ramesh K. Patel"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("nomineeName")}
                   />
                 </div>
 
@@ -333,12 +341,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="text"
+                    id="degree"
                     name="degree"
                     required
                     value={formData.degree}
                     onChange={handleInputChange}
                     placeholder="e.g. B.E. / M.Tech / Ph.D."
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("degree")}
                   />
                 </div>
 
@@ -348,13 +357,14 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="text"
+                    id="yearOfPassing"
                     name="yearOfPassing"
                     required
                     value={formData.yearOfPassing}
                     onChange={handleInputChange}
                     placeholder="e.g. 1998"
                     maxLength={4}
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("yearOfPassing")}
                   />
                 </div>
 
@@ -364,12 +374,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="text"
+                    id="branch"
                     name="branch"
                     required
                     value={formData.branch}
                     onChange={handleInputChange}
                     placeholder="e.g. Electrical Engineering"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("branch")}
                   />
                 </div>
 
@@ -380,10 +391,27 @@ export default function NominatePage() {
                   <input
                     type="date"
                     name="dateOfBirth"
+                    id="dateOfBirth"
                     required
                     value={formData.dateOfBirth}
                     onChange={handleInputChange}
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("dateOfBirth")}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
+                    Nominee Mobile Number <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    name="mobile"
+                    id="mobile"
+                    required
+                    value={formData.mobile}
+                    onChange={handleInputChange}
+                    placeholder="e.g. +91 98765 43210"
+                    className={fieldClass("mobile")}
                   />
                 </div>
 
@@ -394,25 +422,27 @@ export default function NominatePage() {
                   <input
                     type="tel"
                     name="otherPhone"
+                    id="otherPhone"
                     value={formData.otherPhone}
                     onChange={handleInputChange}
                     placeholder="Landline or Alternate Mobile"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("otherPhone")}
                   />
                 </div>
 
-                <div className="sm:col-span-2">
+                <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
                     Email Address <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
                     name="email"
+                    id="email"
                     required
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="nominee@domain.com"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("email")}
                   />
                 </div>
 
@@ -421,13 +451,14 @@ export default function NominatePage() {
                     Residential Address <span className="text-red-500">*</span>
                   </label>
                   <textarea
+                    id="addressResidence"
                     name="addressResidence"
                     required
                     rows={2}
                     value={formData.addressResidence}
                     onChange={handleInputChange}
                     placeholder="Complete residential address"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("addressResidence")}
                   />
                 </div>
 
@@ -436,13 +467,14 @@ export default function NominatePage() {
                     Work / Office Address <span className="text-red-500">*</span>
                   </label>
                   <textarea
+                    id="addressWork"
                     name="addressWork"
                     required
                     rows={2}
                     value={formData.addressWork}
                     onChange={handleInputChange}
                     placeholder="Company / Institution address"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("addressWork")}
                   />
                 </div>
 
@@ -451,11 +483,14 @@ export default function NominatePage() {
                     Category Nominated For <span className="text-red-500">*</span>
                   </label>
                   <select
+                    id="category"
                     name="category"
                     required
                     value={formData.category}
                     onChange={handleInputChange}
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm bg-white focus:outline-none focus:border-[#C9A050]"
+                    className={`w-full px-3.5 py-2.5 border text-sm bg-white focus:outline-none focus:border-[#C9A050] transition ${
+                      missingField === "category" ? "border-red-500 bg-red-50 ring-2 ring-red-200" : "border-gray-300"
+                    }`}
                   >
                     <option value="">-- Select One of 16 Accolade Categories --</option>
                     {ACCOLADE_GROUPS.map((g) => (
@@ -565,12 +600,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="text"
+                    id="proposerName"
                     name="proposerName"
                     required
                     value={formData.proposerName}
                     onChange={handleInputChange}
                     placeholder="Alumnus Name"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("proposerName")}
                   />
                 </div>
 
@@ -580,12 +616,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="text"
+                    id="proposerDegreeYear"
                     name="proposerDegreeYear"
                     required
                     value={formData.proposerDegreeYear}
                     onChange={handleInputChange}
                     placeholder="e.g. B.E. Mechanical 1996"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("proposerDegreeYear")}
                   />
                 </div>
 
@@ -595,12 +632,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="email"
+                    id="proposerEmail"
                     name="proposerEmail"
                     required
                     value={formData.proposerEmail}
                     onChange={handleInputChange}
                     placeholder="proposer@domain.com"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("proposerEmail")}
                   />
                 </div>
 
@@ -610,12 +648,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="tel"
+                    id="proposerMobile"
                     name="proposerMobile"
                     required
                     value={formData.proposerMobile}
                     onChange={handleInputChange}
                     placeholder="+91 98200 XXXXX"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("proposerMobile")}
                   />
                 </div>
 
@@ -624,13 +663,14 @@ export default function NominatePage() {
                     Proposer Address <span className="text-red-500">*</span>
                   </label>
                   <textarea
+                    id="proposerAddress"
                     name="proposerAddress"
                     required
                     rows={2}
                     value={formData.proposerAddress}
                     onChange={handleInputChange}
                     placeholder="Postal address of proposer"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("proposerAddress")}
                   />
                 </div>
               </div>
@@ -654,12 +694,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="text"
+                    id="seconderName"
                     name="seconderName"
                     required
                     value={formData.seconderName}
                     onChange={handleInputChange}
                     placeholder="Alumnus Name"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("seconderName")}
                   />
                 </div>
 
@@ -669,12 +710,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="text"
+                    id="seconderDegreeYear"
                     name="seconderDegreeYear"
                     required
                     value={formData.seconderDegreeYear}
                     onChange={handleInputChange}
                     placeholder="e.g. B.E. Civil 1999"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("seconderDegreeYear")}
                   />
                 </div>
 
@@ -684,12 +726,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="email"
+                    id="seconderEmail"
                     name="seconderEmail"
                     required
                     value={formData.seconderEmail}
                     onChange={handleInputChange}
                     placeholder="seconder@domain.com"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("seconderEmail")}
                   />
                 </div>
 
@@ -699,12 +742,13 @@ export default function NominatePage() {
                   </label>
                   <input
                     type="tel"
+                    id="seconderMobile"
                     name="seconderMobile"
                     required
                     value={formData.seconderMobile}
                     onChange={handleInputChange}
                     placeholder="+91 99000 XXXXX"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("seconderMobile")}
                   />
                 </div>
 
@@ -713,13 +757,14 @@ export default function NominatePage() {
                     Seconder Address <span className="text-red-500">*</span>
                   </label>
                   <textarea
+                    id="seconderAddress"
                     name="seconderAddress"
                     required
                     rows={2}
                     value={formData.seconderAddress}
                     onChange={handleInputChange}
                     placeholder="Postal address of seconder"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-[#C9A050]"
+                    className={fieldClass("seconderAddress")}
                   />
                 </div>
               </div>
@@ -791,7 +836,13 @@ export default function NominatePage() {
                 5. Declaration
               </h2>
 
-              <div className="p-4 bg-[#F8F9FA] border border-gray-200 flex items-start gap-3">
+              <div
+                className={`p-4 border flex items-start gap-3 transition ${
+                  missingField === "declarationAccepted"
+                    ? "bg-red-50 border-red-500 ring-2 ring-red-200"
+                    : "bg-[#F8F9FA] border-gray-200"
+                }`}
+              >
                 <input
                   type="checkbox"
                   id="declarationAccepted"
@@ -801,7 +852,7 @@ export default function NominatePage() {
                   className="mt-1 h-4 w-4 border-gray-300 text-[#0F1E36] focus:ring-[#C9A050]"
                 />
                 <label htmlFor="declarationAccepted" className="text-xs sm:text-sm text-gray-700 leading-relaxed cursor-pointer select-none">
-                  I hereby agree to my nomination for the <strong>ACE Alumnus Accolade</strong> and assure that all information provided in this form and the attached annexures is factual and correct to the best of my knowledge.
+                  I hereby agree to my nomination for the <strong>ACE Alumnus Accolade</strong> and assure that all information provided in this form and the attached annexures is factual and correct to the best of my knowledge. <span className="text-red-500 font-bold">*</span>
                 </label>
               </div>
             </section>
