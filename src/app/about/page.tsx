@@ -10,9 +10,20 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-[#0F1E36] text-white py-20 px-6 text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-radial-gradient"></div>
-        <div className="max-w-4xl mx-auto space-y-6 relative z-10">
+      <section className="bg-[#0F1E36] text-white py-20 md:py-24 px-6 text-center relative overflow-hidden">
+        {/* Background photo with subtle visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src="/images/about-preview.png"
+            alt="SVNIT Alumni Association Gate"
+            className="w-full h-full object-cover object-[center_30%] opacity-25"
+          />
+          {/* Subtle gradient vignette to blend seamlessly into deep navy and keep text crisp */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F1E36]/80 via-[#0F1E36]/60 to-[#0F1E36]/95" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(15,30,54,0.5)_0%,_transparent_70%)]" />
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-6 relative z-10 drop-shadow-sm">
           <h2 className="text-sm font-bold tracking-widest text-red-500 uppercase">
             Sardar Vallabhbhai National Institute of Technology
           </h2>
