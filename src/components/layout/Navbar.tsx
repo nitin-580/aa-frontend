@@ -83,12 +83,15 @@ const Navbar = () => {
       href: "/contact",
       align: "right",
       preview: {
-        image: "/images/svnit-campus-dusk.jpg",
+        image: "/images/contact-preview.png",
         tag: "Campus Office · Surat",
         title: "Contact Alumni Office",
         description: "Reach the Alumni Office near SBI Bank, SVNIT Campus. Phone: +91-8758366507.",
         primaryButtonText: "Get in Touch",
         primaryButtonHref: "/contact",
+        fit: "contain",
+        imageBg: "bg-slate-50",
+        noDarkGradient: true,
       },
     },
     {
@@ -174,14 +177,22 @@ const Navbar = () => {
                       }`}
                     >
                       <div className="bg-white rounded-xl shadow-2xl border border-gray-200 p-3 text-slate-800 space-y-2.5 transition-all duration-200">
-                        <div className="relative rounded-lg overflow-hidden border border-gray-200 aspect-[16/10] bg-gray-900">
+                        <div className={`relative rounded-lg overflow-hidden border border-gray-200 aspect-[16/10] ${item.preview.imageBg || "bg-gray-900"}`}>
                           <img
                             src={item.preview.image}
                             alt={`${item.name} Preview`}
-                            className="w-full h-full object-cover object-top"
+                            className={`w-full h-full ${item.preview.fit === "contain" ? "object-contain p-2.5" : "object-cover object-top"}`}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
-                          <span className="absolute bottom-1.5 left-2 text-[10px] text-white font-mono font-semibold truncate max-w-[90%] bg-black/40 px-1.5 py-0.5 rounded">
+                          {!item.preview.noDarkGradient && (
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+                          )}
+                          <span
+                            className={`absolute bottom-1.5 left-2 text-[10px] font-mono font-semibold truncate max-w-[90%] px-1.5 py-0.5 rounded ${
+                              item.preview.noDarkGradient
+                                ? "text-slate-700 bg-white/95 border border-gray-200 shadow-sm"
+                                : "text-white bg-black/40"
+                            }`}
+                          >
                             {item.preview.tag}
                           </span>
                         </div>
