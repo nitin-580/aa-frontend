@@ -153,7 +153,7 @@ export default function MediaPage() {
             <div
               key={item.id}
               onClick={() => setSelectedImage(item)}
-              className="group bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col"
+              className="group bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 card-glow-interactive cursor-pointer flex flex-col"
             >
               {/* Image Box */}
               <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
@@ -219,7 +219,7 @@ export default function MediaPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* YouTube Shorts Spotlight Card */}
-            <div className="bg-[#0F1E36] text-white p-6 sm:p-7 rounded-3xl space-y-5 flex flex-col justify-between shadow-xl border border-white/10">
+            <div className="bg-[#0F1E36] text-white p-6 sm:p-7 rounded-3xl space-y-5 flex flex-col justify-between shadow-xl border border-white/10 card-glow-red">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-red-400 text-xs font-bold uppercase tracking-wider">
@@ -273,7 +273,7 @@ export default function MediaPage() {
             </div>
 
             {/* Instagram Reel Spotlight Card */}
-            <div className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white p-6 sm:p-7 rounded-3xl space-y-5 flex flex-col justify-between shadow-xl border border-white/10">
+            <div className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white p-6 sm:p-7 rounded-3xl space-y-5 flex flex-col justify-between shadow-xl border border-white/10 card-glow-insta">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-wider">
@@ -366,9 +366,11 @@ export default function MediaPage() {
         </section>
 
         {/* Community Media Submissions & Upload Section */}
-        <section className="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 shadow-lg space-y-8 relative overflow-hidden">
-          <div className="max-w-2xl mx-auto text-center space-y-3">
-            <div className="inline-flex items-center gap-2 bg-amber-50 text-[#0F1E36] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-[#C9A050]/40">
+        <section className="bg-gradient-to-b from-white via-slate-50/60 to-white border-2 border-gray-200/90 rounded-3xl p-8 sm:p-12 shadow-xl space-y-9 relative overflow-hidden card-glow-interactive">
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-48 bg-gradient-to-r from-blue-200/25 via-amber-200/35 to-pink-200/25 blur-3xl pointer-events-none"></div>
+
+          <div className="max-w-2xl mx-auto text-center space-y-3 relative z-10">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-50 to-amber-100/80 text-[#0F1E36] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-[#C9A050]/50 shadow-sm">
               <FolderUp className="h-4 w-4 text-[#C9A050]" />
               Community Media Submissions
             </div>
@@ -381,19 +383,20 @@ export default function MediaPage() {
           </div>
 
           {/* 3 Upload & Share Channels */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch relative z-10">
             {/* Channel 1: Google Drive Direct Folder */}
-            <div className="bg-[#F8FAFC] border-2 border-blue-100 hover:border-blue-400 p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-sm hover:shadow-md transition group">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shadow-sm">
+            <div className="bg-white border-2 border-blue-100 hover:border-blue-500 p-6 sm:p-7 rounded-2xl flex flex-col justify-between space-y-6 shadow-md card-glow-blue group relative overflow-hidden">
+              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-blue-500 via-sky-400 to-blue-600"></div>
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between pt-1">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shadow-sm group-hover:scale-110 group-hover:bg-blue-100/70 transition-all duration-300">
                     <GoogleDriveIcon className="h-6 w-6" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 rounded-full">
                     Direct Drive Folder
                   </span>
                 </div>
-                <h4 className="font-extrabold text-base text-[#0F1E36]">Google Drive Upload</h4>
+                <h4 className="font-extrabold text-base text-[#0F1E36] group-hover:text-blue-600 transition">Google Drive Upload</h4>
                 <p className="text-xs text-gray-600 leading-relaxed">
                   Upload your full-resolution photos, batch albums, and reunion videos directly into our shared alumni drive folder.
                 </p>
@@ -409,7 +412,7 @@ export default function MediaPage() {
                 href="https://drive.google.com/drive/folders/1p8fcWz2Gi06TCFoNNx2FVJjXnFdH7F7B?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm cursor-pointer group-hover:shadow"
+                className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:gap-2.5 active:scale-[0.98] cursor-pointer"
               >
                 <span>Upload to Drive Folder</span>
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -417,28 +420,29 @@ export default function MediaPage() {
             </div>
 
             {/* Channel 2: Email Submission */}
-            <div className="bg-[#F8FAFC] border-2 border-gray-100 hover:border-red-300 p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-sm hover:shadow-md transition group">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-11 h-11 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center text-red-700 shadow-sm">
+            <div className="bg-white border-2 border-red-100 hover:border-red-600 p-6 sm:p-7 rounded-2xl flex flex-col justify-between space-y-6 shadow-md card-glow-red group relative overflow-hidden">
+              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-red-800 via-red-600 to-red-900"></div>
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between pt-1">
+                  <div className="w-12 h-12 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center text-red-800 shadow-sm group-hover:scale-110 group-hover:bg-red-100/70 transition-all duration-300">
                     <Mail className="h-5 w-5" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-800 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-red-50 text-red-850 border border-red-200 px-2.5 py-0.5 rounded-full">
                     Email Delivery
                   </span>
                 </div>
-                <h4 className="font-extrabold text-base text-[#0F1E36]">Email Submission</h4>
+                <h4 className="font-extrabold text-base text-[#0F1E36] group-hover:text-red-900 transition">Email Submission</h4>
                 <p className="text-xs text-gray-600 leading-relaxed">
                   Prefer sending via email? Attach photos or send Drive/Dropbox links directly to our editorial team with batch details.
                 </p>
-                <div className="text-[11px] text-gray-600 bg-gray-100 p-2.5 rounded-xl font-mono truncate border border-gray-200">
+                <div className="text-[11px] text-gray-700 bg-gray-50 p-2.5 rounded-xl font-mono truncate border border-gray-200">
                   svnitalumniassociation01@gmail.com
                 </div>
               </div>
 
               <a
                 href="mailto:svnitalumniassociation01@gmail.com?subject=SVNIT%20Alumni%20Photo%20Submission"
-                className="w-full py-2.5 px-4 bg-red-900 hover:bg-red-950 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm cursor-pointer group-hover:shadow"
+                className="w-full py-3 px-4 bg-gradient-to-r from-red-900 to-red-950 hover:from-red-950 hover:to-black text-white rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:gap-2.5 active:scale-[0.98] cursor-pointer"
               >
                 <span>Send via Email</span>
                 <Mail className="h-3.5 w-3.5" />
@@ -446,21 +450,22 @@ export default function MediaPage() {
             </div>
 
             {/* Channel 3: Social Media / Instagram DM */}
-            <div className="bg-[#F8FAFC] border-2 border-gray-100 hover:border-pink-300 p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-sm hover:shadow-md transition group">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-11 h-11 rounded-xl bg-pink-50 border border-pink-200 flex items-center justify-center text-pink-600 shadow-sm">
+            <div className="bg-white border-2 border-pink-100 hover:border-pink-500 p-6 sm:p-7 rounded-2xl flex flex-col justify-between space-y-6 shadow-md card-glow-insta group relative overflow-hidden">
+              <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737]"></div>
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between pt-1">
+                  <div className="w-12 h-12 rounded-xl bg-pink-50 border border-pink-200 flex items-center justify-center text-pink-600 shadow-sm group-hover:scale-110 group-hover:rotate-2 group-hover:bg-pink-100/70 transition-all duration-300">
                     <InstagramIcon className="h-5 w-5" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider bg-pink-100 text-pink-800 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-pink-50 text-pink-700 border border-pink-200 px-2.5 py-0.5 rounded-full">
                     Instagram & Social
                   </span>
                 </div>
-                <h4 className="font-extrabold text-base text-[#0F1E36]">Instagram DM & Tags</h4>
+                <h4 className="font-extrabold text-base text-[#0F1E36] group-hover:text-pink-600 transition">Instagram DM & Tags</h4>
                 <p className="text-xs text-gray-600 leading-relaxed">
                   Tag us in your campus memories and jubilee stories, or send reels via Instagram Direct Message to be reposted officially.
                 </p>
-                <div className="text-[11px] text-pink-700 bg-pink-50 border border-pink-200 p-2.5 rounded-xl font-medium leading-relaxed">
+                <div className="text-[11px] text-pink-800 bg-pink-50/90 border border-pink-200 p-2.5 rounded-xl font-medium leading-relaxed">
                   Tag <strong>@alumni_association_svnit</strong> or use <strong>#SVNITAlumni</strong>
                 </div>
               </div>
@@ -469,7 +474,7 @@ export default function MediaPage() {
                 href="https://www.instagram.com/alumni_association_svnit/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm cursor-pointer group-hover:shadow"
+                className="w-full py-3 px-4 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-white rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:gap-2.5 active:scale-[0.98] cursor-pointer"
               >
                 <span>DM on Instagram</span>
                 <ExternalLink className="h-3.5 w-3.5" />

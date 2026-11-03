@@ -81,7 +81,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Pillar 1 */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-50 hover:scale-[1.02] transition duration-300 space-y-4">
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 card-glow-interactive space-y-4">
               <div className="p-3 bg-red-900/10 text-red-900 rounded-xl inline-block">
                 <Users className="h-6 w-6" />
               </div>
@@ -92,7 +92,7 @@ export default function AboutPage() {
             </div>
 
             {/* Pillar 2 */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-50 hover:scale-[1.02] transition duration-300 space-y-4">
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 card-glow-interactive space-y-4">
               <div className="p-3 bg-red-900/10 text-red-900 rounded-xl inline-block">
                 <GraduationCap className="h-6 w-6" />
               </div>
@@ -103,7 +103,7 @@ export default function AboutPage() {
             </div>
 
             {/* Pillar 3 */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-50 hover:scale-[1.02] transition duration-300 space-y-4">
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 card-glow-interactive space-y-4">
               <div className="p-3 bg-red-900/10 text-red-900 rounded-xl inline-block">
                 <Gift className="h-6 w-6" />
               </div>

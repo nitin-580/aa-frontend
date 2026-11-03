@@ -189,7 +189,7 @@ export default function AnnouncementsPage() {
         key={isPaginated ? `${item.id}-${currentPage}` : item.id}
         onTouchStart={isPaginated ? handleTouchStart : undefined}
         onTouchEnd={isPaginated ? handleTouchEnd : undefined}
-        className={`bg-white rounded-2xl p-6 md:p-8 shadow-md border border-gray-100 hover:border-[#C9A050]/40 transition-all duration-300 space-y-6 relative overflow-hidden ${animationClass}`}
+        className={`bg-white rounded-2xl p-6 md:p-8 shadow-md border border-gray-100 card-glow-interactive space-y-6 relative overflow-hidden ${animationClass}`}
       >
         {/* Decorative Folded Corner Page-Turn Buttons (Dog-Ear effect) */}
         {isPaginated && currentPage < filteredAnnouncements.length - 1 && (

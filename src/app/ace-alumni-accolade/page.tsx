@@ -232,7 +232,7 @@ export default function AceAwardsPage() {
 
             <div className="grid gap-6 md:grid-cols-3">
               {/* Option 1: By Post / In Person */}
-              <div className="bg-[#F8F9FA] border border-gray-200 p-6 flex flex-col justify-between relative group hover:border-[#C9A050] transition-colors">
+              <div className="bg-[#F8F9FA] border border-gray-200 p-6 flex flex-col justify-between relative group card-glow-interactive">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#C9A050] uppercase tracking-wider">
                     <MapPin className="h-4 w-4" />
@@ -270,7 +270,7 @@ export default function AceAwardsPage() {
               </div>
 
               {/* Option 2: By Email */}
-              <div className="bg-[#F8F9FA] border border-gray-200 p-6 flex flex-col justify-between relative group hover:border-[#C9A050] transition-colors">
+              <div className="bg-[#F8F9FA] border border-gray-200 p-6 flex flex-col justify-between relative group card-glow-interactive">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#C9A050] uppercase tracking-wider">
                     <Mail className="h-4 w-4" />

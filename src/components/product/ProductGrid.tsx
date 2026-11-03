@@ -47,7 +47,7 @@ const ProductGrid: React.FC = () => {
           {productList.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col group border border-gray-100"
+              className="bg-white rounded-xl shadow-md overflow-hidden card-glow-interactive flex flex-col group border border-gray-100"
             >
               <div 
                 className="overflow-hidden bg-gray-50 relative cursor-pointer aspect-square"

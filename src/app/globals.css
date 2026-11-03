@@ -137,3 +137,54 @@ body {
 .hero-glow-text {
   animation: softGlow 4s ease-in-out infinite;
 }
+
+/* Global Interactive Card Pop-up & Glow System */
+.card-glow-interactive {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+.card-glow-interactive:hover {
+  transform: translateY(-6px) scale(1.008);
+  box-shadow: 0 20px 38px -6px rgba(15, 30, 54, 0.14), 0 0 22px rgba(201, 160, 80, 0.22);
+  border-color: rgba(201, 160, 80, 0.5) !important;
+}
+
+.card-glow-blue {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+.card-glow-blue:hover {
+  transform: translateY(-7px) scale(1.01);
+  box-shadow: 0 22px 42px -6px rgba(37, 99, 235, 0.22), 0 0 26px rgba(59, 130, 246, 0.28);
+  border-color: rgba(37, 99, 235, 0.65) !important;
+}
+
+.card-glow-red {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+.card-glow-red:hover {
+  transform: translateY(-7px) scale(1.01);
+  box-shadow: 0 22px 42px -6px rgba(127, 29, 29, 0.24), 0 0 26px rgba(220, 38, 38, 0.28);
+  border-color: rgba(185, 28, 28, 0.65) !important;
+}
+
+.card-glow-insta {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+.card-glow-insta:hover {
+  transform: translateY(-7px) scale(1.01);
+  box-shadow: 0 22px 42px -6px rgba(225, 48, 108, 0.24), 0 0 28px rgba(247, 119, 55, 0.3);
+  border-color: rgba(247, 119, 55, 0.7) !important;
+}
+
+.card-glow-gold {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+.card-glow-gold:hover {
+  transform: translateY(-6px) scale(1.008);
+  box-shadow: 0 20px 38px -6px rgba(15, 30, 54, 0.16), 0 0 26px rgba(201, 160, 80, 0.32);
+  border-color: #C9A050 !important;
+}
