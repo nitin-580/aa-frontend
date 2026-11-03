@@ -205,56 +205,112 @@ export default function MediaPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* YouTube Embed Box / Spotlight Card */}
-            <div className="bg-[#0F1E36] text-white p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* YouTube Shorts Spotlight Card */}
+            <div className="bg-[#0F1E36] text-white p-6 sm:p-7 rounded-3xl space-y-5 flex flex-col justify-between shadow-xl border border-white/10">
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-red-400 text-xs font-bold uppercase">
-                  <Play className="h-4 w-4 fill-current" />
-                  <span>YouTube Channel</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-red-400 text-xs font-bold uppercase tracking-wider">
+                    <Play className="h-4 w-4 fill-current" />
+                    <span>YouTube Shorts · Looping Preview</span>
+                  </div>
+                  <span className="text-[10px] font-mono bg-red-600/30 text-red-300 border border-red-500/40 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Auto-Loop
+                  </span>
                 </div>
-                <h3 className="text-xl font-bold">SVNIT Alumni Association Official Channel</h3>
+                <h3 className="text-lg sm:text-xl font-bold">SVNIT Alumni Association</h3>
                 <p className="text-xs text-gray-300 leading-relaxed font-light">
-                  Watch keynote speeches from Distinguished Alumni, campus tour recaps, Garba nights, and felicitation ceremonies recorded live on our channel.
+                  Preview official campus moments and reunion highlights. Visit our channel for full interviews, felicitation ceremonies, and event playlists.
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                <span className="text-xs text-gray-400">Handle: @alumniassociation-01</span>
-                <a
-                  href="https://youtube.com/@alumniassociation-01?si=S6Lt57THqNENKMne"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-white text-[#0F1E36] hover:bg-gray-100 rounded-lg text-xs font-bold transition flex items-center gap-1.5"
-                >
-                  Watch Videos <ExternalLink className="h-3 w-3" />
-                </a>
+              {/* YouTube Shorts Looping Video Embed */}
+              <div className="relative w-full max-w-[280px] sm:max-w-[300px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 bg-black">
+                <iframe
+                  src="https://www.youtube.com/embed/rOIGz67MY4s?autoplay=1&mute=1&loop=1&playlist=rOIGz67MY4s&controls=1&modestbranding=1&rel=0&playsinline=1"
+                  title="SVNIT Alumni Association YouTube Short Preview"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                <span className="text-xs text-gray-400">@alumniassociation-01</span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://youtube.com/shorts/rOIGz67MY4s?si=4Cx55kzJje-gZzKT"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md"
+                  >
+                    <YoutubeIcon className="h-3.5 w-3.5" />
+                    <span>Watch on YouTube</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                  <a
+                    href="https://youtube.com/@alumniassociation-01?si=S6Lt57THqNENKMne"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-white/20"
+                  >
+                    <span>More Videos</span>
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* Instagram Spotlight Card */}
-            <div className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white p-6 rounded-2xl space-y-4 flex flex-col justify-between shadow-md">
+            {/* Instagram Reel Spotlight Card */}
+            <div className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white p-6 sm:p-7 rounded-3xl space-y-5 flex flex-col justify-between shadow-xl border border-white/10">
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-white text-xs font-bold uppercase">
-                  <InstagramIcon className="h-4 w-4" />
-                  <span>Instagram Official</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-wider">
+                    <InstagramIcon className="h-4 w-4" />
+                    <span>Instagram Reel · Official Preview</span>
+                  </div>
+                  <span className="text-[10px] font-mono bg-white/20 text-white border border-white/30 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Official Reel
+                  </span>
                 </div>
-                <h3 className="text-xl font-bold">@alumni_association_svnit</h3>
-                <p className="text-xs text-white/90 leading-relaxed font-light">
-                  Follow for daily campus updates, throwbacks from past batches, announcements for upcoming alumni meetups, and merchandise launches.
+                <h3 className="text-lg sm:text-xl font-bold">@alumni_association_svnit</h3>
+                <p className="text-xs text-white/95 leading-relaxed font-light">
+                  Watch fresh reels from campus drives, merchandise deliveries, batch meetups, and throwbacks from SVNIT and SVRCET alumni.
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-white/20 flex items-center justify-between">
-                <span className="text-xs text-white/80">Tag #SVNITAlumni</span>
-                <a
-                  href="https://www.instagram.com/alumni_association_svnit/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-white text-[#FD1D1D] hover:bg-gray-100 rounded-lg text-xs font-bold transition flex items-center gap-1.5"
-                >
-                  Follow Page <ExternalLink className="h-3 w-3" />
-                </a>
+              {/* Instagram Reel Embed Player */}
+              <div className="relative w-full max-w-[320px] sm:max-w-[340px] mx-auto h-[480px] sm:h-[500px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/30 bg-black/30 flex items-center justify-center">
+                <iframe
+                  src="https://www.instagram.com/reel/DS2hkgaDCQY/embed"
+                  title="SVNIT Alumni Association Instagram Reel Preview"
+                  className="w-full h-full border-0"
+                  allowTransparency={true}
+                  scrolling="no"
+                />
+              </div>
+
+              <div className="pt-4 border-t border-white/20 flex flex-wrap items-center justify-between gap-3">
+                <span className="text-xs text-white/90 font-medium">Tag #SVNITAlumni</span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://www.instagram.com/reel/DS2hkgaDCQY/?utm_source=ig_web_copy_link&srtk=MzRlODBiNWFlZA=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-2 bg-white text-[#FD1D1D] hover:bg-gray-100 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md"
+                  >
+                    <InstagramIcon className="h-3.5 w-3.5" />
+                    <span>Watch on Instagram</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/alumni_association_svnit/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-2 bg-black/20 hover:bg-black/30 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-white/25"
+                  >
+                    <span>Follow Page</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
