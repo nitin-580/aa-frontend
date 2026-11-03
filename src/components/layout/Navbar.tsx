@@ -16,7 +16,7 @@ const Navbar = () => {
       href: "/about",
       align: "left",
       preview: {
-        image: "/images/svnit-campus-dusk.jpg",
+        image: "/images/about-preview.png",
         tag: "About Association",
         title: "Our Legacy, Your Pride",
         description: "Connecting 25,000+ global alumni, celebrating memories, and supporting student initiatives.",
