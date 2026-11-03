@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Camera, Play, Image as ImageIcon, ExternalLink, X, Heart, Eye, FolderUp, Mail, ShieldCheck } from "lucide-react";
+import { Camera, Play, Image as ImageIcon, ExternalLink, X, Heart, Eye, FolderUp, Mail, ShieldCheck, Volume2, VolumeX } from "lucide-react";
 
 const GoogleDriveIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 87.3 78" fill="none">
@@ -68,6 +68,7 @@ const mediaItems: MediaItem[] = [
 export default function MediaPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedImage, setSelectedImage] = useState<MediaItem | null>(null);
+  const [isInstaMuted, setIsInstaMuted] = useState<boolean>(true);
 
   const filteredItems = selectedCategory === "all"
     ? mediaItems
@@ -277,10 +278,10 @@ export default function MediaPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-wider">
                     <InstagramIcon className="h-4 w-4" />
-                    <span>Instagram Reel · Official Preview</span>
+                    <span>Instagram Reel · Looping Preview</span>
                   </div>
                   <span className="text-[10px] font-mono bg-white/20 text-white border border-white/30 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Official Reel
+                    Auto-Loop
                   </span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold">@alumni_association_svnit</h3>
@@ -289,15 +290,52 @@ export default function MediaPage() {
                 </p>
               </div>
 
-              {/* Instagram Reel Embed Player */}
-              <div className="relative w-full max-w-[320px] sm:max-w-[340px] mx-auto h-[480px] sm:h-[500px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/30 bg-black/30 flex items-center justify-center">
-                <iframe
-                  src="https://www.instagram.com/reel/DS2hkgaDCQY/embed"
-                  title="SVNIT Alumni Association Instagram Reel Preview"
-                  className="w-full h-full border-0"
-                  allowTransparency={true}
-                  scrolling="no"
+              {/* Instagram Reel Looping Player */}
+              <div className="relative w-full max-w-[280px] sm:max-w-[300px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/30 bg-black group">
+                <video
+                  src="/videos/svnit_alumni_reel.mp4"
+                  autoPlay
+                  loop
+                  muted={isInstaMuted}
+                  playsInline
+                  className="w-full h-full object-cover"
                 />
+
+                {/* Sound Toggle Button */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsInstaMuted(!isInstaMuted);
+                  }}
+                  aria-label={isInstaMuted ? "Unmute reel audio" : "Mute reel audio"}
+                  className="absolute top-3 right-3 p-2 rounded-full bg-black/60 hover:bg-black/85 text-white backdrop-blur-md transition shadow-lg border border-white/20 z-20 cursor-pointer"
+                >
+                  {isInstaMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 text-[#F77737]" />}
+                </button>
+
+                {/* Top User Pill Badge */}
+                <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold border border-white/20 z-20 pointer-events-none">
+                  <InstagramIcon className="h-3 w-3 text-[#F77737]" />
+                  <span>@alumni_association_svnit</span>
+                </div>
+
+                {/* Bottom Overlay Link to Instagram */}
+                <a
+                  href="https://www.instagram.com/reel/DS2hkgaDCQY/?utm_source=ig_web_copy_link&srtk=MzRlODBiNWFlZA=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-white flex items-end justify-between transition-opacity group-hover:from-black/95 z-20"
+                >
+                  <div className="space-y-0.5">
+                    <p className="text-xs font-bold leading-tight">Alumni 21st Reunion</p>
+                    <p className="text-[10px] text-white/80">Tap to view full reel on Instagram</p>
+                  </div>
+                  <span className="p-1.5 rounded-lg bg-white/20 group-hover:bg-white/30 text-white text-xs transition">
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </span>
+                </a>
               </div>
 
               <div className="pt-4 border-t border-white/20 flex flex-wrap items-center justify-between gap-3">
