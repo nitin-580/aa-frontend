@@ -94,9 +94,12 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Call Us</p>
-                <p className="text-sm font-semibold mt-1 hover:text-red-400 transition cursor-pointer">
-                  +91 95943 96048
-                </p>
+                <a
+                  href="tel:+918758366507"
+                  className="text-sm font-semibold mt-1 hover:text-red-400 transition cursor-pointer block"
+                >
+                  +91-8758366507
+                </a>
               </div>
             </div>
 
@@ -104,11 +107,20 @@ export default function ContactPage() {
               <div className="p-3 bg-red-900/30 text-red-400 rounded-xl border border-red-900/40">
                 <Mail className="h-6 w-6" />
               </div>
-              <div>
+              <div className="space-y-1">
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Email Support</p>
-                <p className="text-sm font-semibold mt-1 hover:text-red-400 transition cursor-pointer break-all">
+                <a
+                  href="mailto:mail@svnitalumni.com"
+                  className="text-sm font-semibold mt-1 hover:text-red-400 transition cursor-pointer break-all block"
+                >
+                  SVNIT Alumni &lt;mail@svnitalumni.com&gt;
+                </a>
+                <a
+                  href="mailto:svnitalumniassociation01@gmail.com"
+                  className="text-sm font-semibold text-gray-300 hover:text-red-400 transition cursor-pointer break-all block"
+                >
                   svnitalumniassociation01@gmail.com
-                </p>
+                </a>
               </div>
             </div>
           </div>

@@ -63,20 +63,31 @@ const Footer = () => {
             </div>
             <div className="flex">
               <span className="font-bold w-16 shrink-0 text-black">Phone:</span>
-              <span className="text-[#555555] font-semibold">+91 95943 96048</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-bold w-16 shrink-0 text-black">Email:</span>
-              <a href="mailto:svnitalumniassociation01@gmail.com" className="text-[#7f1d1d] font-semibold break-all hover:underline">
-                svnitalumniassociation01@gmail.com
+              <a href="tel:+918758366507" className="text-[#555555] font-semibold hover:underline">
+                +91-8758366507
               </a>
+            </div>
+            <div className="flex items-start">
+              <span className="font-bold w-16 shrink-0 text-black pt-0.5">Email:</span>
+              <div className="space-y-1">
+                <div>
+                  <a href="mailto:mail@svnitalumni.com" className="text-[#7f1d1d] font-semibold break-all hover:underline block">
+                    mail@svnitalumni.com
+                  </a>
+                </div>
+                <div>
+                  <a href="mailto:svnitalumniassociation01@gmail.com" className="text-[#7f1d1d] font-semibold break-all hover:underline block">
+                    svnitalumniassociation01@gmail.com
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* COMPANY */}
+        {/* SVNIT ALUMNI ASSOCIATION */}
         <div>
-          <h3 className="font-bold text-sm tracking-wider uppercase text-black mb-4">COMPANY</h3>
+          <h3 className="font-bold text-sm tracking-wider uppercase text-black mb-4">SVNIT ALUMNI ASSOCIATION</h3>
           <ul className="space-y-2 text-[#7f1d1d]">
             <li><Link href="/about" className="hover:underline flex items-center gap-1.5">• About Us</Link></li>
             <li><Link href="/ace-alumni-accolade" className="hover:underline flex items-center gap-1.5">• Alumni Accolade</Link></li>

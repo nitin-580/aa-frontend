@@ -28,8 +28,8 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
             <h4 className="font-bold text-red-900">How to request a return/rectification:</h4>
             <ul className="list-disc pl-5 space-y-2">
               <li>Take clear photos of the defective item.</li>
-              <li>Email the photos and description along with your Order ID to <strong className="text-red-900 font-semibold">svnitalumniassociation01@gmail.com</strong> as soon as possible.</li>
-              <li>Or contact our support team at <strong className="text-black font-semibold">+91 95943 96048</strong> (available 10:00 AM to 6:00 PM IST, Monday to Saturday).</li>
+              <li>Email the photos and description along with your Order ID to <strong className="text-red-900 font-semibold">mail@svnitalumni.com</strong> or <strong className="text-red-900 font-semibold">svnitalumniassociation01@gmail.com</strong> as soon as possible.</li>
+              <li>Or contact our support team at <strong className="text-black font-semibold">+91-8758366507</strong> (available 10:00 AM to 6:00 PM IST, Monday to Saturday).</li>
             </ul>
           </div>
           <p>
@@ -125,8 +125,9 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
               Reunion batch coordinators are requested to contact our merchandising team at least <strong>3 to 4 weeks prior</strong> to the event to allow for custom sizing, batch embroidery, and timely dispatch.
             </p>
             <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold">
+              <span className="text-red-900">📧 mail@svnitalumni.com</span>
               <span className="text-red-900">📧 svnitalumniassociation01@gmail.com</span>
-              <span className="text-gray-700">📞 +91 95943 96048</span>
+              <span className="text-gray-700">📞 +91-8758366507</span>
             </div>
           </div>
         </div>
