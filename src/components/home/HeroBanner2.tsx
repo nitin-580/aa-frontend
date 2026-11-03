@@ -55,7 +55,7 @@ const HeroBanner2 = () => {
 
       {/* Hero Content Overlay */}
       <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6 z-10">
-        <div className="bg-white/90 p-4 rounded-full shadow-lg mb-6 border-2 border-red-900 animate-pulse">
+        <div className="bg-white/90 p-4 rounded-full shadow-lg mb-6 border-2 border-red-900 animate-hero-emblem">
           <img
             src="/logo/logowithoutbg.png"
             alt="SVNIT Emblem"
@@ -66,28 +66,31 @@ const HeroBanner2 = () => {
           />
         </div>
 
-        <h2 className="text-lg md:text-2xl font-extrabold tracking-widest text-red-500 uppercase mb-4 font-sans">
+        <h2 className="text-lg md:text-2xl font-extrabold tracking-widest text-red-500 uppercase mb-4 font-sans animate-hero-tag">
           CONNECT • COMMUNICATE • COLLABORATE
         </h2>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white max-w-4xl leading-tight">
-          Stay Connected. <span className="text-red-500">Stay Inspired.</span> <br />
-          Stay <span className="underline decoration-red-900">SVNIT</span>.
+          <span className="inline-block animate-hero-title-1">Stay Connected.</span>{" "}
+          <span className="inline-block text-red-500 hero-glow-text animate-hero-title-2">Stay Inspired.</span> <br />
+          <span className="inline-block animate-hero-title-3 mt-1 sm:mt-2">
+            Stay <span className="underline decoration-red-900 underline-offset-4 decoration-4">SVNIT</span>.
+          </span>
         </h1>
 
-        <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl font-light font-quicksand">
+        <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl font-light font-quicksand animate-hero-desc">
           Welcome to the official portal of the Sardar Vallabhbhai National Institute of Technology Alumni Association. Reconnect, share, and support the legacy of excellence.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center animate-hero-cta">
           <Link
             href="/merchandise"
-            className="px-8 py-4 bg-red-900 text-white font-bold text-base rounded-lg hover:bg-red-950 transition duration-300 shadow-lg"
+            className="px-8 py-4 bg-red-900 text-white font-bold text-base rounded-lg hover:bg-red-950 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-lg"
           >
             Explore Merchandise
           </Link>
           <Link
             href="/chapters"
-            className="px-8 py-4 border-2 border-white text-white font-semibold text-base rounded-lg hover:bg-white hover:text-[#0F1E36] transition duration-300 shadow-md"
+            className="px-8 py-4 border-2 border-white text-white font-semibold text-base rounded-lg hover:bg-white hover:text-[#0F1E36] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md"
           >
             Explore Alumni Network
           </Link>

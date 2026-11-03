@@ -69,3 +69,71 @@ body {
 *, *::before, *::after {
   border-radius: 0px !important;
 }
+
+/* Hero smooth entrance animations */
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroEmblemPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes softGlow {
+  0%, 100% {
+    text-shadow: 0 0 16px rgba(239, 68, 68, 0.25);
+  }
+  50% {
+    text-shadow: 0 0 28px rgba(239, 68, 68, 0.65);
+  }
+}
+
+.animate-hero-emblem {
+  animation: heroEmblemPop 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-hero-tag {
+  animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+.animate-hero-title-1 {
+  animation: heroEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+.animate-hero-title-2 {
+  animation: heroEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
+}
+
+.animate-hero-title-3 {
+  animation: heroEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.64s both;
+}
+
+.animate-hero-desc {
+  animation: heroEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+}
+
+.animate-hero-cta {
+  animation: heroEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.95s both;
+}
+
+.hero-glow-text {
+  animation: softGlow 4s ease-in-out infinite;
+}
