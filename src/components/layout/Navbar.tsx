@@ -44,12 +44,15 @@ const Navbar = () => {
       href: "/merchandise",
       align: "center",
       preview: {
-        image: "/images/diary.png",
+        image: "/images/merchandise-preview.png",
         tag: "Official Store",
         title: "Alumni Merchandise",
         description: "Browse authentic executive diaries, apparel, lapel pins, and jubilee reunion kits.",
         primaryButtonText: "Browse Store",
         primaryButtonHref: "/merchandise",
+        fit: "cover",
+        imageBg: "bg-white",
+        noDarkGradient: true,
       },
     },
     {
