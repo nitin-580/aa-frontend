@@ -2,7 +2,18 @@
 import React, { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Camera, Play, Image as ImageIcon, ExternalLink, X, Heart, Eye } from "lucide-react";
+import { Camera, Play, Image as ImageIcon, ExternalLink, X, Heart, Eye, FolderUp, Mail, ShieldCheck } from "lucide-react";
+
+const GoogleDriveIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 87.3 78" fill="none">
+    <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+    <path d="M43.65 25 29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44C.4 50 0 51.55 0 53.1h27.5z" fill="#00ac47"/>
+    <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H59.8l5.85 10.15z" fill="#ea4335"/>
+    <path d="M43.65 25 57.4 1.2C56.05.4 54.5 0 52.95 0H34.35c-1.55 0-3.1.4-4.45 1.2z" fill="#00832d"/>
+    <path d="M59.8 53.1H87.3c0-1.55-.4-3.1-1.2-4.5l-20.7-35.85c-.8-1.4-1.95-2.5-3.3-3.3L48.35 33.25z" fill="#ffba00"/>
+    <path d="M27.5 53.1h32.3L46.05 30.65l-2.4-4.15-16.15 26.6z" fill="#2684fc"/>
+  </svg>
+);
 
 const InstagramIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -316,19 +327,117 @@ export default function MediaPage() {
           </div>
         </section>
 
-        {/* Submit Photos CTA */}
-        <section className="bg-gray-50 border border-gray-200 rounded-2xl p-8 text-center space-y-3">
-          <ImageIcon className="h-8 w-8 text-red-900 mx-auto" />
-          <h3 className="text-xl font-bold text-[#0F1E36]">Have reunion or campus photos to share?</h3>
-          <p className="text-xs text-gray-600 max-w-xl mx-auto leading-relaxed">
-            We welcome vintage photos from your college days and recent batch reunion clicks. Send them to our media archives team to be featured in the official gallery.
-          </p>
-          <a
-            href="mailto:svnitalumniassociation01@gmail.com?subject=SVNIT%20Alumni%20Photo%20Submission"
-            className="inline-block mt-2 px-6 py-2.5 bg-red-900 hover:bg-red-950 text-white rounded-xl text-xs font-bold transition shadow-sm"
-          >
-            Submit Photos via Email
-          </a>
+        {/* Community Media Submissions & Upload Section */}
+        <section className="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 shadow-lg space-y-8 relative overflow-hidden">
+          <div className="max-w-2xl mx-auto text-center space-y-3">
+            <div className="inline-flex items-center gap-2 bg-amber-50 text-[#0F1E36] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-[#C9A050]/40">
+              <FolderUp className="h-4 w-4 text-[#C9A050]" />
+              Community Media Submissions
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F1E36] tracking-tight">
+              Have reunion or campus photos & videos to share?
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-light">
+              We welcome nostalgic vintage photos from your college days, department memories, hostel clicks, and recent jubilee batch reunion videos to feature in the official alumni archives.
+            </p>
+          </div>
+
+          {/* 3 Upload & Share Channels */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
+            {/* Channel 1: Google Drive Direct Folder */}
+            <div className="bg-[#F8FAFC] border-2 border-blue-100 hover:border-blue-400 p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-sm hover:shadow-md transition group">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shadow-sm">
+                    <GoogleDriveIcon className="h-6 w-6" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full">
+                    Direct Drive Folder
+                  </span>
+                </div>
+                <h4 className="font-extrabold text-base text-[#0F1E36]">Google Drive Upload</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Upload your full-resolution photos, batch albums, and reunion videos directly into our shared alumni drive folder.
+                </p>
+                <div className="text-[11px] text-amber-900 bg-amber-50/90 border border-amber-300/80 p-2.5 rounded-xl flex items-start gap-2 leading-relaxed">
+                  <ShieldCheck className="h-4 w-4 text-amber-700 shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Upload-Only Courtesy:</strong> Please upload your new files without modifying or deleting media shared by other alumni.
+                  </span>
+                </div>
+              </div>
+
+              <a
+                href="https://drive.google.com/drive/folders/1p8fcWz2Gi06TCFoNNx2FVJjXnFdH7F7B?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm cursor-pointer group-hover:shadow"
+              >
+                <span>Upload to Drive Folder</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+
+            {/* Channel 2: Email Submission */}
+            <div className="bg-[#F8FAFC] border-2 border-gray-100 hover:border-red-300 p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-sm hover:shadow-md transition group">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-11 h-11 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center text-red-700 shadow-sm">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-800 px-2.5 py-0.5 rounded-full">
+                    Email Delivery
+                  </span>
+                </div>
+                <h4 className="font-extrabold text-base text-[#0F1E36]">Email Submission</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Prefer sending via email? Attach photos or send Drive/Dropbox links directly to our editorial team with batch details.
+                </p>
+                <div className="text-[11px] text-gray-600 bg-gray-100 p-2.5 rounded-xl font-mono truncate border border-gray-200">
+                  svnitalumniassociation01@gmail.com
+                </div>
+              </div>
+
+              <a
+                href="mailto:svnitalumniassociation01@gmail.com?subject=SVNIT%20Alumni%20Photo%20Submission"
+                className="w-full py-2.5 px-4 bg-red-900 hover:bg-red-950 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm cursor-pointer group-hover:shadow"
+              >
+                <span>Send via Email</span>
+                <Mail className="h-3.5 w-3.5" />
+              </a>
+            </div>
+
+            {/* Channel 3: Social Media / Instagram DM */}
+            <div className="bg-[#F8FAFC] border-2 border-gray-100 hover:border-pink-300 p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-sm hover:shadow-md transition group">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-11 h-11 rounded-xl bg-pink-50 border border-pink-200 flex items-center justify-center text-pink-600 shadow-sm">
+                    <InstagramIcon className="h-5 w-5" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-pink-100 text-pink-800 px-2.5 py-0.5 rounded-full">
+                    Instagram & Social
+                  </span>
+                </div>
+                <h4 className="font-extrabold text-base text-[#0F1E36]">Instagram DM & Tags</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Tag us in your campus memories and jubilee stories, or send reels via Instagram Direct Message to be reposted officially.
+                </p>
+                <div className="text-[11px] text-pink-700 bg-pink-50 border border-pink-200 p-2.5 rounded-xl font-medium leading-relaxed">
+                  Tag <strong>@alumni_association_svnit</strong> or use <strong>#SVNITAlumni</strong>
+                </div>
+              </div>
+
+              <a
+                href="https://www.instagram.com/alumni_association_svnit/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 px-4 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm cursor-pointer group-hover:shadow"
+              >
+                <span>DM on Instagram</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
         </section>
       </main>
 
