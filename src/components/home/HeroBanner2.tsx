@@ -71,7 +71,10 @@ const HeroBanner2 = () => {
         </h2>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white max-w-4xl leading-tight">
           <span className="inline-block animate-hero-title-1">Stay Connected.</span>{" "}
-          <span className="inline-block text-red-500 hero-glow-text animate-hero-title-2">Stay Inspired.</span> <br />
+          <span className="inline-block animate-hero-title-2">
+            <span className="inline-block text-red-500 hero-glow-text">Stay Inspired.</span>
+          </span>{" "}
+          <br />
           <span className="inline-block animate-hero-title-3 mt-1 sm:mt-2">
             Stay <span className="underline decoration-red-900 underline-offset-4 decoration-4">SVNIT</span>.
           </span>

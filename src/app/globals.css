@@ -138,6 +138,10 @@ body {
   animation: softGlow 4s ease-in-out infinite;
 }
 
+.animate-hero-title-2.hero-glow-text {
+  animation: heroEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both, softGlow 4s ease-in-out 0.48s infinite;
+}
+
 /* Global Interactive Card Pop-up & Glow System */
 .card-glow-interactive {
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
