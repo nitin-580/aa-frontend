@@ -44,9 +44,9 @@ export default function AceAwardsPage() {
           <img
             src="/images/svnit-campus-dusk.jpg"
             alt="SVNIT Campus Building"
-            className="h-full w-full object-cover object-center opacity-25 filter brightness-90 contrast-110"
+            className="h-full w-full object-cover object-center opacity-45 filter brightness-105 contrast-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F1E36]/85 via-[#0F1E36]/80 to-[#0F1E36]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F1E36]/70 via-[#0F1E36]/65 to-[#0F1E36]/90"></div>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-6 py-10 sm:py-14 text-center">
