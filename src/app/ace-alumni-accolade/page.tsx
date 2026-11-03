@@ -123,15 +123,6 @@ export default function AceAwardsPage() {
             </Link>
 
             <a
-              href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.docx"
-              download
-              className="px-5 py-2.5 bg-white/10 border border-white/30 text-white font-semibold text-xs uppercase tracking-wider hover:bg-white/20 transition-all duration-200 flex items-center gap-2"
-            >
-              <Download className="h-3.5 w-3.5 text-[#C9A050]" />
-              <span>Download Form (DOCX)</span>
-            </a>
-
-            <a
               href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf"
               download
               className="px-5 py-2.5 bg-white/10 border border-white/30 text-white font-semibold text-xs uppercase tracking-wider hover:bg-white/20 transition-all duration-200 flex items-center gap-2"
@@ -211,24 +202,14 @@ export default function AceAwardsPage() {
                 >
                   File Online Form →
                 </Link>
-                <div className="grid grid-cols-2 gap-2">
-                  <a
-                    href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.docx"
-                    download
-                    className="w-full text-center py-2.5 bg-gray-100 text-gray-700 font-medium text-xs hover:bg-gray-200 transition-colors flex items-center justify-center gap-1.5"
-                  >
-                    <Download className="h-3.5 w-3.5" />
-                    <span>DOCX Form</span>
-                  </a>
-                  <a
-                    href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf"
-                    download
-                    className="w-full text-center py-2.5 bg-gray-100 text-gray-700 font-medium text-xs hover:bg-gray-200 transition-colors flex items-center justify-center gap-1.5"
-                  >
-                    <Download className="h-3.5 w-3.5" />
-                    <span>PDF Form</span>
-                  </a>
-                </div>
+                <a
+                  href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf"
+                  download
+                  className="w-full text-center py-2.5 bg-gray-100 text-gray-700 font-semibold text-xs hover:bg-gray-200 transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  <span>Download PDF Form</span>
+                </a>
                 <p className="text-[11px] text-gray-500 text-center font-medium">
                   You can file nomination by using physical copy
                 </p>
@@ -274,21 +255,12 @@ export default function AceAwardsPage() {
                 <div className="mt-6 pt-4 border-t border-gray-200 space-y-2">
                   <div className="flex flex-wrap items-center gap-3">
                     <a
-                      href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.docx"
-                      download
-                      className="text-xs font-bold text-[#0F1E36] hover:text-[#C9A050] inline-flex items-center gap-1.5"
-                    >
-                      <Download className="h-3.5 w-3.5 text-[#C9A050]" />
-                      <span>Download DOCX</span>
-                    </a>
-                    <span className="text-gray-300">|</span>
-                    <a
                       href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf"
                       download
                       className="text-xs font-bold text-[#0F1E36] hover:text-[#C9A050] inline-flex items-center gap-1.5"
                     >
                       <Download className="h-3.5 w-3.5 text-[#C9A050]" />
-                      <span>Download PDF</span>
+                      <span>Download PDF Form</span>
                     </a>
                   </div>
                   <p className="text-[11px] text-gray-500 font-medium">
@@ -645,15 +617,6 @@ export default function AceAwardsPage() {
                 <span>Open online nomination form</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
-
-              <a
-                href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.docx"
-                download
-                className="px-6 py-3.5 bg-white border border-gray-300 text-gray-800 font-semibold text-sm uppercase tracking-wider hover:bg-gray-50 transition-all duration-200 inline-flex items-center gap-2"
-              >
-                <Download className="h-4 w-4 text-[#C9A050]" />
-                <span>Download Form (DOCX)</span>
-              </a>
 
               <a
                 href="/downloads/ACE_Alumnus_Accolade_2026_Notice_and_Nomination_Form.pdf"
