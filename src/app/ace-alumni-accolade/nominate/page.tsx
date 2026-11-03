@@ -972,7 +972,7 @@ export default function NominatePage() {
                   4. Supporting Annexures
                 </h2>
                 <p className="text-xs text-gray-600 mt-2 leading-relaxed">
-                  Upload documents and annexures relevant to the nominated category. Annexures are optional at initial submission and can be provided as PDF, DOC, DOCX, or images (max 10 MB per file).
+                  Upload documents and annexures relevant to the nominated category. Annexures can be provided as PDF, DOC, DOCX, or images (max 10 MB per file). <span className="font-semibold text-gray-800">It is mandatory to upload all relevant support documents in order to qualify for the category.</span>
                 </p>
               </div>
 
