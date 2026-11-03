@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
 
       await sendEmail({
         to: email,
-        subject: `Order Placed - SVNIT Alumni Association Store [${orderId}]`,
+        subject: `Order Placed - SVNIT Alumni Association [${orderId}]`,
         html: emailHtml
       });
     } catch (e) {

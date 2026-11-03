@@ -92,7 +92,7 @@ export async function PUT(
             </div>
             
             <p style="font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 10px; margin-top: 25px;">
-              This is an automated notification from the SVNIT Alumni Association Store.
+              This is an automated notification from the SVNIT Alumni Association.
             </p>
           </div>
         `;

@@ -19,7 +19,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       content: (
         <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p className="font-semibold text-black">
-            The SVNIT Alumni Association Store performs strict quality checks on all products at various stages of production.
+            The SVNIT Alumni Association performs strict quality checks on all products at various stages of production.
           </p>
           <p>
             In the event that a defective or damaged product reaches you, please contact us immediately to rectify the situation.
@@ -88,7 +88,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       content: (
         <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p>
-            The SVNIT Alumni Association Store is a non-profit initiative dedicated to keeping SVNITians connected, honoring our alma mater, and supporting alumni welfare initiatives. We maintain the highest manufacturing quality, and our base prices are subsidized to be accessible to all alumni and students.
+            The SVNIT Alumni Association is a non-profit initiative dedicated to keeping SVNITians connected, honoring our alma mater, and supporting alumni welfare initiatives. We maintain the highest manufacturing quality, and our base prices are subsidized to be accessible to all alumni and students.
           </p>
 
           <div className="bg-amber-50/70 border border-amber-200 p-5 rounded-xl space-y-3">
@@ -139,7 +139,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
       content: (
         <div className="space-y-6 text-sm text-gray-800 leading-relaxed font-sans">
           <p>
-            The SVNIT Alumni Association Store is committed to protecting your privacy. This policy outlines our practices regarding data handling:
+            The SVNIT Alumni Association is committed to protecting your privacy. This policy outlines our practices regarding data handling:
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li><strong>Analytics & Logs:</strong> We collect anonymous browser statistics (such as IP addresses, referring pages, and timestamps) to monitor website performance and improve user experience.</li>

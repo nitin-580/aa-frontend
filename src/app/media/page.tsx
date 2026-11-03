@@ -60,7 +60,7 @@ const mediaItems: MediaItem[] = [
     categoryLabel: "Jubilee Merch Delivery",
     imageUrl: "/aaphotos/successStories/35a42487-eb0e-469a-8a9e-448f35ef4b6c.JPG",
     date: "Global Alumni Convention",
-    location: "Alumni Association Store",
+    location: "Alumni Association Office",
     description: "Memorable moments as alumni receive their exclusive SVNIT legacy t-shirts and custom keepsakes during the convention meetups."
   }
 ];

@@ -63,7 +63,7 @@ export function generateEmailHtml(order: any, stage: string) {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #0f1e36;">
       <div style="text-align: center; border-bottom: 2px solid #7f1d1d; padding-bottom: 20px; margin-bottom: 20px;">
-        <h2 style="color: #7f1d1d; margin: 0 0 5px 0;">SVNIT Alumni Association Store</h2>
+        <h2 style="color: #7f1d1d; margin: 0 0 5px 0;">SVNIT Alumni Association</h2>
         <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #6b7280;">Official Merchandise Portal</span>
       </div>
       
