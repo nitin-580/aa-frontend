@@ -11,17 +11,103 @@ const Navbar = () => {
   const { cartCount } = useCart();
 
   const navItems = [
-    { name: "About Us", href: "/about" },
-    { name: "Alumni Accolade", href: "/ace-alumni-accolade" },
-    { name: "Merchandise", href: "/merchandise" },
-    { name: "Announcements", href: "/announcements" },
-    { name: "Media", href: "/media" },
-    { name: "Contact Us", href: "/contact" },
+    {
+      name: "About Us",
+      href: "/about",
+      align: "left",
+      preview: {
+        image: "/images/svnit-campus-dusk.jpg",
+        tag: "About Association",
+        title: "Our Legacy, Your Pride",
+        description: "Connecting 25,000+ global alumni, celebrating memories, and supporting student initiatives.",
+        primaryButtonText: "Explore About",
+        primaryButtonHref: "/about",
+      },
+    },
+    {
+      name: "Alumni Accolade",
+      href: "/ace-alumni-accolade",
+      align: "left",
+      preview: {
+        image: "/images/hero-award.jpg",
+        tag: "Accolade 2026",
+        title: "ACE Alumnus Accolade",
+        description: "Honouring distinguished alumni achievements across 16 categories for Convention 2026.",
+        primaryButtonText: "View Notice",
+        primaryButtonHref: "/ace-alumni-accolade",
+        secondaryButtonText: "Nominate",
+        secondaryButtonHref: "/ace-alumni-accolade/nominate",
+      },
+    },
+    {
+      name: "Merchandise",
+      href: "/merchandise",
+      align: "center",
+      preview: {
+        image: "/images/diary.png",
+        tag: "Official Store",
+        title: "Alumni Merchandise",
+        description: "Browse authentic executive diaries, apparel, lapel pins, and jubilee reunion kits.",
+        primaryButtonText: "Browse Store",
+        primaryButtonHref: "/merchandise",
+      },
+    },
+    {
+      name: "Announcements",
+      href: "/announcements",
+      align: "center",
+      preview: {
+        image: "/images/announcements/22nd_global_alumni_convention_invitation.png",
+        tag: "Notices & Bulletins",
+        title: "Latest Announcements",
+        description: "Official circulars for the 22nd Global Convention, MC election drives, and notices.",
+        primaryButtonText: "View Circulars",
+        primaryButtonHref: "/announcements",
+      },
+    },
+    {
+      name: "Media",
+      href: "/media",
+      align: "center",
+      preview: {
+        image: "/aaphotos/ramzat-garba/image.png",
+        tag: "Gallery & Reels",
+        title: "Media & Photo Gallery",
+        description: "Relive memories from milestone jubilee reunions, convention fulfillments, and looping reels.",
+        primaryButtonText: "View Gallery",
+        primaryButtonHref: "/media",
+      },
+    },
+    {
+      name: "Contact Us",
+      href: "/contact",
+      align: "right",
+      preview: {
+        image: "/images/svnit-campus-dusk.jpg",
+        tag: "Campus Office · Surat",
+        title: "Contact Alumni Office",
+        description: "Reach the Alumni Office near SBI Bank, SVNIT Campus. Phone: +91-8758366507.",
+        primaryButtonText: "Get in Touch",
+        primaryButtonHref: "/contact",
+      },
+    },
     {
       name: "SVNIT Alumni Portal",
       href: "/alumni-portal",
       isPortal: true,
       externalUrl: "https://www.svnit.ac.in/web/alumni/",
+      align: "right",
+      preview: {
+        image: "/images/svnit_alumni_portal_preview.webp",
+        tag: "svnit.ac.in/web/alumni/",
+        title: "Official SVNIT Alumni Portal",
+        description: "Redirect to the official portal for voter registration and membership card access.",
+        primaryButtonText: "Preview",
+        primaryButtonHref: "/alumni-portal",
+        secondaryButtonText: "Redirect",
+        secondaryButtonHref: "https://www.svnit.ac.in/web/alumni/",
+        isExternalSecondary: true,
+      },
     },
   ];
 
@@ -76,44 +162,63 @@ const Navbar = () => {
                     )}
                   </Link>
 
-                  {/* Hover Quick Preview Card for SVNIT Alumni Portal */}
-                  {item.isPortal && (
-                    <div className="absolute right-0 top-full pt-3 hidden group-hover:block z-50 w-72 pointer-events-auto">
-                      <div className="bg-white rounded-xl shadow-2xl border border-gray-200 p-3 text-slate-800 space-y-2.5">
+                  {/* Hover Quick Preview Card for every nav item */}
+                  {item.preview && (
+                    <div
+                      className={`absolute top-full pt-3 hidden group-hover:block z-50 w-72 pointer-events-auto ${
+                        item.align === "right"
+                          ? "right-0"
+                          : item.align === "left"
+                          ? "left-0"
+                          : "left-1/2 -translate-x-1/2"
+                      }`}
+                    >
+                      <div className="bg-white rounded-xl shadow-2xl border border-gray-200 p-3 text-slate-800 space-y-2.5 transition-all duration-200">
                         <div className="relative rounded-lg overflow-hidden border border-gray-200 aspect-[16/10] bg-gray-900">
                           <img
-                            src="/images/svnit_alumni_portal_preview.webp"
-                            alt="SVNIT Alumni Portal Preview"
+                            src={item.preview.image}
+                            alt={`${item.name} Preview`}
                             className="w-full h-full object-cover object-top"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                          <span className="absolute bottom-1.5 left-2 text-[10px] text-white font-mono font-semibold truncate max-w-[90%]">
-                            svnit.ac.in/web/alumni/
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+                          <span className="absolute bottom-1.5 left-2 text-[10px] text-white font-mono font-semibold truncate max-w-[90%] bg-black/40 px-1.5 py-0.5 rounded">
+                            {item.preview.tag}
                           </span>
                         </div>
                         <div className="space-y-1">
                           <p className="font-bold text-xs text-[#0F1E36]">
-                            Official SVNIT Alumni Portal
+                            {item.preview.title}
                           </p>
-                          <p className="text-[11px] text-gray-500 leading-snug">
-                            Redirect to the official portal or view interactive preview.
+                          <p className="text-[11px] text-gray-500 leading-snug line-clamp-2">
+                            {item.preview.description}
                           </p>
                         </div>
-                        <div className="grid grid-cols-2 gap-1.5 pt-1">
-                          <a
-                            href={item.externalUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-2.5 py-1.5 bg-[#C9A050] hover:bg-[#b88e3e] text-[#0F1E36] font-bold text-[11px] rounded text-center uppercase tracking-wider flex items-center justify-center gap-1 shadow"
-                          >
-                            <span>Redirect</span>
-                            <ExternalLink className="h-3 w-3" />
-                          </a>
+                        <div className={`grid ${item.preview.secondaryButtonText ? "grid-cols-2" : "grid-cols-1"} gap-1.5 pt-1`}>
+                          {item.preview.secondaryButtonText && (
+                            item.preview.isExternalSecondary ? (
+                              <a
+                                href={item.preview.secondaryButtonHref || item.externalUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-2.5 py-1.5 bg-[#C9A050] hover:bg-[#b88e3e] text-[#0F1E36] font-bold text-[11px] rounded text-center uppercase tracking-wider flex items-center justify-center gap-1 shadow transition"
+                              >
+                                <span>{item.preview.secondaryButtonText}</span>
+                                <ExternalLink className="h-3 w-3" />
+                              </a>
+                            ) : (
+                              <Link
+                                href={item.preview.secondaryButtonHref || item.href}
+                                className="px-2.5 py-1.5 bg-[#C9A050] hover:bg-[#b88e3e] text-[#0F1E36] font-bold text-[11px] rounded text-center uppercase tracking-wider flex items-center justify-center gap-1 shadow transition"
+                              >
+                                <span>{item.preview.secondaryButtonText}</span>
+                              </Link>
+                            )
+                          )}
                           <Link
-                            href={item.href}
-                            className="px-2.5 py-1.5 bg-[#0F1E36] hover:bg-[#1a2e4d] text-white font-semibold text-[11px] rounded text-center uppercase tracking-wider flex items-center justify-center"
+                            href={item.preview.primaryButtonHref || item.href}
+                            className="px-2.5 py-1.5 bg-[#0F1E36] hover:bg-[#1a2e4d] text-white font-semibold text-[11px] rounded text-center uppercase tracking-wider flex items-center justify-center transition"
                           >
-                            <span>Preview</span>
+                            <span>{item.preview.primaryButtonText}</span>
                           </Link>
                         </div>
                       </div>
