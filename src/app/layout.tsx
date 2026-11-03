@@ -22,8 +22,8 @@ const dancing_script = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "SVNIT Alumni Association Store",
-  description: "Official merchandise store of Sardar Vallabhbhai National Institute of Technology Alumni Association",
+  title: "SVNIT Alumni Association",
+  description: "Official portal of Sardar Vallabhbhai National Institute of Technology Alumni Association",
   icons: {
     icon: "/logo/logowithoutbg.png",
   },

@@ -17,7 +17,7 @@ export default function AboutPage() {
             Sardar Vallabhbhai National Institute of Technology
           </h2>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-            SVNIT Alumni Association Store
+            SVNIT Alumni Association
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
             Connecting generations of SVNIT graduates, celebrating our collective legacy, and giving back to our alma mater.
@@ -42,7 +42,7 @@ export default function AboutPage() {
               Our Legacy, Your Pride
             </h2>
             <p className="text-gray-700 leading-relaxed text-sm">
-              The SVNIT Alumni Association Store is the official portal for authentic, premium-grade merchandise representing the Sardar Vallabhbhai National Institute of Technology, Surat. Designed to be a bridge between campus memories and your professional journey, every product carries the official SVNIT crest with pride.
+              The SVNIT Alumni Association is the official portal for authentic, premium-grade merchandise representing the Sardar Vallabhbhai National Institute of Technology, Surat. Designed to be a bridge between campus memories and your professional journey, every product carries the official SVNIT crest with pride.
             </p>
             <p className="text-gray-700 leading-relaxed text-sm">
               Whether you are attending a batch reunion, visiting campus, or representing SVNIT at international forums, our collection of executive diaries, apparel, keychains, and heritage boxes is curated to meet the highest standards of quality.
@@ -75,7 +75,7 @@ export default function AboutPage() {
               Why We Stand Apart
             </h3>
             <p className="text-gray-500 text-sm max-w-xl mx-auto">
-              How the official alumni store translates legacy into community support.
+              How the official alumni association translates legacy into community support.
             </p>
           </div>
 
