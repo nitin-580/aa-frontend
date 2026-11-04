@@ -4,6 +4,8 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY) 
   : null;
 
+export const ASSOCIATION_EMAIL = "svnitalumniassociation01@gmail.com";
+
 interface EmailParams {
   to: string;
   subject: string;
@@ -92,6 +94,110 @@ export function generateEmailHtml(order: any, stage: string) {
       
       <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 30px; text-align: center; font-size: 12px; color: #9ca3af;">
         <p style="margin: 0 0 5px 0;">Sardar Vallabhbhai National Institute of Technology, Surat, Gujarat</p>
+        <p style="margin: 0;">&copy; ${new Date().getFullYear()} SVNIT Alumni Association. All rights reserved.</p>
+      </div>
+    </div>
+  `;
+}
+
+export function generateOrderIntimationHtml(order: any) {
+  return `
+    <div style="font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; padding: 24px; color: #0f1e36; border: 1px solid #e5e7eb; border-radius: 8px;">
+      <div style="text-align: center; border-bottom: 2px solid #7f1d1d; padding-bottom: 16px; margin-bottom: 20px;">
+        <h2 style="color: #7f1d1d; margin: 0 0 4px 0;">SVNIT Alumni Association</h2>
+        <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #6b7280;">Store Order Intimation Notice</span>
+      </div>
+
+      <div style="background-color: #fef2f2; border-left: 4px solid #7f1d1d; padding: 14px 18px; margin: 0 0 20px 0; border-radius: 4px;">
+        <h3 style="margin: 0 0 6px 0; color: #7f1d1d; font-size: 16px;">🚨 New Order Placed (Pending Payment Verification)</h3>
+        <p style="margin: 0; font-size: 14px; color: #4b5563; line-height: 1.5;">
+          A new merchandise order has been placed on the SVNIT Alumni Association portal.
+          This intimation is sent immediately upon order placement, regardless of confirmation status.
+        </p>
+      </div>
+
+      <div style="background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px; margin-bottom: 20px;">
+        <h4 style="margin: 0 0 12px 0; color: #7f1d1d; font-size: 15px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px;">
+          Order & Customer Information
+        </h4>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6;">
+          <tr>
+            <td style="padding: 4px 0; width: 35%; color: #6b7280; font-weight: bold;">Order ID:</td>
+            <td style="padding: 4px 0; font-family: monospace; font-weight: bold; color: #111827;">${order.id}</td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Order Date:</td>
+            <td style="padding: 4px 0; color: #111827;">${order.date || new Date().toLocaleString("en-IN")}</td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Customer Name:</td>
+            <td style="padding: 4px 0; font-weight: bold; color: #111827;">${order.name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Email:</td>
+            <td style="padding: 4px 0; color: #111827;"><a href="mailto:${order.email}" style="color: #7f1d1d; text-decoration: underline;">${order.email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Phone:</td>
+            <td style="padding: 4px 0; color: #111827;"><a href="tel:${order.phone}" style="color: #7f1d1d; text-decoration: none;">${order.phone}</a></td>
+          </tr>
+          ${order.batch ? `
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Branch / Batch:</td>
+            <td style="padding: 4px 0; color: #111827;">${order.batch}</td>
+          </tr>
+          ` : ""}
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold; vertical-align: top;">Shipping Address:</td>
+            <td style="padding: 4px 0; color: #111827;">${order.address}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px; margin-bottom: 20px;">
+        <h4 style="margin: 0 0 12px 0; color: #7f1d1d; font-size: 15px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px;">
+          Payment & Items Breakdown
+        </h4>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6;">
+          <tr>
+            <td style="padding: 4px 0; width: 35%; color: #6b7280; font-weight: bold; vertical-align: top;">Items Ordered:</td>
+            <td style="padding: 4px 0; color: #111827;">${order.products}</td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Subtotal:</td>
+            <td style="padding: 4px 0; color: #111827;">₹${order.subtotal || 0}</td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Shipping:</td>
+            <td style="padding: 4px 0; color: #111827;">₹${order.shipping || 0}</td>
+          </tr>
+          <tr style="border-top: 1px dashed #d1d5db;">
+            <td style="padding: 6px 0; color: #111827; font-weight: bold;">Total Amount:</td>
+            <td style="padding: 6px 0; font-weight: bold; color: #7f1d1d; font-size: 16px;">₹${order.total}</td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">UTR / Reference ID:</td>
+            <td style="padding: 4px 0;"><span style="font-family: monospace; font-weight: bold; color: #047857; background: #ecfdf5; padding: 3px 8px; border-radius: 4px; display: inline-block; border: 1px solid #a7f3d0;">${order.utr}</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Payment Status:</td>
+            <td style="padding: 4px 0; color: #b45309; font-weight: bold;">${order.paymentStatus || "PENDING_VERIFICATION"}</td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 0; color: #6b7280; font-weight: bold;">Order Status:</td>
+            <td style="padding: 4px 0; color: #4b5563;">${order.orderStatus || "PENDING_PAYMENT"}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="background-color: #fffbeb; border: 1px solid #fef3c7; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px;">
+        <p style="margin: 0; font-size: 13px; color: #92400e; line-height: 1.4;">
+          <strong>Next Action:</strong> Please verify the credited payment against the provided UTR (<strong>${order.utr}</strong>) in the bank statement, then update the order in the Admin Dashboard.
+        </p>
+      </div>
+
+      <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; text-align: center; font-size: 12px; color: #9ca3af;">
+        <p style="margin: 0 0 4px 0;">Automated intimation to SVNIT Alumni Association (${ASSOCIATION_EMAIL})</p>
         <p style="margin: 0;">&copy; ${new Date().getFullYear()} SVNIT Alumni Association. All rights reserved.</p>
       </div>
     </div>

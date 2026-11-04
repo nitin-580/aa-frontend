@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/db";
-import { sendEmail, generateEmailHtml } from "@/lib/email";
+import { sendEmail, generateEmailHtml, generateOrderIntimationHtml, ASSOCIATION_EMAIL } from "@/lib/email";
 
 export async function GET() {
   try {
@@ -44,6 +44,8 @@ export async function POST(req: NextRequest) {
 
     const orderId = id || ("SVN-" + Math.floor(Math.random() * 900000 + 100000));
     
+    const orderDate = date || new Date().toLocaleString("en-IN");
+
     await query(`
       INSERT INTO orders (id, name, email, phone, batch, address, products, subtotal, shipping, total, utr, payment_status, order_status, date)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
@@ -61,12 +63,12 @@ export async function POST(req: NextRequest) {
       utr, 
       paymentStatus || "PENDING_VERIFICATION", 
       orderStatus || "PENDING_PAYMENT", 
-      date || new Date().toLocaleString("en-IN")
+      orderDate
     ]);
 
-    // Send confirmation email
+    // Send customer confirmation email & association intimation email independently
     try {
-      const emailHtml = generateEmailHtml({
+      const customerEmailHtml = generateEmailHtml({
         id: orderId,
         name,
         email,
@@ -76,13 +78,46 @@ export async function POST(req: NextRequest) {
         utr
       }, "ORDER_PLACED");
 
-      await sendEmail({
-        to: email,
-        subject: `Order Placed - SVNIT Alumni Association [${orderId}]`,
-        html: emailHtml
+      const associationIntimationHtml = generateOrderIntimationHtml({
+        id: orderId,
+        name,
+        email,
+        phone,
+        batch,
+        address,
+        products,
+        subtotal,
+        shipping,
+        total,
+        utr,
+        paymentStatus: paymentStatus || "PENDING_VERIFICATION",
+        orderStatus: orderStatus || "PENDING_PAYMENT",
+        date: orderDate
+      });
+
+      const emailPromises = [
+        sendEmail({
+          to: email,
+          subject: `Order Placed - SVNIT Alumni Association [${orderId}]`,
+          html: customerEmailHtml
+        }).then(res => ({ recipient: email, type: "customer_confirmation", res })),
+        sendEmail({
+          to: ASSOCIATION_EMAIL,
+          subject: `[New Order Intimation] Order Placed: ${orderId} - ₹${total || 0} (UTR: ${utr})`,
+          html: associationIntimationHtml
+        }).then(res => ({ recipient: ASSOCIATION_EMAIL, type: "association_intimation", res }))
+      ];
+
+      const emailResults = await Promise.allSettled(emailPromises);
+      emailResults.forEach(result => {
+        if (result.status === "fulfilled") {
+          console.log(`Order placement email dispatched to ${result.value.recipient} (${result.value.type}):`, result.value.res);
+        } else {
+          console.error(`Order placement email failed:`, result.reason);
+        }
       });
     } catch (e) {
-      console.error("Failed to send initial order verification email:", e);
+      console.error("Failed while dispatching order placement emails:", e);
     }
 
     return NextResponse.json({ success: true, message: "Order placed successfully", id: orderId });
