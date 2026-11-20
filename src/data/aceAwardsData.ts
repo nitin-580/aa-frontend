@@ -116,7 +116,7 @@ export const ACCOLADE_DETAILED_GROUPS: AccoladeGroupDetail[] = [
       },
       {
         number: 16,
-        title: "Senior Achiever (under 40-60)",
+        title: "Senior Achiever (above 40)",
         description: "Advance-career alumni with exceptional impact in any of the above areas, which broadens participation.",
       },
     ],
