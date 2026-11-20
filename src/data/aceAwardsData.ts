@@ -207,7 +207,7 @@ export const SELECTION_CRITERIA = [
 
 export const KEY_DATES = [
   {
-    date: "25 November 2026",
+    date: "1 December 2026",
     label: "Last date for nomination (Last date of receipt of duly filled and signed nominations)",
     badge: "Closing Date",
   },

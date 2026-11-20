@@ -75,7 +75,7 @@ export default function AceAwardsPage() {
                 Last Date for Nomination
               </div>
               <div className="text-lg sm:text-2xl font-extrabold tracking-tight text-white mt-0.5">
-                25 Nov 2026
+                1st Dec 2026
               </div>
               <div className="text-[11px] text-gray-300 mt-1 flex items-center gap-1.5">
                 <Clock className="h-3 w-3 text-[#C9A050]" />
@@ -183,7 +183,7 @@ export default function AceAwardsPage() {
                 </div>
                 <div className="border-b border-gray-100 pb-3">
                   <span className="font-bold text-[#0F1E36] block">Last Date of Receipt:</span>
-                  <span className="text-red-700 font-semibold">25th November 2026</span>
+                  <span className="text-red-700 font-semibold">1st December 2026</span>
                 </div>
                 <div className="border-b border-gray-100 pb-3">
                   <span className="font-bold text-[#0F1E36] block">Announcement & Presentation:</span>
@@ -226,7 +226,7 @@ export default function AceAwardsPage() {
                 How to Submit Nominations
               </h2>
               <p className="mt-2 text-sm text-gray-600 max-w-2xl leading-relaxed">
-                Nominations may be submitted through any of the three official options listed below before the closing date: <strong>25th November 2026</strong>.
+                Nominations may be submitted through any of the three official options listed below before the closing date: <strong>1st December 2026</strong>.
               </p>
             </div>
 
@@ -242,7 +242,7 @@ export default function AceAwardsPage() {
                     Physical Submission
                   </h3>
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    Duly filled in and signed nominations shall be received before <strong>25th November 2026</strong> at:
+                    Duly filled in and signed nominations shall be received before <strong>1st December 2026</strong> at:
                   </p>
                   <div className="bg-white border border-gray-200 p-3.5 text-xs text-gray-700 leading-relaxed font-mono">
                     <p className="font-bold text-[#0F1E36]">{POSTAL_ADDRESS.recipient}</p>
@@ -280,7 +280,7 @@ export default function AceAwardsPage() {
                     Scanned Soft Copy
                   </h3>
                   <p className="text-xs text-gray-600 leading-relaxed">
-                    A scanned soft copy of the duly signed nomination and annexures shall be received before <strong>25th November 2026</strong> at:
+                    A scanned soft copy of the duly signed nomination and annexures shall be received before <strong>1st December 2026</strong> at:
                   </p>
                   <ul className="space-y-2 bg-white border border-gray-200 p-3.5 text-xs">
                     {OFFICIAL_EMAILS.map((email) => (
@@ -606,7 +606,7 @@ export default function AceAwardsPage() {
               Ready to Submit a Nomination?
             </h2>
             <p className="text-sm text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Complete the online nomination form or submit via physical mail / email before <strong>25th November 2026</strong>.
+              Complete the online nomination form or submit via physical mail / email before <strong>1st December 2026</strong>.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">

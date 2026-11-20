@@ -318,7 +318,7 @@ export default function NominatePage() {
             Nomination Form — ACE Alumnus Accolade 2026
           </h1>
           <p className="mt-2 text-sm text-gray-300">
-            Fields marked <span className="text-red-400 font-bold">*</span> are mandatory. Last date for submission: <strong className="text-[#C9A050]">25 November 2026</strong>.
+            Fields marked <span className="text-red-400 font-bold">*</span> are mandatory. Last date for submission: <strong className="text-[#C9A050]">1st December 2026</strong>.
           </p>
         </div>
       </header>
